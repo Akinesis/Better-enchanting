@@ -6,7 +6,7 @@ import cutefox.betterenchanting.BetterEnchanting;
 public class ModLootTableModifiers {
 
     public static void modifyLootTables(){
-        BetterEnchanting.LOGGER.info("Registering all event for : "+ BetterEnchanting.MOD_ID);
+        BetterEnchanting.LOGGER.info("Registering loot tables for : "+ BetterEnchanting.MOD_ID);
 
     }
 

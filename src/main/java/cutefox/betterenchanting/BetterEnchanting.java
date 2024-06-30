@@ -53,10 +53,15 @@ public class BetterEnchanting implements ModInitializer {
 	}
 
 	private static final ItemGroup ITEM_GROUP = FabricItemGroup.builder()
-			.icon(() -> new ItemStack(Items.RABBIT_FOOT))
+			.icon(() -> new ItemStack(ModItems.ESSENCE_OF_PROTECTION))
 			.displayName(Text.translatable("itemGroup.better-enchanting.item_group"))
 			.entries((context, entries) -> {
+				entries.add(ModItems.INFUSED_LAPIS);
+				entries.add(ModItems.MAGIC_SHARD_DULL);
+				entries.add(ModItems.MAGIC_SHARD_FULL);
 				entries.add(ModItems.ESSENCE_OF_PROTECTION);
+				entries.add(ModItems.ESSENCE_OF_FIRE_PROTECTION);
+				entries.add(ModItems.ESSENCE_OF_BLAST_PROTECTION);
 			})
 			.build();
 }

@@ -25,13 +25,14 @@ public class ModModelProvider extends FabricModelProvider {
         BetterEnchanting.LOGGER.info("Generating item model data for : "+BetterEnchanting.MOD_ID);
 
         //region MISC
-        itemModelGenerator.register(ModItems.STEEL_BLEND, Models.GENERATED);
-        itemModelGenerator.register(ModItems.STEEL_INGOT, Models.GENERATED);
+        //itemModelGenerator.register(ModItems.STEEL_BLEND, Models.GENERATED);
+        //itemModelGenerator.register(ModItems.STEEL_INGOT, Models.GENERATED);
         //endregion
 
         //region ENCHANTMENT INGREDIENTS
         itemModelGenerator.register(ModItems.ESSENCE_OF_PROTECTION, Models.GENERATED);
         itemModelGenerator.register(ModItems.ESSENCE_OF_FIRE_PROTECTION, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ESSENCE_OF_BLAST_PROTECTION, Models.GENERATED);
         //endregion
 
     }

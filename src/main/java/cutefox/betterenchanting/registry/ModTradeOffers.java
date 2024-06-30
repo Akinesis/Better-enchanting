@@ -61,7 +61,7 @@ public class ModTradeOffers extends TradeOffers {
             }else {
                 itemStack = new ItemStack(Items.BOOK);
             }
-            int price = random.nextBetween(15,28);
+            int price = random.nextBetween(8,18);
             return new TradeOffer(new TradedItem(Items.EMERALD, price), itemStack, 12, this.experience, 0.2f);
         }
     }
