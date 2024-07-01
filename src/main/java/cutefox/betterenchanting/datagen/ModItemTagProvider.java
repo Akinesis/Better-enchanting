@@ -37,7 +37,9 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(Items.EXPERIENCE_BOTTLE)
                 .add(Items.TURTLE_SCUTE)
                 .add(Items.WIND_CHARGE)
-                .add(ModItems.MAGIC_SHARD_FULL);
+                .add(ModItems.MAGIC_SHARD_FULL)
+                .add(ModItems.MAGIC_SHARD_DULL)
+                .add(ModItems.INFUSED_LAPIS);
 
 
 

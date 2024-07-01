@@ -1,4 +1,8 @@
-// 1.21	2024-06-30T12:17:45.0211267	Better Enchanting/Model Definitions
+// 1.21	2024-06-30T12:24:27.6085812	Better Enchanting/Model Definitions
+5dade9a6c1394c93ce35a4767f47b5cc5cb22d55 assets\better-enchanting\models\item\essence_of_experience.json
+2d1eddb79c9541cb0d3b6a7e9c0d50ca20977340 assets\better-enchanting\models\item\magic_shard_full.json
 3108202c6813ea206cc60035b7b949e897f47d3d assets\better-enchanting\models\item\essence_of_blast_protection.json
 17221917a138dacd257d94efb808659ecea0d2f6 assets\better-enchanting\models\item\essence_of_fire_protection.json
 18387448cfc54b00cbedcaf5b38f65568e3cc9d5 assets\better-enchanting\models\item\essence_of_protection.json
+1aba1c4a4e72e9a05ca32e0f9ad7b1a0983bcb13 assets\better-enchanting\models\item\magic_shard_dull.json
+f210d09f71bc4b53598758801118acbc9ea2713e assets\better-enchanting\models\item\infused_lapis.json

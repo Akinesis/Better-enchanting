@@ -1,6 +1,6 @@
-// 1.21	2024-06-30T12:17:45.0231209	Better Enchanting/Recipes
-766e2b0ebc057df2f4586d13dcf3cdf38bc228e6 data\better-enchanting\advancement\recipes\misc\magic_shard_full.json
+// 1.21	2024-06-30T12:24:27.6265319	Better Enchanting/Recipes
 d80c895acbaeb708dfd89baf67eead657ec44a04 data\better-enchanting\recipe\magic_shard_full.json
+766e2b0ebc057df2f4586d13dcf3cdf38bc228e6 data\better-enchanting\advancement\recipes\misc\magic_shard_full.json
 9feb57447b2796c09a902f80526b8c3f8e7fb081 data\better-enchanting\advancement\recipes\misc\magic_shard_dull.json
 2e112c15c1b7f98aa9133c1d21e5ceec65eaa4ca data\better-enchanting\recipe\magic_shard_dull.json
 0f31954acfb1d50f598e2dc8f58408c51610e176 data\better-enchanting\recipe\infused_lapis.json

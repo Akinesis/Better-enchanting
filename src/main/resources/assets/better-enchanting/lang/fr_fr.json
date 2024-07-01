@@ -1,12 +1,20 @@
 {
   "itemGroup.better-enchanting.item_group": "Fox Den's Better Enchanting",
 
+  "item.better-enchanting.infused_lapis": "Lapis-lazuli infusé",
+  "item.better-enchanting.magic_shard_dull": "Éclat magique vide",
+  "item.better-enchanting.magic_shard_full": "Éclat magique",
+
   "item.better-enchanting.essence_of_protection": "Essence de protection",
+  "item.better-enchanting.essence_of_fire_protection": "Essence de protection aux flammes",
+  "item.better-enchanting.essence_of_blast_protection": "Essence de protection aux explosions",
+  "item.better-enchanting.essence_of_experience": "Essence d'expérience",
 
   "item.better-enchanting.steel_ingot": "Lingot d'acier",
   "item.better-enchanting.steel_blend": "Mélange d'acier",
 
   "container.foxden.enchant.material.one": "%s %s",
+  "container.foxden.enchant.charge": "Charger éclat magique",
 
   "tag.item.better-enchanting.enchantment_ingredients":"Ingredients d'enchentement"
 }

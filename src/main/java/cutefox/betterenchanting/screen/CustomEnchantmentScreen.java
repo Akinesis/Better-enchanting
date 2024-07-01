@@ -4,12 +4,14 @@ import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
 import cutefox.betterenchanting.ModEnchantmentHelper;
 import cutefox.betterenchanting.Utils;
+import cutefox.betterenchanting.registry.ModItems;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.ingame.HandledScreen;
 import net.minecraft.client.render.DiffuseLighting;
 import net.minecraft.client.render.OverlayTexture;
+import net.minecraft.client.render.TexturedRenderLayers;
 import net.minecraft.client.render.VertexConsumer;
 import net.minecraft.client.render.entity.model.BookModel;
 import net.minecraft.client.render.entity.model.EntityModelLayers;
@@ -30,6 +32,7 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RotationAxis;
 import net.minecraft.util.math.random.Random;
+import net.minecraft.world.World;
 
 import java.util.List;
 import java.util.Optional;
@@ -43,6 +46,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
     private static final Identifier SCROLLER_DISABLED = Utils.id("container/enchanting_table/scroller_disabled");
     private static final Identifier BOOK_SLOT_SELECTOR = Utils.id("container/enchanting_table/book_slot_selector");
     private static final Identifier TEXTURE = Utils.id("textures/gui/container/custom_enchanting_table.png");
+    private static final Identifier MAGIC_SHARD_FULL = Utils.id("container/enchanting_table/magic_shard_full");
     private static final Identifier BOOK_TEXTURE = Identifier.ofVanilla("textures/entity/enchanting_table_book.png");
     private static final Identifier CHECKMARK = Identifier.ofVanilla("icon/checkmark");
     private final Random random = Random.create();
@@ -92,7 +96,19 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
             this.scrolling = true;
         }
 
-        for(int k = 0; k < 14; ++k) {
+        if(this.handler.enchantmentId[0] == -5){
+            double r = mouseX - (width+72);
+            double s = mouseY - (height+14);
+
+            if (r >= 0 && s >= 0 && r < 15 && s < 15 && this.handler.onButtonClick(this.client.player, -5)) {
+                selectedSlot[0] = 0;
+                selectedSlot[1] = 0;
+                this.client.interactionManager.clickButton(this.handler.syncId, -5);
+                return true;
+            }
+        }
+
+        for(int k = 0; k < handler.ENCHANT_ARRAY_SIZE ; ++k) {
             if(k < indexStartOffset)
                 continue;
             if(this.handler.enchantmentId[k] > -1){
@@ -111,7 +127,6 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                     }
                 }
             }
-
         }
 
         return super.mouseClicked(mouseX, mouseY, button);
@@ -131,6 +146,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
         context.drawTexture(TEXTURE, localWidth, localHeight, 0, 0, this.backgroundWidth, this.backgroundHeight);
         this.drawBook(context, localWidth-3 , localHeight+24, delta);
         boolean playerInCreative = client.player.isInCreativeMode();
+        int q = 8453920;
 
         int numberOfPossibleEnchants = 0;
 
@@ -139,7 +155,23 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
         if(handler.getSlot(0).getStack().isEmpty())
             indexStartOffset = 0;
 
-        for(int k = 0; k<15; k++){
+        if(this.handler.enchantmentId[0] == -5){
+            if(this.client.player.experienceLevel < 10)
+                q = Colors.RED;
+
+            context.drawTexture(TEXTURE, localWidth+63, localHeight+14, 182, 32, 16,16);
+
+            context.drawGuiTexture(MAGIC_SHARD_FULL, localWidth+72,localHeight+14,16,16);
+
+            if(!playerInCreative)
+                context.drawTextWithShadow(this.textRenderer, ""+10, localWidth+18+72 - this.textRenderer.getWidth(""+10), localHeight+14+8, q);
+
+            return;
+        }
+
+        World playerWorld = client.world;
+
+        for(int k = 0; k<handler.ENCHANT_ARRAY_SIZE; k++){
 
             if(k<indexStartOffset)
                 continue;
@@ -168,8 +200,6 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                 //Draw books and connexions
                 for(int l = 0; l < this.handler.enchantmentLevel[k]; l++){
 
-                    int q = 8453920;
-
                     int r = mouseX - (localWidth+72+(16*l)+(4*l));
                     int s = mouseY - (localHeight+14+(16*(k-indexStartOffset)));
 
@@ -178,7 +208,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
 
 
                     if (enchant != null && !enchant.isEmpty()) {
-                        int enchantLevelCost = ModEnchantmentHelper.getEnchantmentLevelCost(enchant.get().value(),l+1, stack);
+                        int enchantLevelCost = ModEnchantmentHelper.getEnchantmentLevelCost(enchant.get().value(),l+1, stack, playerWorld);
                         int enchantLevelReq = ModEnchantmentHelper.getEnchantmentLeveRequierment(enchant.get().value(),l);
                         RegistryEntry<Enchantment> enchantEntry = this.client.world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(enchant.get().value());
                         boolean hasEnchantLevel = EnchantmentHelper.getLevel(enchantEntry,stack)>=l+1;
@@ -201,7 +231,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                         }
 
                         context.drawTexture(TEXTURE, localWidth+68+(16*l)+(4*l), localHeight+14+(16*(k-indexStartOffset)), 198, 0, 4,16);
-                        if(!this.client.player.isInCreativeMode())
+                        if(!this.client.player.isInCreativeMode() && bookToDraw != ENCHANTMENT_BOOK_DISABLED)
                             context.drawTextWithShadow(this.textRenderer, ""+enchantLevelCost, localWidth+18+72+(16*l)+(4*l) - this.textRenderer.getWidth(""+enchantLevelCost), localHeight+14+8+(16*(k-indexStartOffset)), q);
 
                         context.drawGuiTexture(bookToDraw, localWidth+72+(16*l)+(4*l), localHeight+14+(16*(k-indexStartOffset)), 16, 16);
@@ -253,10 +283,39 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
         boolean isInCreative = this.client.player.getAbilities().creativeMode;
         int lapisCount = this.handler.getLapisCount();
 
+        if(handler.enchantmentId[0] == -5){
+            if (this.isPointWithinBounds(72, 14, 15, 15, mouseX, mouseY)){
+                List<Text> list = Lists.newArrayList();
+                MutableText mutableText,mutableText2,mutableText3;
+                mutableText3 = Text.translatable("container.foxden.enchant.charge");
+                mutableText = Text.translatable("container.enchant.lapis.many", 5);
+                mutableText2 = Text.translatable("container.enchant.level.many", 10);
 
-        for(int k = 0; k<15; k++){
+                list.add(mutableText3);
+
+                if (!isInCreative) {
+                    list.add(ScreenTexts.EMPTY);
+                    list.add(mutableText.formatted(lapisCount >= 5 ? Formatting.GRAY : Formatting.RED));
+                    list.add(mutableText2.formatted(client.player.experienceLevel >= 10 ? Formatting.GRAY : Formatting.RED));
+                }
+
+                context.drawTooltip(this.textRenderer, list, mouseX, mouseY);
+            }
+
+            return;
+        }
+
+        int numberOfPossibleEnchants = 0;
+
+        for(int k = 0; k<handler.ENCHANT_ARRAY_SIZE; k++){
             if(k<indexStartOffset)
                 continue;
+
+            if(numberOfPossibleEnchants >= 7)
+                break;
+
+            numberOfPossibleEnchants++;
+
             if(this.handler.enchantmentId[k] > -1){
                 Optional<RegistryEntry.Reference<Enchantment>> enchant = this.client.world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(this.handler.enchantmentId[k]);
                 for(int l = 0; l < this.handler.enchantmentLevel[k]; l++){
@@ -264,12 +323,12 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                     if (enchant != null && !enchant.isEmpty()) {
                         //l is enchantment level between 0 and max
                         //k is current enchantment type
-                        if (this.isPointWithinBounds(72+(16*l)+(4*l), 14+(16*(k-indexStartOffset)), 15, 15, mouseX, mouseY)
+                        if (this.isPointWithinBounds(72+(16*l)+(4*l), 14+(16*(k-indexStartOffset)), 16, 14, mouseX, mouseY)
                                 && l >= 0) {
                             //If mouse over the book of enchant k and level l
 
                             int displayedEnchantLevel = l + 1;
-                            int enchantLevelCost = ModEnchantmentHelper.getEnchantmentLevelCost(enchant.get().value(),displayedEnchantLevel,stack);
+                            int enchantLevelCost = ModEnchantmentHelper.getEnchantmentLevelCost(enchant.get().value(),displayedEnchantLevel,stack, client.world);
                             int enchantLevReq = ModEnchantmentHelper.getEnchantmentLeveRequierment(enchant.get().value(),displayedEnchantLevel);
                             int enchantIngredientCost = ModEnchantmentHelper.getEnchantmentIngredientCost(enchant.get().value(),displayedEnchantLevel);
                             int lapisCost = (int)Math.floor(enchantLevelCost/2);
@@ -306,7 +365,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                                         mutableText = Text.translatable("container.enchant.lapis.many", new Object[]{lapisCost});
                                     }
 
-                                    list.add(mutableText.formatted(lapisCount >= displayedEnchantLevel ? Formatting.GRAY : Formatting.RED));
+                                    list.add(mutableText.formatted(lapisCount >= (int)Math.floor(enchantLevelCost/2) ? Formatting.GRAY : Formatting.RED));
 
                                     MutableText mutableText2;
                                     if (enchantLevReq == 1) {
@@ -315,7 +374,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                                         mutableText2 = Text.translatable("container.enchant.level.many", enchantLevelCost);
                                     }
 
-                                    list.add(mutableText2.formatted(Formatting.GRAY));
+                                    list.add(mutableText2.formatted(client.player.experienceLevel >= enchantLevelCost ? Formatting.GRAY : Formatting.RED));
 
                                     MutableText mutableText3;
                                     mutableText3 = Text.translatable("container.foxden.enchant.material.one", enchantIngredientCost, Text.translatable(enchantIngredientStack.getTranslationKey()));
@@ -328,7 +387,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                                         list.add(mutableText3.formatted(Formatting.GRAY));
 
                                 }
-                                context.drawTooltip(this.textRenderer, list, mouseX, mouseY);
+                                //context.drawTooltip(this.textRenderer, list, mouseX, mouseY);
                             }
 
                             context.drawItem(enchantIngredientStack,i +22, j +26);
@@ -402,7 +461,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
         this.pageTurningSpeed = this.nextPageTurningSpeed;
         boolean bl = false;
 
-        for(int i = 0; i < 14; ++i) {
+        for(int i = 0; i < handler.ENCHANT_ARRAY_SIZE; ++i) {
             if (this.handler.enchantmentLevel[i] != 0) {
                 bl = true;
                 break;

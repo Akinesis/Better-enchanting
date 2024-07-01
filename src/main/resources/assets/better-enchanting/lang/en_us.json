@@ -1,12 +1,20 @@
 {
   "itemGroup.better-enchanting.item_group": "Fox Den's Better Enchanting",
 
+  "item.better-enchanting.infused_lapis": "Infused Lapis Lazuli",
+  "item.better-enchanting.magic_shard_dull": "Dull Magic Shard",
+  "item.better-enchanting.magic_shard_full": "Magic Shard",
+
   "item.better-enchanting.essence_of_protection": "Essence Of Protection",
+  "item.better-enchanting.essence_of_fire_protection": "Essence Of Fire Protection",
+  "item.better-enchanting.essence_of_blast_protection": "Essence Of Blast Protection",
+  "item.better-enchanting.essence_of_experience": "Essence Of Experience",
 
   "item.better-enchanting.steel_ingot": "Steel Ingot",
   "item.better-enchanting.steel_blend": "Steel Blend",
 
   "container.foxden.enchant.material.one": "%s %s",
+  "container.foxden.enchant.charge": "Charge Magic Shard",
 
   "tag.item.better-enchanting.enchantment_ingredients":"Enchantment Ingredients"
 }

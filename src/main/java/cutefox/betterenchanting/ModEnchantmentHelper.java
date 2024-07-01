@@ -2,6 +2,7 @@ package cutefox.betterenchanting;
 
 import com.google.common.collect.Lists;
 import cutefox.betterenchanting.datagen.ModEnchantIngredientMap;
+import cutefox.betterenchanting.registry.ModEnchantmentTags;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
@@ -12,12 +13,14 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
+import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.util.collection.IndexedIterable;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Stream;
 
 public class ModEnchantmentHelper {
@@ -28,10 +31,22 @@ public class ModEnchantmentHelper {
         return indexedIterable.get(id).value();
     }
 
-    public static int getEnchantmentLevelCost(Enchantment enchantment, int enchantLevel, ItemStack stack){
-        int tempCost = Math.round((8f/enchantment.getWeight())+enchantLevel);
-        tempCost *= 1+(0.1*stack.getEnchantments().getSize()); //price increase by 10% for each different enchantments.
-        return tempCost;
+    public static int getEnchantmentLevelCost(Enchantment enchantment, int enchantLevel, ItemStack stack, World world){
+        float tempCost = (8f/enchantment.getWeight())+enchantLevel;
+        tempCost *= (1+(0.1*stack.getEnchantments().getSize())); //price increase by 10% for each different enchantments.
+        if(enchantIsTreasure(enchantment, world))
+            tempCost *= 2;
+        return Math.round(tempCost);
+    }
+
+    private static boolean enchantIsTreasure(Enchantment enchantment,World world){
+        Optional<RegistryEntryList.Named<Enchantment>> treasureList = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntryList(ModEnchantmentTags.BENEFICIAL_TREASURE);
+        if(treasureList != null && !treasureList.isEmpty()){
+            return  (treasureList.get().stream().filter(e -> {
+                return e.value() == enchantment;
+            }).count() > 0);
+        }
+        return false;
     }
 
     public static int getEnchantmentLeveRequierment(Enchantment enchantment, int enchantLevel){

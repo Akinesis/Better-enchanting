@@ -62,6 +62,7 @@ public class BetterEnchanting implements ModInitializer {
 				entries.add(ModItems.ESSENCE_OF_PROTECTION);
 				entries.add(ModItems.ESSENCE_OF_FIRE_PROTECTION);
 				entries.add(ModItems.ESSENCE_OF_BLAST_PROTECTION);
+				entries.add(ModItems.ESSENCE_OF_EXPERIENCE);
 			})
 			.build();
 }

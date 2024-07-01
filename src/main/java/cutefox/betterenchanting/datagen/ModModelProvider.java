@@ -30,9 +30,13 @@ public class ModModelProvider extends FabricModelProvider {
         //endregion
 
         //region ENCHANTMENT INGREDIENTS
+        itemModelGenerator.register(ModItems.INFUSED_LAPIS, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MAGIC_SHARD_DULL, Models.GENERATED);
+        itemModelGenerator.register(ModItems.MAGIC_SHARD_FULL, Models.GENERATED);
         itemModelGenerator.register(ModItems.ESSENCE_OF_PROTECTION, Models.GENERATED);
         itemModelGenerator.register(ModItems.ESSENCE_OF_FIRE_PROTECTION, Models.GENERATED);
         itemModelGenerator.register(ModItems.ESSENCE_OF_BLAST_PROTECTION, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ESSENCE_OF_EXPERIENCE, Models.GENERATED);
         //endregion
 
     }

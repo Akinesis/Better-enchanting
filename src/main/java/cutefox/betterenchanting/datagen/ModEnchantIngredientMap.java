@@ -29,23 +29,22 @@ public class ModEnchantIngredientMap {
 
     public static HashMap<String, List<String>> defaultMap = new HashMap<>();
     public static HashMap<RegistryKey<Enchantment>, List<Item>> map = new HashMap<>();
-    public static HashMap<String, List<String>> stringMap = new HashMap<>();
 
 
     static{
         //Armor enchantment
         defaultMap.put(Enchantments.PROTECTION.getValue().toString(), listOfIdentifiers(List.of(Items.COPPER_INGOT,Items.IRON_INGOT,Items.DIAMOND, ModItems.ESSENCE_OF_PROTECTION)));
-        defaultMap.put(Enchantments.FIRE_PROTECTION.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,Items.DIRT,ModItems.ESSENCE_OF_PROTECTION)));
-        defaultMap.put(Enchantments.FEATHER_FALLING.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,Items.DIRT,Items.DIRT)));
+        defaultMap.put(Enchantments.FIRE_PROTECTION.getValue().toString(), listOfIdentifiers(List.of(Items.MAGMA_BLOCK,Items.MAGMA_CREAM,Items.LAVA_BUCKET,ModItems.ESSENCE_OF_PROTECTION)));
+        defaultMap.put(Enchantments.FEATHER_FALLING.getValue().toString(), listOfIdentifiers(List.of(Items.FEATHER,Items.PHANTOM_MEMBRANE,Items.WIND_CHARGE,Items.DIRT)));
         defaultMap.put(Enchantments.BLAST_PROTECTION.getValue().toString(), listOfIdentifiers(List.of(Items.GUNPOWDER, Items.TNT, Items.CREEPER_HEAD, ModItems.ESSENCE_OF_BLAST_PROTECTION)));
-        defaultMap.put(Enchantments.PROJECTILE_PROTECTION.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,Items.DIRT,Items.DIRT)));
-        defaultMap.put(Enchantments.RESPIRATION.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,Items.DIRT)));
-        defaultMap.put(Enchantments.AQUA_AFFINITY.getValue().toString(), listOfIdentifiers(List.of(Items.TURTLE_SCUTE)));
-        defaultMap.put(Enchantments.THORNS.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,Items.DIRT)));
-        defaultMap.put(Enchantments.DEPTH_STRIDER.getValue().toString(), listOfIdentifiers(List.of(Items.COD,Items.DEAD_HORN_CORAL, Items.SPONGE)));
-        defaultMap.put(Enchantments.FROST_WALKER.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT))); //Treasure
+        defaultMap.put(Enchantments.PROJECTILE_PROTECTION.getValue().toString(), listOfIdentifiers(List.of(Items.LEATHER,Items.BRICK,Items.IRON_BARS,Items.DIRT)));
+        defaultMap.put(Enchantments.RESPIRATION.getValue().toString(), listOfIdentifiers(List.of(Items.PUFFERFISH,Items.TURTLE_SCUTE,Items.DIRT)));
+        defaultMap.put(Enchantments.AQUA_AFFINITY.getValue().toString(), listOfIdentifiers(List.of(Items.AXOLOTL_BUCKET)));
+        defaultMap.put(Enchantments.THORNS.getValue().toString(), listOfIdentifiers(List.of(Items.CACTUS,Items.PUFFERFISH_BUCKET,Items.DIRT)));
+        defaultMap.put(Enchantments.DEPTH_STRIDER.getValue().toString(), listOfIdentifiers(List.of(Items.COD,Items.SPONGE, Items.SPONGE)));
+        defaultMap.put(Enchantments.FROST_WALKER.getValue().toString(), listOfIdentifiers(List.of(Items.PACKED_ICE,Items.DIRT))); //Treasure
         defaultMap.put(Enchantments.SOUL_SPEED.getValue().toString(), listOfIdentifiers(List.of(Items.SOUL_SAND,Items.SOUL_SOIL,Items.GHAST_TEAR))); //Treasure
-        defaultMap.put(Enchantments.SWIFT_SNEAK.getValue().toString(), listOfIdentifiers(List.of(Items.WHITE_WOOL,Items.WIND_CHARGE,Items.RABBIT_FOOT))); //Treasure
+        defaultMap.put(Enchantments.SWIFT_SNEAK.getValue().toString(), listOfIdentifiers(List.of(Items.ECHO_SHARD,Items.ECHO_SHARD,Items.ECHO_SHARD))); //Treasure
 
         //Sword enchantment
         defaultMap.put(Enchantments.SHARPNESS.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,Items.DIRT,Items.DIRT,Items.DIRT)));
@@ -95,9 +94,7 @@ public class ModEnchantIngredientMap {
     }
 
     public static void genMapFromJson(World world){
-        Gson gson = new GsonBuilder().create();
-
-        //String tempJson = "{\"minecraft:silk_touch\" : [\"minecraft:acacia_planks\",\"minecraft:acacia_planks\",\"minecraft:acacia_planks\"]}";
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         try {
 
@@ -113,7 +110,6 @@ public class ModEnchantIngredientMap {
                 writer.close();
             }
 
-            //String path = FabricLoader.getInstance().getGameDir().resolve("custom/enchantment_ingredients.json").toString();
             JsonReader reader = new JsonReader(new FileReader(configFile));
             Map<String, List<String>> jsonMap = new HashMap<>();
             jsonMap = gson.fromJson(reader, Map.class);
