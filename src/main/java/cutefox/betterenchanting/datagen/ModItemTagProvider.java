@@ -33,6 +33,14 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ItemTags.HEAD_ARMOR);
         getOrCreateTagBuilder(ItemTags.HEAD_ARMOR_ENCHANTABLE);
 
+        getOrCreateTagBuilder(ModItemTags.LIBRARIAN_ENCHANT_INGREDIENT_SALE)
+                .add(Items.EXPERIENCE_BOTTLE)
+                .add(Items.TURTLE_SCUTE)
+                .add(Items.WIND_CHARGE)
+                .add(ModItems.MAGIC_SHARD_FULL)
+                .add(ModItems.MAGIC_SHARD_DULL)
+                .add(ModItems.INFUSED_LAPIS);
+
         getOrCreateTagBuilder(ModItemTags.ENCHANTEMNT_INGREDIENT)
                 .add(Items.EXPERIENCE_BOTTLE)
                 .add(Items.TURTLE_SCUTE)
@@ -41,8 +49,17 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.MAGIC_SHARD_DULL)
                 .add(ModItems.INFUSED_LAPIS);
 
-
-
+        getOrCreateTagBuilder(ModItemTags.ENCHANTMENT_ESSENCE)
+                .add(ModItems.ESSENCE_OF_EXPERIENCE)
+                .add(ModItems.SOUL_ESSENCE_1)
+                .add(ModItems.SOUL_ESSENCE_2)
+                .add(ModItems.SOUL_ESSENCE_3)
+                .add(ModItems.ESSENCE_OF_SNEAK_1)
+                .add(ModItems.ESSENCE_OF_SNEAK_2)
+                .add(ModItems.ESSENCE_OF_SNEAK_3)
+                .add(ModItems.ESSENCE_OF_PROTECTION)
+                .add(ModItems.ESSENCE_OF_BLAST_PROTECTION)
+                .add(ModItems.ESSENCE_OF_FIRE_PROTECTION);
 
     }
 }

@@ -26,22 +26,6 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     public void generate(RecipeExporter exporter) {
         BetterEnchanting.LOGGER.info("Generating recipes for : "+BetterEnchanting.MOD_ID);
 
-        //region CRAFTING COMPONENTS
-        /*ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.STEEL_BLEND, 1)
-                .input(Items.RAW_IRON)
-                .input(Ingredient.ofItems(Items.COAL, Items.CHARCOAL))
-                .criterion(hasItem(Items.IRON_NUGGET), conditionsFromItem(Items.RAW_IRON))
-                .criterion(hasItem(Items.COAL), conditionsFromItem(Items.COAL))
-                .criterion(hasItem(Items.CHARCOAL), conditionsFromItem(Items.CHARCOAL))
-                .offerTo(exporter, Utils.id(getRecipeName(ModItems.STEEL_BLEND)));*/
-        //endregion
-
-        //region SMELTING
-        /*CookingRecipeJsonBuilder.createSmelting(Ingredient.ofItems(ModItems.STEEL_BLEND), RecipeCategory.MISC, ModItems.STEEL_INGOT, 1,200)
-                .criterion(hasItem(ModItems.STEEL_BLEND), conditionsFromItem(ModItems.STEEL_BLEND))
-                .offerTo(exporter, Utils.id(getRecipeName(ModItems.STEEL_INGOT)));*/
-        //endregion
-
         //region ENCHANTMENT INGREDIENTS
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.MAGIC_SHARD_DULL, 1)
@@ -80,6 +64,30 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.QUARTZ), conditionsFromItem(Items.QUARTZ))
                 .offerTo(exporter, Utils.id(getRecipeName(ModItems.INFUSED_LAPIS)));
 
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.SOUL_ESSENCE_1, 2)
+                .input(ModItems.SOUL_ESSENCE_2)
+                .criterion(hasItem(ModItems.SOUL_ESSENCE_2), conditionsFromItem(ModItems.SOUL_ESSENCE_2))
+                .criterion(hasItem(ModItems.SOUL_ESSENCE_1), conditionsFromItem(ModItems.SOUL_ESSENCE_1))
+                .offerTo(exporter, Utils.id(getRecipeName(ModItems.SOUL_ESSENCE_1)));
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.SOUL_ESSENCE_2, 2)
+                .input(ModItems.SOUL_ESSENCE_3)
+                .criterion(hasItem(ModItems.SOUL_ESSENCE_3), conditionsFromItem(ModItems.SOUL_ESSENCE_3))
+                .criterion(hasItem(ModItems.SOUL_ESSENCE_2), conditionsFromItem(ModItems.SOUL_ESSENCE_2))
+                .offerTo(exporter, Utils.id(getRecipeName(ModItems.SOUL_ESSENCE_2)));
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ESSENCE_OF_SNEAK_1, 2)
+                .input(ModItems.ESSENCE_OF_SNEAK_2)
+                .criterion(hasItem(ModItems.ESSENCE_OF_SNEAK_2), conditionsFromItem(ModItems.ESSENCE_OF_SNEAK_2))
+                .criterion(hasItem(ModItems.ESSENCE_OF_SNEAK_1), conditionsFromItem(ModItems.ESSENCE_OF_SNEAK_1))
+                .offerTo(exporter, Utils.id(getRecipeName(ModItems.ESSENCE_OF_SNEAK_1)));
+
+        ShapelessRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ESSENCE_OF_SNEAK_2, 2)
+                .input(ModItems.ESSENCE_OF_SNEAK_3)
+                .criterion(hasItem(ModItems.ESSENCE_OF_SNEAK_3), conditionsFromItem(ModItems.ESSENCE_OF_SNEAK_3))
+                .criterion(hasItem(ModItems.ESSENCE_OF_SNEAK_2), conditionsFromItem(ModItems.ESSENCE_OF_SNEAK_2))
+                .offerTo(exporter, Utils.id(getRecipeName(ModItems.ESSENCE_OF_SNEAK_2)));
 
         //endregion
 

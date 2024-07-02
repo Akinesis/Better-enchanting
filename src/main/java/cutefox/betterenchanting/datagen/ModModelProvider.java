@@ -37,6 +37,12 @@ public class ModModelProvider extends FabricModelProvider {
         itemModelGenerator.register(ModItems.ESSENCE_OF_FIRE_PROTECTION, Models.GENERATED);
         itemModelGenerator.register(ModItems.ESSENCE_OF_BLAST_PROTECTION, Models.GENERATED);
         itemModelGenerator.register(ModItems.ESSENCE_OF_EXPERIENCE, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SOUL_ESSENCE_1, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SOUL_ESSENCE_2, Models.GENERATED);
+        itemModelGenerator.register(ModItems.SOUL_ESSENCE_3, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ESSENCE_OF_SNEAK_1, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ESSENCE_OF_SNEAK_2, Models.GENERATED);
+        itemModelGenerator.register(ModItems.ESSENCE_OF_SNEAK_3, Models.GENERATED);
         //endregion
 
     }

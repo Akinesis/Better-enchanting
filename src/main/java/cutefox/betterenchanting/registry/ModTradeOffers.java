@@ -55,12 +55,13 @@ public class ModTradeOffers extends TradeOffers {
         public TradeOffer create(Entity entity, Random random) {
             int l;
             ItemStack itemStack;
-            RegistryEntryList.Named<Item> ingredients = Registries.ITEM.getOrCreateEntryList(ModItemTags.ENCHANTEMNT_INGREDIENT);
+            RegistryEntryList.Named<Item> ingredients = Registries.ITEM.getOrCreateEntryList(ModItemTags.LIBRARIAN_ENCHANT_INGREDIENT_SALE);
             if(ingredients.size() > 0){
                 itemStack = ingredients.get(random.nextBetween(0,ingredients.size()-1)).value().getDefaultStack();
             }else {
                 itemStack = new ItemStack(Items.BOOK);
             }
+            itemStack.setCount(random.nextBetween(1,2));
             int price = random.nextBetween(8,18);
             return new TradeOffer(new TradedItem(Items.EMERALD, price), itemStack, 12, this.experience, 0.2f);
         }

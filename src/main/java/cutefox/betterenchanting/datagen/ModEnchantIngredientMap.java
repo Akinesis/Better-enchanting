@@ -42,12 +42,12 @@ public class ModEnchantIngredientMap {
         defaultMap.put(Enchantments.AQUA_AFFINITY.getValue().toString(), listOfIdentifiers(List.of(Items.AXOLOTL_BUCKET)));
         defaultMap.put(Enchantments.THORNS.getValue().toString(), listOfIdentifiers(List.of(Items.CACTUS,Items.PUFFERFISH_BUCKET,Items.DIRT)));
         defaultMap.put(Enchantments.DEPTH_STRIDER.getValue().toString(), listOfIdentifiers(List.of(Items.COD,Items.SPONGE, Items.SPONGE)));
-        defaultMap.put(Enchantments.FROST_WALKER.getValue().toString(), listOfIdentifiers(List.of(Items.PACKED_ICE,Items.DIRT))); //Treasure
-        defaultMap.put(Enchantments.SOUL_SPEED.getValue().toString(), listOfIdentifiers(List.of(Items.SOUL_SAND,Items.SOUL_SOIL,Items.GHAST_TEAR))); //Treasure
-        defaultMap.put(Enchantments.SWIFT_SNEAK.getValue().toString(), listOfIdentifiers(List.of(Items.ECHO_SHARD,Items.ECHO_SHARD,Items.ECHO_SHARD))); //Treasure
+        defaultMap.put(Enchantments.FROST_WALKER.getValue().toString(), listOfIdentifiers(List.of(Items.BLUE_ICE,Items.DIRT))); //Treasure
+        defaultMap.put(Enchantments.SOUL_SPEED.getValue().toString(), listOfIdentifiers(List.of(ModItems.SOUL_ESSENCE_1,ModItems.SOUL_ESSENCE_2,ModItems.SOUL_ESSENCE_3))); //Treasure
+        defaultMap.put(Enchantments.SWIFT_SNEAK.getValue().toString(), listOfIdentifiers(List.of(ModItems.ESSENCE_OF_SNEAK_1,ModItems.ESSENCE_OF_SNEAK_2,ModItems.ESSENCE_OF_SNEAK_3))); //Treasure
 
         //Sword enchantment
-        defaultMap.put(Enchantments.SHARPNESS.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,Items.DIRT,Items.DIRT,Items.DIRT)));
+        defaultMap.put(Enchantments.SHARPNESS.getValue().toString(), listOfIdentifiers(List.of(Items.FLINT,Items.DIRT,Items.DIRT,Items.DIRT,Items.DIRT)));
         defaultMap.put(Enchantments.SMITE.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,Items.DIRT,Items.DIRT,Items.DIRT)));
         defaultMap.put(Enchantments.BANE_OF_ARTHROPODS.getValue().toString(), listOfIdentifiers(List.of(Items.SPIDER_EYE,Items.SPIDER_EYE,Items.COBWEB, Items.FERMENTED_SPIDER_EYE,Items.FERMENTED_SPIDER_EYE )));
         defaultMap.put(Enchantments.KNOCKBACK.getValue().toString(), listOfIdentifiers(List.of(Items.PISTON, Items.STICKY_PISTON)));
@@ -72,7 +72,7 @@ public class ModEnchantIngredientMap {
 
         //Anything enchantment
         defaultMap.put(Enchantments.UNBREAKING.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,Items.DIRT)));
-        defaultMap.put(Enchantments.MENDING.getValue().toString(), listOfIdentifiers(List.of(Items.EXPERIENCE_BOTTLE))); //Treasure
+        defaultMap.put(Enchantments.MENDING.getValue().toString(), listOfIdentifiers(List.of(ModItems.ESSENCE_OF_EXPERIENCE))); //Treasure
 
         //Trident enchantment
         defaultMap.put(Enchantments.CHANNELING.getValue().toString(), listOfIdentifiers(List.of(Items.WATER_BUCKET)));
@@ -82,9 +82,8 @@ public class ModEnchantIngredientMap {
 
         //Crossbow enchantment
         defaultMap.put(Enchantments.MULTISHOT.getValue().toString(), listOfIdentifiers(List.of(Items.FIREWORK_ROCKET)));
-        defaultMap.put(Enchantments.PIERCING.getValue().toString(), listOfIdentifiers(List.of(Items.NAUTILUS_SHELL,Items.DIRT,Items.DIRT,Items.DIRT)));
+        defaultMap.put(Enchantments.PIERCING.getValue().toString(), listOfIdentifiers(List.of(Items.FLINT,Items.ARROW,Items.SPECTRAL_ARROW,Items.DIRT)));
         defaultMap.put(Enchantments.QUICK_CHARGE.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,Items.DIRT)));
-
 
     }
 
