@@ -2,10 +2,21 @@
   "values": [
     "better-enchanting:essence_of_experience",
     "better-enchanting:essence_of_arrows",
-    "better-enchanting:essence_of_sweeping",
+    "better-enchanting:essence_of_feather",
+    "better-enchanting:essence_of_respiration",
+    "better-enchanting:essence_of_thorn",
+    "better-enchanting:essence_of_sea",
+    "better-enchanting:essence_of_ice",
     "better-enchanting:essence_of_protection",
     "better-enchanting:essence_of_blast_protection",
     "better-enchanting:essence_of_fire_protection",
-    "better-enchanting:essence_of_projectile_protection"
+    "better-enchanting:essence_of_projectile_protection",
+    "better-enchanting:essence_of_arthropods",
+    "better-enchanting:essence_of_sharpness",
+    "better-enchanting:essence_of_smite",
+    "better-enchanting:essence_of_fire",
+    "better-enchanting:essence_of_knockback",
+    "better-enchanting:essence_of_looting",
+    "better-enchanting:essence_of_sweeping"
   ]
 }

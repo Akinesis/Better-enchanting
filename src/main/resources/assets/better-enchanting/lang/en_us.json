@@ -17,12 +17,22 @@
   "item.better-enchanting.essence_of_sneak_3": "Essence Of Sneak III",
   "item.better-enchanting.essence_of_sweeping": "Essence Of Sweeping",
   "item.better-enchanting.essence_of_arrows": "Essence Of Arrows",
+  "item.better-enchanting.essence_of_feather": "Essence Of Feathers",
+  "item.better-enchanting.essence_of_respiration": "Essence Of Respiration",
+  "item.better-enchanting.essence_of_sea": "Essence Of The Sea",
+  "item.better-enchanting.essence_of_thorn": "Essence Of Thorns",
+  "item.better-enchanting.essence_of_ice": "Essence Of Ice",
+  "item.better-enchanting.essence_of_smite": "Essence Of Smite",
+  "item.better-enchanting.essence_of_arthropods": "Essence Of The Arthropods",
+  "item.better-enchanting.essence_of_knockback": "Essence Of Knockback",
+  "item.better-enchanting.essence_of_fire": "Essence Of Fire",
+  "item.better-enchanting.essence_of_looting": "Essence Of Looting",
 
-  "item.better-enchanting.steel_ingot": "Steel Ingot",
-  "item.better-enchanting.steel_blend": "Steel Blend",
 
-  "container.foxden.enchant.material.one": "%s %s",
-  "container.foxden.enchant.charge": "Charge Magic Shard",
 
-  "tag.item.better-enchanting.enchantment_ingredients":"Enchantment Ingredients"
+  "container.better-enchanting.enchant.material.one": "%s %s",
+  "container.better-enchanting.enchant.charge": "Charge Magic Shard",
+
+  "tag.item.better-enchanting.enchantment_ingredients":"Enchantment Ingredients",
+  "tag.item.better-enchanting.enchantment_essence":"Enchantment Essence"
 }

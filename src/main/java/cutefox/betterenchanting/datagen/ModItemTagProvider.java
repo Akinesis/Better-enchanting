@@ -45,6 +45,11 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(Items.EXPERIENCE_BOTTLE)
                 .add(Items.TURTLE_SCUTE)
                 .add(Items.WIND_CHARGE)
+                .add(Items.PUFFERFISH)
+                .add(Items.CACTUS)
+                .add(Items.BLUE_ICE)
+                .add(Items.PISTON)
+                .add(Items.SPIDER_EYE)
                 .add(ModItems.MAGIC_SHARD_FULL)
                 .add(ModItems.MAGIC_SHARD_DULL)
                 .add(ModItems.INFUSED_LAPIS);
@@ -52,11 +57,22 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ModItemTags.ENCHANTMENT_ESSENCE)
                 .add(ModItems.ESSENCE_OF_EXPERIENCE)
                 .add(ModItems.ESSENCE_OF_ARROWS)
-                .add(ModItems.ESSENCE_OF_SWEEPING)
+                .add(ModItems.ESSENCE_OF_FEATHER)
+                .add(ModItems.ESSENCE_OF_RESPIRATION)
+                .add(ModItems.ESSENCE_OF_THORN)
+                .add(ModItems.ESSENCE_OF_SEA)
+                .add(ModItems.ESSENCE_OF_ICE)
                 .add(ModItems.ESSENCE_OF_PROTECTION)
                 .add(ModItems.ESSENCE_OF_BLAST_PROTECTION)
                 .add(ModItems.ESSENCE_OF_FIRE_PROTECTION)
-                .add(ModItems.ESSENCE_OF_PROJECTILE_PROTECTION);
+                .add(ModItems.ESSENCE_OF_PROJECTILE_PROTECTION)
+                .add(ModItems.ESSENCE_OF_ARTHROPODS)
+                .add(ModItems.ESSENCE_OF_SHARPNESS)
+                .add(ModItems.ESSENCE_OF_SMITE)
+                .add(ModItems.ESSENCE_OF_FIRE)
+                .add(ModItems.ESSENCE_OF_KNOCKBACK)
+                .add(ModItems.ESSENCE_OF_LOOTING)
+                .add(ModItems.ESSENCE_OF_SWEEPING);
 
     }
 }

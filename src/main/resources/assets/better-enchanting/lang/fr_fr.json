@@ -17,12 +17,19 @@
   "item.better-enchanting.essence_of_sneak_3": "Essence de précaution III",
   "item.better-enchanting.essence_of_sweeping": "Essence d'affilage",
   "item.better-enchanting.essence_of_arrows": "Essence de flèches",
+  "item.better-enchanting.essence_of_respiration": "Essence de réspiration",
+  "item.better-enchanting.essence_of_sea": "Essence de la mer",
+  "item.better-enchanting.essence_of_thorn": "Essence d'épines",
+  "item.better-enchanting.essence_of_ice": "Essence de glace",
+  "item.better-enchanting.essence_of_smite": "Essence de châtiment",
+  "item.better-enchanting.essence_of_arthropods": "Essence des Arthropodes",
+  "item.better-enchanting.essence_of_knockback": "Essence de recul",
+  "item.better-enchanting.essence_of_fire": "Essence de feu",
+  "item.better-enchanting.essence_of_looting": "Essence de butin",
 
-  "item.better-enchanting.steel_ingot": "Lingot d'acier",
-  "item.better-enchanting.steel_blend": "Mélange d'acier",
+  "container.better-enchanting.enchant.material.one": "%s %s",
+  "container.better-enchanting.enchant.charge": "Charger éclat magique",
 
-  "container.foxden.enchant.material.one": "%s %s",
-  "container.foxden.enchant.charge": "Charger éclat magique",
-
-  "tag.item.better-enchanting.enchantment_ingredients":"Ingredients d'enchentement"
+  "tag.item.better-enchanting.enchantment_ingredients":"Ingredients d'enchantement",
+  "tag.item.better-enchanting.enchantment_essence":"Essence d'enchantement"
 }
