@@ -35,6 +35,7 @@ public class BetterEnchanting implements ModInitializer {
 		ModEnchantIngredientMap.createMap();
 		ModTradeOffers.removeEnchantedBooks();
 		ModItemTags.registerModTags();
+		ModLootTables.registerLootTables();
 
 		Registry.register(Registries.ITEM_GROUP, Utils.id("item_group"), ITEM_GROUP);
 
@@ -62,6 +63,7 @@ public class BetterEnchanting implements ModInitializer {
 				entries.add(ModItems.ESSENCE_OF_PROTECTION);
 				entries.add(ModItems.ESSENCE_OF_FIRE_PROTECTION);
 				entries.add(ModItems.ESSENCE_OF_BLAST_PROTECTION);
+				entries.add(ModItems.ESSENCE_OF_PROJECTILE_PROTECTION);
 				entries.add(ModItems.ESSENCE_OF_EXPERIENCE);
 				entries.add(ModItems.SOUL_ESSENCE_1);
 				entries.add(ModItems.SOUL_ESSENCE_2);
@@ -69,6 +71,8 @@ public class BetterEnchanting implements ModInitializer {
 				entries.add(ModItems.ESSENCE_OF_SNEAK_1);
 				entries.add(ModItems.ESSENCE_OF_SNEAK_2);
 				entries.add(ModItems.ESSENCE_OF_SNEAK_3);
+				entries.add(ModItems.ESSENCE_OF_SWEEPING);
+				entries.add(ModItems.ESSENCE_OF_ARROWS);
 			})
 			.build();
 }

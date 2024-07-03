@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "better-enchanting:essence_of_sneak_3"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "better-enchanting:essence_of_sneak_2"
+  }
+}

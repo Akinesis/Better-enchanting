@@ -103,6 +103,10 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:iron_pickaxe"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "better-enchanting:essence"
         }
       ],
       "rolls": {

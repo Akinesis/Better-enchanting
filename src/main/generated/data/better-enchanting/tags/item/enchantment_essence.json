@@ -1,11 +1,11 @@
 {
   "values": [
     "better-enchanting:essence_of_experience",
-    "better-enchanting:soul_essence_1",
-    "better-enchanting:soul_essence_2",
-    "better-enchanting:soul_essence_3",
+    "better-enchanting:essence_of_arrows",
+    "better-enchanting:essence_of_sweeping",
     "better-enchanting:essence_of_protection",
     "better-enchanting:essence_of_blast_protection",
-    "better-enchanting:essence_of_fire_protection"
+    "better-enchanting:essence_of_fire_protection",
+    "better-enchanting:essence_of_projectile_protection"
   ]
 }

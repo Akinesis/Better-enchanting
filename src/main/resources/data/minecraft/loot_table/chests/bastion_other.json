@@ -143,6 +143,21 @@
           ],
           "name": "minecraft:golden_apple",
           "weight": 9
+        },
+        {
+          "type": "minecraft:item",
+          "name": "better-enchanting:soul_essence_1",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "better-enchanting:soul_essence_2",
+          "weight": 10
+        },
+        {
+          "type": "minecraft:item",
+          "name": "better-enchanting:soul_essence_3",
+          "weight": 10
         }
       ],
       "rolls": 1.0

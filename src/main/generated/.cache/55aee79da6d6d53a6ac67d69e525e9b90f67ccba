@@ -1,7 +1,15 @@
-// 1.21	2024-07-01T16:41:17.7656989	Better Enchanting/Recipes
+// 1.21	2024-07-02T23:57:41.1023579	Better Enchanting/Recipes
 d80c895acbaeb708dfd89baf67eead657ec44a04 data\better-enchanting\recipe\magic_shard_full.json
+8b11e51578ae7ebfdf793d85d56fd34a94faa54f data\better-enchanting\recipe\soul_essence_2.json
+6f4c5024d1ab4f94d742421c68f6a36270ea468a data\better-enchanting\advancement\recipes\misc\soul_essence_2.json
+397b613e3fd71fcffe66ab58be72834e83e06eef data\better-enchanting\advancement\recipes\misc\essence_of_sneak_2.json
+99df2f23e8a438d9a020f192581b64bb7bf338b6 data\better-enchanting\recipe\essence_of_sneak_1.json
+4f2f42e42f83618ab9a1c1924aba3af30fbd7220 data\better-enchanting\advancement\recipes\misc\soul_essence_1.json
+0f31954acfb1d50f598e2dc8f58408c51610e176 data\better-enchanting\recipe\infused_lapis.json
+f1ee85f7fa3178bd7bf97ff22c73eec9e04b54f7 data\better-enchanting\recipe\essence_of_sneak_2.json
+317ee3cca664b8d6c50810f086c3ca4d02069b34 data\better-enchanting\recipe\soul_essence_1.json
 766e2b0ebc057df2f4586d13dcf3cdf38bc228e6 data\better-enchanting\advancement\recipes\misc\magic_shard_full.json
 9feb57447b2796c09a902f80526b8c3f8e7fb081 data\better-enchanting\advancement\recipes\misc\magic_shard_dull.json
 2e112c15c1b7f98aa9133c1d21e5ceec65eaa4ca data\better-enchanting\recipe\magic_shard_dull.json
-0f31954acfb1d50f598e2dc8f58408c51610e176 data\better-enchanting\recipe\infused_lapis.json
+e820407eade39060df46acfc971c240892250c8f data\better-enchanting\advancement\recipes\misc\essence_of_sneak_1.json
 6461d637101a2b006218de676ce9d66b96670bdb data\better-enchanting\advancement\recipes\misc\infused_lapis.json

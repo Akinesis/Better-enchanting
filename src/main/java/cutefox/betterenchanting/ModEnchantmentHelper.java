@@ -115,6 +115,8 @@ public class ModEnchantmentHelper {
 
     public static int getEnchantmentIngredientCost(Enchantment value, int displayedEnchantLevel) {
         int tempValue = (int)Math.floor(value.getWeight()/2);
+        if (value.getMaxLevel() == displayedEnchantLevel)
+            tempValue = 1;
         return tempValue==0?1:tempValue;
     }
 

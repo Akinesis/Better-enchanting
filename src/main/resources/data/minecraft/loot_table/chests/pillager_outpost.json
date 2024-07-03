@@ -169,6 +169,10 @@
           ],
           "name": "minecraft:iron_ingot",
           "weight": 3
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "better-enchanting:enchantment_loot"
         }
       ],
       "rolls": {

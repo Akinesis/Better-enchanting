@@ -43,6 +43,11 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:compass"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "better-enchanting:essence",
+          "weight": 10
         }
       ],
       "rolls": {

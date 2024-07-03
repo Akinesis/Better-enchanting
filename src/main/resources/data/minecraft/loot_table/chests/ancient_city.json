@@ -375,6 +375,26 @@
           ],
           "name": "minecraft:coal",
           "weight": 7
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "better-enchanting:enchantment_loot",
+          "weight": 5
+        },
+        {
+          "type": "minecraft:item",
+          "name": "better-enchanting:essence_of_sneak_1",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "better-enchanting:essence_of_sneak_2",
+          "weight": 3
+        },
+        {
+          "type": "minecraft:item",
+          "name": "better-enchanting:essence_of_sneak_3",
+          "weight": 3
         }
       ],
       "rolls": {

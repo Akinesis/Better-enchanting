@@ -134,10 +134,9 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
 
     protected void drawForeground(DrawContext context, int mouseX, int mouseY) {
         super.drawForeground(context,mouseX,mouseY);
-        int width = (this.width - this.backgroundWidth) / 2;
-        int height = (this.height - this.backgroundHeight) / 2;
         if(!client.player.isInCreativeMode())
-            context.drawText(this.textRenderer, Text.of("XP : "+this.client.player.experienceLevel),width-110, height+68, Colors.GREEN, true);
+            context.drawText(this.textRenderer, Text.of("XP : "+this.client.player.experienceLevel),10, 74, Colors.GREEN, true);
+
     }
 
     protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {

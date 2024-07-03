@@ -149,6 +149,11 @@
         {
           "type": "minecraft:empty",
           "weight": 15
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "better-enchanting:enchantment_loot",
+          "weight": 20
         }
       ],
       "rolls": {

@@ -158,6 +158,10 @@
         {
           "type": "minecraft:item",
           "name": "minecraft:music_disc_otherside"
+        },
+        {
+          "type": "minecraft:loot_table",
+          "value": "better-enchanting:essence"
         }
       ],
       "rolls": {
