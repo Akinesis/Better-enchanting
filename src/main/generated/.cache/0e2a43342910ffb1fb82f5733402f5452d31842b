@@ -1,10 +1,11 @@
-// 1.21	2024-07-03T15:34:46.2325345	Better Enchanting/Model Definitions
+// 1.21	2024-07-04T16:21:13.4675431	Better Enchanting/Model Definitions
 c8683df4f900f368d0794309edd76b6f95f403f8 assets\better-enchanting\models\item\essence_of_smite.json
 12b41de0c7d5e8d26e4d67fe195e953b0711a7d0 assets\better-enchanting\models\item\essence_of_sneak_2.json
 56dfff9d40aa713cddd8fd58a769690262e4e7f6 assets\better-enchanting\models\item\soul_essence_2.json
 07e7ac04407dd6a7f6676049c50fdb686660b9d2 assets\better-enchanting\models\item\essence_of_fire.json
 cd750db79b689f9a36dff9a38965eab07d301508 assets\better-enchanting\models\item\essence_of_knockback.json
 18387448cfc54b00cbedcaf5b38f65568e3cc9d5 assets\better-enchanting\models\item\essence_of_protection.json
+b6c985aa76b097b082cea241cb48abf65c391b21 assets\better-enchanting\models\item\essence_of_punch.json
 3108202c6813ea206cc60035b7b949e897f47d3d assets\better-enchanting\models\item\essence_of_blast_protection.json
 17221917a138dacd257d94efb808659ecea0d2f6 assets\better-enchanting\models\item\essence_of_fire_protection.json
 c41adaafbaa608920426f27aeb213336c60c8d29 assets\better-enchanting\models\item\essence_of_looting.json
@@ -12,10 +13,10 @@ c41adaafbaa608920426f27aeb213336c60c8d29 assets\better-enchanting\models\item\es
 3bfd089ca496b0900587d24864aa24475c676194 assets\better-enchanting\models\item\essence_of_thorn.json
 0263758e55299e5fef6be643b7e1c7d52cef8c68 assets\better-enchanting\models\item\essence_of_ice.json
 160021197f11e7ef328258e29ae8462d8cf48276 assets\better-enchanting\models\item\essence_of_arrows.json
-97e5e4a6cea8709d3c9c707d5d1b13eb713b0280 assets\better-enchanting\models\item\essence_of_sea.json
 7a51e33e05c7fbf22b08e6d78417b074ef042229 assets\better-enchanting\models\item\essence_of_sweeping.json
-1c4e60056b27adbc4153f133f545cb676649cdca assets\better-enchanting\models\item\soul_essence_3.json
+97e5e4a6cea8709d3c9c707d5d1b13eb713b0280 assets\better-enchanting\models\item\essence_of_sea.json
 f7cf3d6dc879d912d3697a10988155ea1b8b5288 assets\better-enchanting\models\item\soul_essence_1.json
+1c4e60056b27adbc4153f133f545cb676649cdca assets\better-enchanting\models\item\soul_essence_3.json
 aa551931cfc45ca41ec3cd70d3059873f209cf7a assets\better-enchanting\models\item\essence_of_projectile_protection.json
 1aba1c4a4e72e9a05ca32e0f9ad7b1a0983bcb13 assets\better-enchanting\models\item\magic_shard_dull.json
 f210d09f71bc4b53598758801118acbc9ea2713e assets\better-enchanting\models\item\infused_lapis.json
@@ -23,6 +24,7 @@ f210d09f71bc4b53598758801118acbc9ea2713e assets\better-enchanting\models\item\in
 7b0bd6d42adad16d9b6d6178453ee261a465e91b assets\better-enchanting\models\item\essence_of_feather.json
 2d1eddb79c9541cb0d3b6a7e9c0d50ca20977340 assets\better-enchanting\models\item\magic_shard_full.json
 260689db05523f96694d536756325fe1ed160b35 assets\better-enchanting\models\item\essence_of_sharpness.json
+5b307796d893e904fb457ace86c3b2f738da0e34 assets\better-enchanting\models\item\essence_of_power.json
 9101686812d6e1cc14bf8f8b5f2a19a643fb9467 assets\better-enchanting\models\item\essence_of_sneak_3.json
 96e80de5407ff7a1adb235709f1aa97302108bd8 assets\better-enchanting\models\item\essence_of_respiration.json
 a9cdfdc43f682a9a25658a5176f5ef778bbfb953 assets\better-enchanting\models\item\essence_of_arthropods.json
