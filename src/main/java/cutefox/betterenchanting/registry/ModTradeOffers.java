@@ -38,16 +38,8 @@ public class ModTradeOffers extends TradeOffers {
     public static class EnchantmentIngredientsFactory
             implements Factory {
         private final int experience;
-        private final int minLevel;
-        private final int maxLevel;
 
         public EnchantmentIngredientsFactory(int experience) {
-            this(experience, 0, Integer.MAX_VALUE);
-        }
-
-        public EnchantmentIngredientsFactory(int experience, int minLevel, int maxLevel) {
-            this.minLevel = minLevel;
-            this.maxLevel = maxLevel;
             this.experience = experience;
         }
 

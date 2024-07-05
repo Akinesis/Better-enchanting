@@ -44,12 +44,11 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ModItemTags.ENCHANTEMNT_INGREDIENT)
                 .add(Items.EXPERIENCE_BOTTLE)
                 .add(Items.TURTLE_SCUTE)
-                .add(Items.WIND_CHARGE)
                 .add(Items.PUFFERFISH)
-                .add(Items.CACTUS)
                 .add(Items.BLUE_ICE)
+                .add(Items.GOLDEN_CARROT)
                 .add(Items.PISTON)
-                .add(Items.SPIDER_EYE)
+                .add(Items.HEART_OF_THE_SEA)
                 .add(ModItems.MAGIC_SHARD_FULL)
                 .add(ModItems.MAGIC_SHARD_DULL)
                 .add(ModItems.INFUSED_LAPIS);
@@ -72,7 +71,25 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.ESSENCE_OF_FIRE)
                 .add(ModItems.ESSENCE_OF_KNOCKBACK)
                 .add(ModItems.ESSENCE_OF_LOOTING)
-                .add(ModItems.ESSENCE_OF_SWEEPING);
+                .add(ModItems.ESSENCE_OF_SWEEPING)
+                .add(ModItems.ESSENCE_OF_PUNCH)
+                .add(ModItems.ESSENCE_OF_POWER)
+                .add(ModItems.ESSENCE_OF_SEA_LUCK)
+                .add(ModItems.ESSENCE_OF_FORTUNE)
+                .add(ModItems.ESSENCE_OF_EFFICIENCY)
+                .add(ModItems.ESSENCE_OF_LURE)
+                .add(ModItems.ESSENCE_OF_SILK_TOUCH)
+                .add(ModItems.ESSENCE_OF_MENDING)
+                .add(ModItems.ESSENCE_OF_UNBREAKING)
+                .add(ModItems.ESSENCE_OF_CHANNELING)
+                .add(ModItems.ESSENCE_OF_IMPALING)
+                .add(ModItems.ESSENCE_OF_LOYALTY)
+                .add(ModItems.ESSENCE_OF_RIPTIDE)
+                .add(ModItems.ESSENCE_OF_MULTISHOT)
+                .add(ModItems.ESSENCE_OF_PIERCING)
+                .add(ModItems.ESSENCE_OF_QUICK_CHARGE)
+                .add(ModItems.ESSENCE_OF_DENSITY)
+                .add(ModItems.ESSENCE_OF_BREACH);
 
     }
 }
