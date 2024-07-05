@@ -1,4 +1,4 @@
-// 1.21	2024-07-05T14:31:27.7757532	Better Enchanting/Model Definitions
+// 1.21	2024-07-05T23:32:23.7791386	Better Enchanting/Model Definitions
 c8683df4f900f368d0794309edd76b6f95f403f8 assets\better-enchanting\models\item\essence_of_smite.json
 12b41de0c7d5e8d26e4d67fe195e953b0711a7d0 assets\better-enchanting\models\item\essence_of_sneak_2.json
 56dfff9d40aa713cddd8fd58a769690262e4e7f6 assets\better-enchanting\models\item\soul_essence_2.json
@@ -14,8 +14,8 @@ c41adaafbaa608920426f27aeb213336c60c8d29 assets\better-enchanting\models\item\es
 17221917a138dacd257d94efb808659ecea0d2f6 assets\better-enchanting\models\item\essence_of_fire_protection.json
 54ecf495b880f1ab8876afe20c95c65417ec685f assets\better-enchanting\models\item\essence_of_riptide.json
 8b4877b7a4bf851e9b90ee519bfd3c326d082298 assets\better-enchanting\models\item\essence_of_sneak_1.json
-214cc13c81e828a5835e9812262b9a708b4c0928 assets\better-enchanting\models\item\essence_of_efficiency.json
 6f3ae6cd95f693161aea4f021cb154c04b8467c6 assets\better-enchanting\models\item\essence_of_silk_touch.json
+214cc13c81e828a5835e9812262b9a708b4c0928 assets\better-enchanting\models\item\essence_of_efficiency.json
 3bfd089ca496b0900587d24864aa24475c676194 assets\better-enchanting\models\item\essence_of_thorn.json
 542c09ed8444deefd352a7236dd84faa08334420 assets\better-enchanting\models\item\essence_of_unbreaking.json
 0263758e55299e5fef6be643b7e1c7d52cef8c68 assets\better-enchanting\models\item\essence_of_ice.json
@@ -26,8 +26,8 @@ c579760e1c6dcd701fefe93e4a7080ce71bc7171 assets\better-enchanting\models\item\es
 de1aee5a42abc991637077ac43f2ae2ab508ced3 assets\better-enchanting\models\item\essence_of_density.json
 97e5e4a6cea8709d3c9c707d5d1b13eb713b0280 assets\better-enchanting\models\item\essence_of_sea.json
 1c4e60056b27adbc4153f133f545cb676649cdca assets\better-enchanting\models\item\soul_essence_3.json
-b0184a9f0b7ebde92ca31997eaa8ae33fbd6cd53 assets\better-enchanting\models\item\essence_of_fortune.json
 f7cf3d6dc879d912d3697a10988155ea1b8b5288 assets\better-enchanting\models\item\soul_essence_1.json
+b0184a9f0b7ebde92ca31997eaa8ae33fbd6cd53 assets\better-enchanting\models\item\essence_of_fortune.json
 76c2154bba5434a0a74f7b095ed6929b8006a5e9 assets\better-enchanting\models\item\essence_of_impaling.json
 aa551931cfc45ca41ec3cd70d3059873f209cf7a assets\better-enchanting\models\item\essence_of_projectile_protection.json
 1aba1c4a4e72e9a05ca32e0f9ad7b1a0983bcb13 assets\better-enchanting\models\item\magic_shard_dull.json

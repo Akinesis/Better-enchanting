@@ -1,4 +1,4 @@
-// 1.21	2024-07-05T14:31:27.7797418	Better Enchanting/Tags for minecraft:item
+// 1.21	2024-07-05T23:32:23.7841251	Better Enchanting/Tags for minecraft:item
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data\minecraft\tags\item\enchantable\head_armor.json
 e755dbeced8578168bd879a2f1b6b6e0fa309948 data\better-enchanting\tags\item\enchantment_essence.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data\minecraft\tags\item\foot_armor.json
@@ -6,6 +6,6 @@ e755dbeced8578168bd879a2f1b6b6e0fa309948 data\better-enchanting\tags\item\enchan
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data\minecraft\tags\item\leg_armor.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data\minecraft\tags\item\head_armor.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data\minecraft\tags\item\enchantable\chest_armor.json
-35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data\minecraft\tags\item\enchantable\foot_armor.json
 35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data\minecraft\tags\item\enchantable\leg_armor.json
+35133e95f1c8fdd7a1c21afcc231fc0bffefb9a8 data\minecraft\tags\item\enchantable\foot_armor.json
 e30fbc320111f67333d9b799773e0a77a42f0211 data\better-enchanting\tags\item\enchantment_ingredients.json

@@ -42,8 +42,6 @@ public class BetterEnchanting implements ModInitializer {
 		ModLootTableModifiers.modifyLootTables();
 
 		addEventListner();
-
-		LOGGER.info("Hello Fabric world!");
 	}
 
 	private void addEventListner(){
