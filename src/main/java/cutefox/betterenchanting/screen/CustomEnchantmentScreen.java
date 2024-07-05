@@ -190,7 +190,6 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                     context.drawTexture(TEXTURE, localWidth+63, localHeight+14, 182, 0, 16,16);
                 }else if(k ==14 || this.handler.enchantmentId[k+1]<=-1){
                     context.drawTexture(TEXTURE, localWidth+63, localHeight+14+(16*(k-indexStartOffset)), 182, 32, 16,16);
-                    //TheFoxDenCollection.LOGGER.info("Drawing enchant number : " + this.handler.enchantmentId[k]);
                 }else {
                     boolean lastEntry = numberOfPossibleEnchants >=7;
                     context.drawTexture(TEXTURE, localWidth+63, localHeight+14+(16*(k-indexStartOffset)), 182, 16, lastEntry?13:16,16);
@@ -376,7 +375,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                                     list.add(mutableText2.formatted(client.player.experienceLevel >= enchantLevelCost ? Formatting.GRAY : Formatting.RED));
 
                                     MutableText mutableText3;
-                                    mutableText3 = Text.translatable("container.foxden.enchant.material.one", enchantIngredientCost, Text.translatable(enchantIngredientStack.getTranslationKey()));
+                                    mutableText3 = Text.translatable("container.better-enchanting.enchant.material.one", enchantIngredientCost, Text.translatable(enchantIngredientStack.getTranslationKey()));
 
                                     if(handler.getSlot(2).getStack().getItem() != enchantIngredient)
                                         list.add(mutableText3.formatted(Formatting.RED));

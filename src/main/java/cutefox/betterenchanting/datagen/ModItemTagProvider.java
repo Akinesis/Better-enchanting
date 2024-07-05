@@ -89,6 +89,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.ESSENCE_OF_PIERCING)
                 .add(ModItems.ESSENCE_OF_QUICK_CHARGE)
                 .add(ModItems.ESSENCE_OF_DENSITY)
+                .add(ModItems.ESSENCE_OF_WIND)
                 .add(ModItems.ESSENCE_OF_BREACH);
 
     }

@@ -222,7 +222,7 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
                 return false;
             } else if (itemToEnchant.isEmpty() || (player.experienceLevel < enchantLevelCost || player.experienceLevel < enchantLevReq) && !player.isInCreativeMode()) {
                 return false;
-            }else if(getSlot(2).getStack().getItem() != enchantIngredient && getSlot(2).getStack().getCount() < enchantIngredientCost && !player.isInCreativeMode()){
+            }else if((getSlot(2).getStack().getItem() != enchantIngredient || getSlot(2).getStack().getCount() < enchantIngredientCost) && !player.isInCreativeMode()){
                 return false;
             }else{
                 //can enchant
