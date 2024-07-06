@@ -50,7 +50,7 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
     public final int[] enchantmentId;
     public final int[] enchantmentLevel;
     private List<EnchantmentLevelEntry> possibleEnchantments;
-    public static final int ENCHANT_ARRAY_SIZE = 20;
+    public static final int ENCHANT_ARRAY_SIZE = 40;
 
     public CustomEnchantmentScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
@@ -66,8 +66,8 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
         };
 
         this.enchantmentPower = new int[3];
-        this.enchantmentId = new int[]{-1, -1, -1,-1, -1, -1,-1, -1, -1,-1, -1, -1,-1, -1, -1, -1, -1, -1, -1, -1};
-        this.enchantmentLevel = new int[]{-1, -1, -1,-1, -1, -1,-1, -1, -1,-1, -1, -1,-1, -1, -1, -1, -1, -1, -1, -1};
+        this.enchantmentId = new int[ENCHANT_ARRAY_SIZE];//{-1, -1, -1,-1, -1, -1,-1, -1, -1,-1, -1, -1,-1, -1, -1, -1, -1, -1, -1, -1};
+        this.enchantmentLevel = new int[ENCHANT_ARRAY_SIZE];//{-1, -1, -1,-1, -1, -1,-1, -1, -1,-1, -1, -1,-1, -1, -1, -1, -1, -1, -1, -1};
         this.context = context;
 
         this.addSlot(new Slot(this.inventory, 0, 11, 91) {
@@ -101,7 +101,15 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
         this.addProperty(Property.create(this.enchantmentPower, 0));
         this.addProperty(Property.create(this.enchantmentPower, 1));
         this.addProperty(Property.create(this.enchantmentPower, 2));
-        this.addProperty(Property.create(this.enchantmentId, 0));
+
+        for(i = 0; i < ENCHANT_ARRAY_SIZE; ++i){
+            enchantmentId[i] = -1;
+            enchantmentLevel[i] = -1;
+            this.addProperty(Property.create(this.enchantmentId, i));
+            this.addProperty(Property.create(this.enchantmentLevel, i));
+        }
+
+        /*this.addProperty(Property.create(this.enchantmentId, 0));
         this.addProperty(Property.create(this.enchantmentId, 1));
         this.addProperty(Property.create(this.enchantmentId, 2));
         this.addProperty(Property.create(this.enchantmentId, 3));
@@ -140,7 +148,7 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
         this.addProperty(Property.create(this.enchantmentLevel, 16));
         this.addProperty(Property.create(this.enchantmentLevel, 17));
         this.addProperty(Property.create(this.enchantmentLevel, 18));
-        this.addProperty(Property.create(this.enchantmentLevel, 19));
+        this.addProperty(Property.create(this.enchantmentLevel, 19));*/
     }
 
     public void onContentChanged(Inventory inventory) {
@@ -205,8 +213,10 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
             int displayedEnchantLevel = level + 1;
             int enchantLevelCost = ModEnchantmentHelper.getEnchantmentLevelCost(enchant.get().value(),displayedEnchantLevel,itemToEnchant, player.getWorld());
             int enchantLevReq = ModEnchantmentHelper.getEnchantmentLeveRequierment(enchant.get().value(),displayedEnchantLevel);
-            int enchantIngredientCost = ModEnchantmentHelper.getEnchantmentIngredientCost(enchant.get().value(),displayedEnchantLevel);
-            int lapisCost = (int)Math.floor(enchantLevelCost/2);
+            Item enchantIngredient = ModEnchantmentHelper.getEnchantIngredient(enchantEntry1.getKey().get(), level);
+            int enchantIngredientCost = ModEnchantmentHelper.getEnchantmentIngredientCost(enchant.get().value(),displayedEnchantLevel,enchantIngredient);
+            int tempLapisCost = (int)Math.floor(enchantLevelCost/2);
+            int lapisCost = tempLapisCost<=0?1:tempLapisCost;
             boolean hasEnchantLevel = EnchantmentHelper.getLevel(enchantEntry1,itemToEnchant)>=displayedEnchantLevel;
 
             if(level > 0 && !ModEnchantmentHelper.itemHasPreviousLevelOfEnchant(itemToEnchant, enchantEntry1, level) && !hasEnchantLevel){
@@ -216,7 +226,6 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
             if(hasEnchantLevel)
                 return false;
 
-            Item enchantIngredient = ModEnchantmentHelper.getEnchantIngredient(enchantEntry1.getKey().get(), level);
 
             if ((lapisStack.isEmpty() || lapisStack.getCount() < lapisCost) && !player.isInCreativeMode()) {
                 return false;

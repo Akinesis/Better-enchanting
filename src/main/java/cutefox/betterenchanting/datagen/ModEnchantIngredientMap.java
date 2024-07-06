@@ -20,10 +20,7 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ModEnchantIngredientMap {
 
@@ -100,6 +97,8 @@ public class ModEnchantIngredientMap {
     public static void genMapFromJson(World world){
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
+        //Resolve default config for suported mod here. Put entry in default map
+
         try {
 
             File configFolder = new File(FabricLoader.getInstance().getConfigDir().resolve("better-enchanting").toString());
@@ -124,15 +123,18 @@ public class ModEnchantIngredientMap {
             for (String key : jsonMap.keySet()) {
                 Identifier enchantId = Identifier.of(key);
                 enchantment = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).get(enchantId);
-                enchantementKey = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment).get();
+                Optional<RegistryKey<Enchantment>> optional = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment);
+                //enchantementKey = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment);
 
-                if (enchantementKey != null) {
-
+                if (optional.isPresent()) {
+                    enchantementKey = optional.get();
                     List<Item> ingredients = new ArrayList<>();
 
                     jsonMap.get(key).forEach(s -> {
+                        Item temp;
                         Identifier itemId = Identifier.of(s);
-                        ingredients.add(Registries.ITEM.get(itemId));
+                        temp = Registries.ITEM.get(itemId);
+                        ingredients.add(temp!=null?temp:Items.BARRIER);
                     });
 
                     map.put(enchantementKey, ingredients);

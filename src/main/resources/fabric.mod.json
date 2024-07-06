@@ -5,7 +5,7 @@
 	"name": "Better Enchanting",
 	"description": "This is an example description! Tell everyone what your mod is about!",
 	"authors": [
-		"Me!"
+		"_TheCuteFox_"
 	],
 	"contact": {
 		"homepage": "https://fabricmc.net/",
@@ -35,6 +35,6 @@
 		"fabric-api": "*"
 	},
 	"suggests": {
-		"another-mod": "*"
+		"incantationem": "*"
 	}
 }

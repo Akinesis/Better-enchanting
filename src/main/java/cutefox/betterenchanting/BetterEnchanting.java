@@ -3,12 +3,11 @@ package cutefox.betterenchanting;
 import cutefox.betterenchanting.datagen.ModEnchantIngredientMap;
 import cutefox.betterenchanting.registry.*;
 import net.fabricmc.api.ModInitializer;
-
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.server.world.ServerWorld;
@@ -42,6 +41,11 @@ public class BetterEnchanting implements ModInitializer {
 		ModLootTableModifiers.modifyLootTables();
 
 		addEventListner();
+		if(FabricLoader.getInstance().isModLoaded("incantationem")){
+			LOGGER.info("Mod incantationem is loded ! ");
+		}
+
+
 	}
 
 	private void addEventListner(){

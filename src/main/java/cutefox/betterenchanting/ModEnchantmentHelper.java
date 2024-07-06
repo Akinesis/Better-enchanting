@@ -3,6 +3,7 @@ package cutefox.betterenchanting;
 import com.google.common.collect.Lists;
 import cutefox.betterenchanting.datagen.ModEnchantIngredientMap;
 import cutefox.betterenchanting.registry.ModEnchantmentTags;
+import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
@@ -34,6 +35,9 @@ public class ModEnchantmentHelper {
     public static int getEnchantmentLevelCost(Enchantment enchantment, int enchantLevel, ItemStack stack, World world){
         float tempCost = (8f/enchantment.getWeight())+enchantLevel;
         tempCost *= (1+(0.1*stack.getEnchantments().getSize())); //price increase by 10% for each different enchantments.
+        for(Object2IntMap.Entry<RegistryEntry<Enchantment>> e : stack.getEnchantments().getEnchantmentEntries()){
+            tempCost += stack.getEnchantments().getLevel(e.getKey());
+        }
         if(enchantIsTreasure(enchantment, world))
             tempCost *= 2;
         return Math.round(tempCost);
@@ -51,12 +55,12 @@ public class ModEnchantmentHelper {
 
     public static int getEnchantmentLeveRequierment(Enchantment enchantment, int enchantLevel){
         int tempLevelReq = 10-enchantment.getWeight()+(enchantLevel*enchantLevel);
-        return tempLevelReq>30?30:tempLevelReq; //Cap level requirement at 30 to keep it vanilla lik
+        return tempLevelReq>30?30:tempLevelReq; //Cap level requirement at 30 to keep it vanilla like
     }
 
     public static int getBookshelfCountRequierment(Enchantment enchantment, int enchantLevel){
         int tempReq = (int)Math.floor(getEnchantmentLeveRequierment(enchantment, enchantLevel)/2);
-        return tempReq<=4?0:tempReq;
+        return tempReq<=3?0:tempReq;
     }
 
     public static Item getEnchantIngredient(RegistryKey<Enchantment> enchantment, int enchantLevel){
@@ -65,6 +69,17 @@ public class ModEnchantmentHelper {
                 return ModEnchantIngredientMap.map.get(enchantment).get(enchantLevel);
 
         return null;
+    }
+
+    public static int getEnchantmentIngredientCost(Enchantment value, int displayedEnchantLevel, Item ingredient) {
+        int tempValue = (int)Math.floor(value.getWeight()/2);
+        if (value.getMaxLevel() == displayedEnchantLevel)
+            tempValue = 1;
+        tempValue = tempValue==0?1:tempValue;
+        if(ingredient == null)
+            return tempValue;
+        else
+            return tempValue>ingredient.getMaxCount()?ingredient.getMaxCount():tempValue;
     }
 
     public static List<EnchantmentLevelEntry> getPossibleEntries(int bookshelfCount, ItemStack stack, Stream<RegistryEntry<Enchantment>> possibleEnchantments){
@@ -111,13 +126,6 @@ public class ModEnchantmentHelper {
             }
         }
         return true;
-    }
-
-    public static int getEnchantmentIngredientCost(Enchantment value, int displayedEnchantLevel) {
-        int tempValue = (int)Math.floor(value.getWeight()/2);
-        if (value.getMaxLevel() == displayedEnchantLevel)
-            tempValue = 1;
-        return tempValue==0?1:tempValue;
     }
 
     public static List<EnchantmentLevelEntry> addSwordEnchantToAxes(int bookshelfCount, Stream<RegistryEntry<Enchantment>> possibleEnchantments){
