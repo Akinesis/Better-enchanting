@@ -40,6 +40,11 @@ public class ModEnchantmentHelper {
         }
         if(enchantIsTreasure(enchantment, world))
             tempCost *= 2;
+
+        int encahntability = stack.getItem().getEnchantability();
+
+        tempCost = tempCost * (1-(encahntability/100));
+
         return Math.round(tempCost);
     }
 

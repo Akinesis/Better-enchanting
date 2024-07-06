@@ -66,8 +66,8 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
         };
 
         this.enchantmentPower = new int[3];
-        this.enchantmentId = new int[ENCHANT_ARRAY_SIZE];//{-1, -1, -1,-1, -1, -1,-1, -1, -1,-1, -1, -1,-1, -1, -1, -1, -1, -1, -1, -1};
-        this.enchantmentLevel = new int[ENCHANT_ARRAY_SIZE];//{-1, -1, -1,-1, -1, -1,-1, -1, -1,-1, -1, -1,-1, -1, -1, -1, -1, -1, -1, -1};
+        this.enchantmentId = new int[ENCHANT_ARRAY_SIZE];
+        this.enchantmentLevel = new int[ENCHANT_ARRAY_SIZE];
         this.context = context;
 
         this.addSlot(new Slot(this.inventory, 0, 11, 91) {
@@ -108,47 +108,6 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
             this.addProperty(Property.create(this.enchantmentId, i));
             this.addProperty(Property.create(this.enchantmentLevel, i));
         }
-
-        /*this.addProperty(Property.create(this.enchantmentId, 0));
-        this.addProperty(Property.create(this.enchantmentId, 1));
-        this.addProperty(Property.create(this.enchantmentId, 2));
-        this.addProperty(Property.create(this.enchantmentId, 3));
-        this.addProperty(Property.create(this.enchantmentId, 4));
-        this.addProperty(Property.create(this.enchantmentId, 5));
-        this.addProperty(Property.create(this.enchantmentId, 6));
-        this.addProperty(Property.create(this.enchantmentId, 7));
-        this.addProperty(Property.create(this.enchantmentId, 8));
-        this.addProperty(Property.create(this.enchantmentId, 9));
-        this.addProperty(Property.create(this.enchantmentId, 10));
-        this.addProperty(Property.create(this.enchantmentId, 11));
-        this.addProperty(Property.create(this.enchantmentId, 12));
-        this.addProperty(Property.create(this.enchantmentId, 13));
-        this.addProperty(Property.create(this.enchantmentId, 14));
-        this.addProperty(Property.create(this.enchantmentId, 15));
-        this.addProperty(Property.create(this.enchantmentId, 16));
-        this.addProperty(Property.create(this.enchantmentId, 17));
-        this.addProperty(Property.create(this.enchantmentId, 18));
-        this.addProperty(Property.create(this.enchantmentId, 19));
-        this.addProperty(Property.create(this.enchantmentLevel, 0));
-        this.addProperty(Property.create(this.enchantmentLevel, 1));
-        this.addProperty(Property.create(this.enchantmentLevel, 2));
-        this.addProperty(Property.create(this.enchantmentLevel, 3));
-        this.addProperty(Property.create(this.enchantmentLevel, 4));
-        this.addProperty(Property.create(this.enchantmentLevel, 5));
-        this.addProperty(Property.create(this.enchantmentLevel, 6));
-        this.addProperty(Property.create(this.enchantmentLevel, 7));
-        this.addProperty(Property.create(this.enchantmentLevel, 8));
-        this.addProperty(Property.create(this.enchantmentLevel, 9));
-        this.addProperty(Property.create(this.enchantmentLevel, 10));
-        this.addProperty(Property.create(this.enchantmentLevel, 11));
-        this.addProperty(Property.create(this.enchantmentLevel, 12));
-        this.addProperty(Property.create(this.enchantmentLevel, 13));
-        this.addProperty(Property.create(this.enchantmentLevel, 14));
-        this.addProperty(Property.create(this.enchantmentLevel, 15));
-        this.addProperty(Property.create(this.enchantmentLevel, 16));
-        this.addProperty(Property.create(this.enchantmentLevel, 17));
-        this.addProperty(Property.create(this.enchantmentLevel, 18));
-        this.addProperty(Property.create(this.enchantmentLevel, 19));*/
     }
 
     public void onContentChanged(Inventory inventory) {

@@ -199,9 +199,6 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                     int r = mouseX - (localWidth+72+(16*l)+(4*l));
                     int s = mouseY - (localHeight+14+(16*(k-indexStartOffset)));
 
-                    //if(selectedSlot[0] > -1 && selectedSlot[0] > indexStartOffset)
-                        //context.drawGuiTexture(BOOK_SLOT_SELECTOR, localWidth+72+(16*selectedSlot[1])+(4*selectedSlot[1]), localHeight+14+(16*(selectedSlot[0]-indexStartOffset)), 16, 16);
-
 
                     if (enchant != null && !enchant.isEmpty()) {
                         int enchantLevelCost = ModEnchantmentHelper.getEnchantmentLevelCost(enchant.get().value(),l+1, stack, playerWorld);
@@ -227,7 +224,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                         }
 
                         context.drawTexture(TEXTURE, localWidth+68+(16*l)+(4*l), localHeight+14+(16*(k-indexStartOffset)), 198, 0, 4,16);
-                        if(!this.client.player.isInCreativeMode() && bookToDraw != ENCHANTMENT_BOOK_DISABLED)
+                        if(!this.client.player.isInCreativeMode() && bookToDraw != ENCHANTMENT_BOOK_DISABLED && !hasEnchantLevel)
                             context.drawTextWithShadow(this.textRenderer, ""+enchantLevelCost, localWidth+18+72+(16*l)+(4*l) - this.textRenderer.getWidth(""+enchantLevelCost), localHeight+14+8+(16*(k-indexStartOffset)), q);
 
                         context.drawGuiTexture(bookToDraw, localWidth+72+(16*l)+(4*l), localHeight+14+(16*(k-indexStartOffset)), 16, 16);
