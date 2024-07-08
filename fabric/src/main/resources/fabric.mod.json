@@ -1,0 +1,40 @@
+{
+	"schemaVersion": 1,
+	"id": "better-enchanting",
+	"version": "${version}",
+	"name": "Better Enchanting",
+	"description": "A complete overhaul of the enchanting system of Minecraft to make it rely less on randomness and tie it to exploration and game progression.",
+	"authors": [
+		"_TheCuteFox_"
+	],
+	"contact": {
+		"homepage": "https://fabricmc.net/",
+		"sources": "https://github.com/Akinesis/better-enchanting"
+	},
+	"license": "CC0-1.0",
+	"icon": "assets/better-enchanting/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+          "cutefox.betterenchanting.BetterEnchantingFabric"
+		],
+		"client": [
+			"cutefox.betterenchanting.BetterEnchantingFabricClient"
+		],
+		"fabric-datagen": [
+			"cutefox.betterenchanting.datagen.ModDataGenerator"
+		]
+	},
+	"mixins": [
+		"better-enchanting.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.15.11",
+		"minecraft": "~1.21",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {
+		"incantationem": "*"
+	}
+}

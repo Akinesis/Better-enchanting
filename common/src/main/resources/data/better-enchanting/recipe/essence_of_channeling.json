@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:lightning_rod"
+    },
+    "B": {
+      "item": "minecraft:copper_block"
+    },
+    "C": {
+      "item": "minecraft:iron_block"
+    },
+    "I": {
+      "item": "better-enchanting:infused_lapis"
+    },
+    "S": {
+      "item": "better-enchanting:magic_shard_full"
+    }
+  },
+  "pattern": [
+    " I ",
+    "ASA",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "better-enchanting:essence_of_channeling"
+  }
+}

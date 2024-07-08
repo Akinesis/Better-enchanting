@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:armadillo_scute"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "H": {
+      "item": "minecraft:skeleton_skull"
+    },
+    "I": {
+      "item": "better-enchanting:infused_lapis"
+    },
+    "S": {
+      "item": "better-enchanting:magic_shard_full"
+    }
+  },
+  "pattern": [
+    " I ",
+    "DSD",
+    "HBH"
+  ],
+  "result": {
+    "count": 1,
+    "id": "better-enchanting:essence_of_projectile_protection"
+  }
+}

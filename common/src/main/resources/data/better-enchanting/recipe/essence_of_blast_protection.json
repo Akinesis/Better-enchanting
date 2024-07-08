@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:creeper_head"
+    },
+    "I": {
+      "item": "better-enchanting:infused_lapis"
+    },
+    "O": {
+      "item": "minecraft:obsidian"
+    },
+    "S": {
+      "item": "better-enchanting:magic_shard_full"
+    },
+    "W": {
+      "item": "minecraft:nether_star"
+    }
+  },
+  "pattern": [
+    " I ",
+    "WSW",
+    "OCO"
+  ],
+  "result": {
+    "count": 1,
+    "id": "better-enchanting:essence_of_blast_protection"
+  }
+}

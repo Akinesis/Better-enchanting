@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "better-enchanting:soul_essence_3"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "better-enchanting:soul_essence_2"
+  }
+}

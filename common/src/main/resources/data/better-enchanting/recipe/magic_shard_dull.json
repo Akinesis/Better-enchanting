@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "G": {
+      "item": "minecraft:ghast_tear"
+    },
+    "I": {
+      "item": "better-enchanting:infused_lapis"
+    }
+  },
+  "pattern": [
+    "IDI",
+    "GAG",
+    "IDI"
+  ],
+  "result": {
+    "count": 1,
+    "id": "better-enchanting:magic_shard_dull"
+  }
+}
