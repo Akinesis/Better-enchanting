@@ -33,22 +33,23 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
         getOrCreateTagBuilder(ItemTags.HEAD_ARMOR);
         getOrCreateTagBuilder(ItemTags.HEAD_ARMOR_ENCHANTABLE);
 
-        /*getOrCreateTagBuilder(ModItemTags.LIBRARIAN_ENCHANT_INGREDIENT_SALE)
+        getOrCreateTagBuilder(ModItemTags.LIBRARIAN_RARE_INGREDIENT)
                 .add(Items.EXPERIENCE_BOTTLE)
                 .add(Items.TURTLE_SCUTE)
                 .add(Items.WIND_CHARGE)
-                .add(ModItems.MAGIC_SHARD_FULL)
-                .add(ModItems.MAGIC_SHARD_DULL)
-                .add(ModItems.INFUSED_LAPIS);*/
+                .add(Items.HEART_OF_THE_SEA)
+                .add(Items.NAUTILUS_SHELL)
+                .add(Items.QUARTZ)
+                .add(ModItems.MAGIC_SHARD_FULL);
 
         getOrCreateTagBuilder(ModItemTags.ENCHANTEMNT_INGREDIENT)
                 .add(Items.EXPERIENCE_BOTTLE)
-                .add(Items.TURTLE_SCUTE)
                 .add(Items.PUFFERFISH)
-                .add(Items.BLUE_ICE)
                 .add(Items.GOLDEN_CARROT)
                 .add(Items.PISTON)
-                .add(Items.HEART_OF_THE_SEA)
+                .add(Items.POINTED_DRIPSTONE)
+                .add(Items.PHANTOM_MEMBRANE)
+                .add(Items.GLASS_BOTTLE)
                 .add(ModItems.MAGIC_SHARD_FULL)
                 .add(ModItems.MAGIC_SHARD_DULL)
                 .add(ModItems.INFUSED_LAPIS);

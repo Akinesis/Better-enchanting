@@ -3,6 +3,9 @@
   "category": "misc",
   "key": {
     "C": {
+      "item": "minecraft:tnt"
+    },
+    "H": {
       "item": "minecraft:creeper_head"
     },
     "I": {
@@ -15,12 +18,12 @@
       "item": "better-enchanting:magic_shard_full"
     },
     "W": {
-      "item": "minecraft:nether_star"
+      "item": "minecraft:wither_skeleton_skull"
     }
   },
   "pattern": [
     " I ",
-    "WSW",
+    "WSH",
     "OCO"
   ],
   "result": {

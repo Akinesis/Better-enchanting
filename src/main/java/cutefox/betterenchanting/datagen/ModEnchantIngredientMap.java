@@ -74,8 +74,8 @@ public class ModEnchantIngredientMap {
         //Trident enchantment
         defaultMap.put(Enchantments.CHANNELING.getValue().toString(), listOfIdentifiers(List.of(ModItems.ESSENCE_OF_CHANNELING)));
         defaultMap.put(Enchantments.IMPALING.getValue().toString(), listOfIdentifiers(List.of(Items.POINTED_DRIPSTONE,Items.IRON_BARS,Items.QUARTZ,Items.DIAMOND_SWORD,ModItems.ESSENCE_OF_IMPALING)));
-        defaultMap.put(Enchantments.LOYALTY.getValue().toString(), listOfIdentifiers(List.of(Items.NAUTILUS_SHELL,Items.NAUTILUS_SHELL,ModItems.ESSENCE_OF_LOYALTY)));
-        defaultMap.put(Enchantments.RIPTIDE.getValue().toString(), listOfIdentifiers(List.of(Items.NAUTILUS_SHELL,Items.NAUTILUS_SHELL,ModItems.ESSENCE_OF_RIPTIDE)));
+        defaultMap.put(Enchantments.LOYALTY.getValue().toString(), listOfIdentifiers(List.of(Items.BONE_BLOCK,Items.GOLDEN_CARROT,ModItems.ESSENCE_OF_LOYALTY)));
+        defaultMap.put(Enchantments.RIPTIDE.getValue().toString(), listOfIdentifiers(List.of(Items.WATER_BUCKET,Items.NAUTILUS_SHELL,ModItems.ESSENCE_OF_RIPTIDE)));
 
         //Crossbow enchantment
         defaultMap.put(Enchantments.MULTISHOT.getValue().toString(), listOfIdentifiers(List.of(ModItems.ESSENCE_OF_MULTISHOT)));
@@ -83,9 +83,9 @@ public class ModEnchantIngredientMap {
         defaultMap.put(Enchantments.QUICK_CHARGE.getValue().toString(), listOfIdentifiers(List.of(Items.AMETHYST_SHARD,Items.GLOWSTONE,ModItems.ESSENCE_OF_QUICK_CHARGE)));
 
         //Mace enchantment
-        defaultMap.put(Enchantments.DENSITY.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,Items.DIRT,Items.DIRT,ModItems.ESSENCE_OF_DENSITY)));
-        defaultMap.put(Enchantments.BREACH.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,Items.DIRT,ModItems.ESSENCE_OF_BREACH)));
-        defaultMap.put(Enchantments.WIND_BURST.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,ModItems.ESSENCE_OF_WIND)));
+        defaultMap.put(Enchantments.DENSITY.getValue().toString(), listOfIdentifiers(List.of(Items.STONE,Items.DEEPSLATE,Items.OBSIDIAN,Items.LODESTONE,ModItems.ESSENCE_OF_DENSITY)));
+        defaultMap.put(Enchantments.BREACH.getValue().toString(), listOfIdentifiers(List.of(Items.IRON_INGOT,Items.SMOOTH_STONE,Items.TNT,ModItems.ESSENCE_OF_BREACH)));
+        defaultMap.put(Enchantments.WIND_BURST.getValue().toString(), listOfIdentifiers(List.of(Items.SUGAR_CANE,Items.WIND_CHARGE,ModItems.ESSENCE_OF_WIND)));
 
     }
 

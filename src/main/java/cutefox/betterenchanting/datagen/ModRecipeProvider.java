@@ -96,9 +96,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern("CDC")
                 .input('S', ModItems.MAGIC_SHARD_FULL)
                 .input('I', ModItems.INFUSED_LAPIS)
-                .input('C', Items.CRYING_OBSIDIAN)
-                .input('N', Items.NETHERITE_INGOT)
-                .input('D', Items.DRAGON_BREATH)
+                .input('C', Items.SHULKER_SHELL)
+                .input('N', Items.NETHERITE_SCRAP)
+                .input('D', Items.CRYING_OBSIDIAN)
                 .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
                 .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
 
@@ -118,13 +118,14 @@ public class ModRecipeProvider extends FabricRecipeProvider {
         recipeItem = ModItems.ESSENCE_OF_BLAST_PROTECTION;
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
                 .pattern(" I ")
-                .pattern("WSW")
+                .pattern("WSH")
                 .pattern("OCO")
                 .input('S', ModItems.MAGIC_SHARD_FULL)
                 .input('I', ModItems.INFUSED_LAPIS)
-                .input('W', Items.NETHER_STAR)
+                .input('H', Items.CREEPER_HEAD)
+                .input('W', Items.WITHER_SKELETON_SKULL)
                 .input('O', Items.OBSIDIAN)
-                .input('C', Items.CREEPER_HEAD)
+                .input('C', Items.TNT)
                 .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
                 .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
 
@@ -150,7 +151,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('I', ModItems.INFUSED_LAPIS)
                 .input('M', Items.PHANTOM_MEMBRANE)
                 .input('G', Items.GLOWSTONE)
-                .input('A', Items.SHULKER_SHELL)
+                .input('A', Items.SHULKER_BOX)
                 .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
                 .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
 
@@ -162,7 +163,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('S', ModItems.MAGIC_SHARD_FULL)
                 .input('I', ModItems.INFUSED_LAPIS)
                 .input('P', Items.PUFFERFISH_BUCKET)
-                .input('C', Items.CONDUIT)
+                .input('C', Items.HEART_OF_THE_SEA)
                 .input('R', Items.DARK_PRISMARINE)
                 .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
                 .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
@@ -319,7 +320,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('I', ModItems.INFUSED_LAPIS)
                 .input('A', Items.SPECTRAL_ARROW)
                 .input('B', Items.OBSIDIAN)
-                .input('C', Items.LODESTONE)
+                .input('C', Items.TNT)
                 .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
                 .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
 
@@ -399,7 +400,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('I', ModItems.INFUSED_LAPIS)
                 .input('A', Items.GOLDEN_CARROT)
                 .input('B', Items.PRISMARINE_CRYSTALS)
-                .input('C', Items.HEART_OF_THE_SEA)
+                .input('C', Items.EMERALD_BLOCK)
                 .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
                 .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
 
@@ -410,9 +411,9 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .pattern("BCB")
                 .input('S', ModItems.MAGIC_SHARD_FULL)
                 .input('I', ModItems.INFUSED_LAPIS)
-                .input('A', Items.GOLDEN_CARROT)
-                .input('B', Items.PRISMARINE_CRYSTALS)
-                .input('C', Items.HEART_OF_THE_SEA)
+                .input('A', Items.IRON_BLOCK)
+                .input('B', Items.OBSIDIAN)
+                .input('C', Items.NETHERITE_INGOT)
                 .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
                 .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
 
@@ -491,7 +492,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('I', ModItems.INFUSED_LAPIS)
                 .input('A', Items.WATER_BUCKET)
                 .input('B', Items.TNT)
-                .input('C', Items.CONDUIT)
+                .input('C', Items.NAUTILUS_SHELL)
                 .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
                 .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
 
