@@ -4,10 +4,11 @@ import net.neoforged.fml.common.Mod;
 
 import cutefox.betterenchanting.BetterEnchanting;
 
-@Mod(BetterEnchanting.MOD_ID)
-public final class ExampleModNeoForge {
-    public ExampleModNeoForge() {
+@Mod("betterenchanting")
+public final class BetterEnchantingNeoForge {
+    public BetterEnchantingNeoForge() {
         // Run our common setup.
+
         BetterEnchanting.init();
     }
 }

@@ -12,7 +12,7 @@ public class ModLootTableModifiers {
     public static void modifyLootTables(){
         BetterEnchantingFabric.LOGGER.info("Registering loot tables for : "+ BetterEnchantingFabric.MOD_ID);
 
-        LootTableEvents.MODIFY.register((key, builder, source)->{
+        /*LootTableEvents.MODIFY.register((key, builder, source)->{
             if(source.isBuiltin() && LootTables.PIGLIN_BARTERING_GAMEPLAY == key){
 
                 builder.modifyPools( p -> {
@@ -21,7 +21,7 @@ public class ModLootTableModifiers {
                     .with(ItemEntry.builder(ModItems.SOUL_ESSENCE_3).weight(5));
                 });
             }
-        });
+        });*/
 
         LootTableEvents.MODIFY.register((key, builder, source)->{
             if(source.isBuiltin() && LootTables.FISHING_TREASURE_GAMEPLAY == key){

@@ -4,7 +4,7 @@ loaderVersion = "[4,)"
 license = "Insert License Here"
 
 [[mods]]
-modId = "better-enchanting"
+modId = "betterenchanting"
 version = "${version}"
 displayName = "Better Enchanting"
 authors = "Me!"

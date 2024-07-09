@@ -1,6 +1,6 @@
 {
 	"schemaVersion": 1,
-	"id": "better-enchanting",
+	"id": "betterenchanting",
 	"version": "${version}",
 	"name": "Better Enchanting",
 	"description": "A complete overhaul of the enchanting system of Minecraft to make it rely less on randomness and tie it to exploration and game progression.",
@@ -12,7 +12,7 @@
 		"sources": "https://github.com/Akinesis/better-enchanting"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/better-enchanting/icon.png",
+	"icon": "assets/betterenchanting/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [

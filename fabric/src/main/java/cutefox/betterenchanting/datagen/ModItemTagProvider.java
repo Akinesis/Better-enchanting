@@ -40,7 +40,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.MAGIC_SHARD_FULL)
                 .add(ModItems.MAGIC_SHARD_DULL)
                 .add(ModItems.INFUSED_LAPIS);*/
-
+/*
         getOrCreateTagBuilder(ModItemTags.ENCHANTEMNT_INGREDIENT)
                 .add(Items.EXPERIENCE_BOTTLE)
                 .add(Items.TURTLE_SCUTE)
@@ -90,7 +90,7 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.ESSENCE_OF_QUICK_CHARGE)
                 .add(ModItems.ESSENCE_OF_DENSITY)
                 .add(ModItems.ESSENCE_OF_WIND)
-                .add(ModItems.ESSENCE_OF_BREACH);
+                .add(ModItems.ESSENCE_OF_BREACH);*/
 
     }
 }
