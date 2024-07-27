@@ -5,6 +5,9 @@ import cutefox.betterenchanting.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -37,6 +40,7 @@ public class BetterEnchanting implements ModInitializer {
 		ModLootTables.registerLootTables();
 
 		Registry.register(Registries.ITEM_GROUP, Utils.id("item_group"), ITEM_GROUP);
+		PayloadTypeRegistry.playS2C().register(EnchantingIngredientMapPayload.ID, EnchantingIngredientMapPayload.CODEC);
 
 		ModLootTableModifiers.modifyLootTables();
 
@@ -49,7 +53,12 @@ public class BetterEnchanting implements ModInitializer {
 	}
 
 	private void addEventListner(){
-
+		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+		server.execute(() -> {
+			ServerPlayNetworking.send(handler.player,
+					new EnchantingIngredientMapPayload(ModEnchantIngredientMap.jsonMap));
+			});
+		});
 		ServerLifecycleEvents.SERVER_STARTED.register(e -> {
 			ModEnchantIngredientMap.genMapFromJson(e.getWorld(ServerWorld.OVERWORLD));
 		});
