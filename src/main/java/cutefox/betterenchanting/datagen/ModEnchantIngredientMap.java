@@ -121,14 +121,17 @@ public class ModEnchantIngredientMap {
 
             JsonReader reader = new JsonReader(new FileReader(configFile));
             jsonMap = gson.fromJson(reader, Map.class);
-
-            genMapFromJsonStringMap(world, jsonMap);
+            if (!world.isClient)
+            {
+                genMapFromJsonStringMap(world, jsonMap);
+            }
         } catch (Exception e){
             throw new RuntimeException(e.toString());
         }
     }
 
     public static void genMapFromJsonStringMap(World world, Map<String, List<String>> stringMap) {
+        map = new HashMap<>();
         RegistryKey<Enchantment> enchantementKey;
         Enchantment enchantment;
 
@@ -184,7 +187,7 @@ public class ModEnchantIngredientMap {
 
         public void encode(ByteBuf byteBuf, Map<String, List<String>> blockPos) {
             Gson gson = new GsonBuilder().create();
-            String json = gson.toJson(defaultMap);
+            String json = gson.toJson(jsonMap);
             byte[] bytes = json.getBytes(Charsets.UTF_8);
             byteBuf.writeInt(bytes.length);
             byteBuf.writeBytes(bytes);
