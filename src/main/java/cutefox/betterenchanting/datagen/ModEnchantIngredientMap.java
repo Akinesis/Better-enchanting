@@ -1,21 +1,26 @@
 package cutefox.betterenchanting.datagen;
 
+import com.google.common.base.Charsets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import cutefox.betterenchanting.BetterEnchanting;
 import cutefox.betterenchanting.registry.ModItems;
+import io.netty.buffer.ByteBuf;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
+import java.lang.reflect.Type;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
@@ -26,6 +31,7 @@ public class ModEnchantIngredientMap {
 
     public static HashMap<String, List<String>> defaultMap = new HashMap<>();
     public static HashMap<RegistryKey<Enchantment>, List<Item>> map = new HashMap<>();
+    public static Map<String, List<String>> jsonMap = new HashMap<>();
 
 
     static{
@@ -114,34 +120,40 @@ public class ModEnchantIngredientMap {
             }
 
             JsonReader reader = new JsonReader(new FileReader(configFile));
-            Map<String, List<String>> jsonMap = new HashMap<>();
             jsonMap = gson.fromJson(reader, Map.class);
-
-            RegistryKey<Enchantment> enchantementKey;
-            Enchantment enchantment;
-
-            for (String key : jsonMap.keySet()) {
-                Identifier enchantId = Identifier.of(key);
-                enchantment = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).get(enchantId);
-                Optional<RegistryKey<Enchantment>> optional = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment);
-                //enchantementKey = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment);
-
-                if (optional.isPresent()) {
-                    enchantementKey = optional.get();
-                    List<Item> ingredients = new ArrayList<>();
-
-                    jsonMap.get(key).forEach(s -> {
-                        Item temp;
-                        Identifier itemId = Identifier.of(s);
-                        temp = Registries.ITEM.get(itemId);
-                        ingredients.add(temp!=null?temp:Items.BARRIER);
-                    });
-
-                    map.put(enchantementKey, ingredients);
-                }
+            if (!world.isClient)
+            {
+                genMapFromJsonStringMap(world, jsonMap);
             }
-        }catch (Exception e){
+        } catch (Exception e){
             throw new RuntimeException(e.toString());
+        }
+    }
+
+    public static void genMapFromJsonStringMap(World world, Map<String, List<String>> stringMap) {
+        map = new HashMap<>();
+        RegistryKey<Enchantment> enchantementKey;
+        Enchantment enchantment;
+
+        for (String key : stringMap.keySet()) {
+            Identifier enchantId = Identifier.of(key);
+            enchantment = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).get(enchantId);
+            Optional<RegistryKey<Enchantment>> optional = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment);
+            //enchantementKey = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment);
+
+            if (optional.isPresent()) {
+                enchantementKey = optional.get();
+                List<Item> ingredients = new ArrayList<>();
+
+                stringMap.get(key).forEach(s -> {
+                    Item temp;
+                    Identifier itemId = Identifier.of(s);
+                    temp = Registries.ITEM.get(itemId);
+                    ingredients.add(temp!=null?temp:Items.BARRIER);
+                });
+
+                map.put(enchantementKey, ingredients);
+            }
         }
     }
 
@@ -160,4 +172,25 @@ public class ModEnchantIngredientMap {
         enchant.getValue().toString();
         return "";
     }
+
+    public static final PacketCodec<ByteBuf, Map<String, List<String>>> MAP_CODEC = new PacketCodec<ByteBuf, Map<String, List<String>>>() {
+        public Map<String, List<String>> decode(ByteBuf byteBuf) {
+            Gson gson = new GsonBuilder().create();
+            int length = byteBuf.readInt();
+            byte[] bytes = new byte[length];
+            byteBuf.readBytes(bytes);
+            String message = new String(bytes, Charsets.UTF_8);
+            Type mapType = new TypeToken<Map<String, List<String>>>() {
+            }.getType();
+            return gson.fromJson(message, mapType);
+        }
+
+        public void encode(ByteBuf byteBuf, Map<String, List<String>> blockPos) {
+            Gson gson = new GsonBuilder().create();
+            String json = gson.toJson(jsonMap);
+            byte[] bytes = json.getBytes(Charsets.UTF_8);
+            byteBuf.writeInt(bytes.length);
+            byteBuf.writeBytes(bytes);
+        }
+    };
 }
