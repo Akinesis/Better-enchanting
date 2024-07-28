@@ -1,4 +1,4 @@
-// 1.21	2024-07-08T23:28:06.864183	Better Enchanting/Recipes
+// 1.21	2024-07-11T11:42:32.3290294	Better Enchanting/Recipes
 8b11e51578ae7ebfdf793d85d56fd34a94faa54f data\better-enchanting\recipe\soul_essence_2.json
 e23b6174761648dd73b4e9156e5fba2a54e4774b data\better-enchanting\recipe\essence_of_power.json
 5739607dbb4f37e2949a8bf60e9eec43d66b8b19 data\better-enchanting\advancement\recipes\misc\essence_of_quick_charge.json
@@ -28,8 +28,8 @@ dede921b6efc501a21d92f382c8d11296f3fa0d4 data\better-enchanting\advancement\reci
 56434849c0925f83946b5d49c00e94e49a2fb77a data\better-enchanting\recipe\essence_of_thorn.json
 39e1c05dafa5bfce2e2caa4e43d13f3612b5cce3 data\better-enchanting\recipe\essence_of_projectile_protection.json
 a371c667355fc50ca657fd9477704aeea7ba6018 data\better-enchanting\advancement\recipes\misc\essence_of_looting.json
-e37ae2309e08ee11ea1d91e499059d2151e2bfd0 data\better-enchanting\advancement\recipes\misc\essence_of_loyalty.json
 b6728a5c06dcd81eb9eb71d4d1af63d21f07763c data\better-enchanting\recipe\essence_of_lure.json
+e37ae2309e08ee11ea1d91e499059d2151e2bfd0 data\better-enchanting\advancement\recipes\misc\essence_of_loyalty.json
 3034cf31caa7c5fe5a2867ba9e33558d9f7b2b42 data\better-enchanting\recipe\essence_of_riptide.json
 1f5eb275838ef56f6790fa80db9649af3c009e42 data\better-enchanting\advancement\recipes\misc\essence_of_multishot.json
 9011e697da07a93e1653543f31cbaf78062db365 data\better-enchanting\advancement\recipes\misc\essence_of_arthropods.json
@@ -64,8 +64,8 @@ fe95b23a93bebb13bad7f273787ca6bec1835401 data\better-enchanting\advancement\reci
 4f2f42e42f83618ab9a1c1924aba3af30fbd7220 data\better-enchanting\advancement\recipes\misc\soul_essence_1.json
 d253d6f0c6895ccc7a00e77484512ab29f3e0b93 data\better-enchanting\recipe\essence_of_arrows.json
 746f6a86fa20c0fbe3301b288efae4dbc302a26e data\better-enchanting\advancement\recipes\misc\essence_of_impaling.json
-ed2fb85a71790ed64f37e92da2c347208f9d9912 data\better-enchanting\recipe\essence_of_protection.json
 317ee3cca664b8d6c50810f086c3ca4d02069b34 data\better-enchanting\recipe\soul_essence_1.json
+ed2fb85a71790ed64f37e92da2c347208f9d9912 data\better-enchanting\recipe\essence_of_protection.json
 8054c6d57acfe1311767a941d42a475cccbfb9ad data\better-enchanting\recipe\essence_of_smite.json
 27964d9ca940cde6d27af16918752a3939f0982e data\better-enchanting\advancement\recipes\misc\essence_of_knockback.json
 f67a25cb1c497c7dfcd44d910ba497a436c7bbf6 data\better-enchanting\recipe\essence_of_channeling.json

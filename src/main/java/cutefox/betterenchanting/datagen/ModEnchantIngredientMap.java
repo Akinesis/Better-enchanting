@@ -103,7 +103,7 @@ public class ModEnchantIngredientMap {
     public static void genMapFromJson(World world){
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        //Resolve default config for suported mod here. Put entry in default map
+        //Resolve default config for supported mod here. Put entry in default map
 
         try {
 

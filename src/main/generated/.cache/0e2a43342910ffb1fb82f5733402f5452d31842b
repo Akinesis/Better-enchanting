@@ -1,10 +1,10 @@
-// 1.21	2024-07-08T23:28:06.8581992	Better Enchanting/Model Definitions
-c8683df4f900f368d0794309edd76b6f95f403f8 assets\better-enchanting\models\item\essence_of_smite.json
+// 1.21	2024-07-11T11:42:32.3250399	Better Enchanting/Model Definitions
 12b41de0c7d5e8d26e4d67fe195e953b0711a7d0 assets\better-enchanting\models\item\essence_of_sneak_2.json
+c8683df4f900f368d0794309edd76b6f95f403f8 assets\better-enchanting\models\item\essence_of_smite.json
 56dfff9d40aa713cddd8fd58a769690262e4e7f6 assets\better-enchanting\models\item\soul_essence_2.json
 07e7ac04407dd6a7f6676049c50fdb686660b9d2 assets\better-enchanting\models\item\essence_of_fire.json
-cd750db79b689f9a36dff9a38965eab07d301508 assets\better-enchanting\models\item\essence_of_knockback.json
 1db8d4cfcc928652fae9bc107bbe9fc7ae1d992b assets\better-enchanting\models\item\essence_of_wind.json
+cd750db79b689f9a36dff9a38965eab07d301508 assets\better-enchanting\models\item\essence_of_knockback.json
 18387448cfc54b00cbedcaf5b38f65568e3cc9d5 assets\better-enchanting\models\item\essence_of_protection.json
 b6c985aa76b097b082cea241cb48abf65c391b21 assets\better-enchanting\models\item\essence_of_punch.json
 ebe1f27313c24973f3e5a0093d01db085723b66f assets\better-enchanting\models\item\essence_of_loyalty.json
@@ -34,8 +34,8 @@ aa551931cfc45ca41ec3cd70d3059873f209cf7a assets\better-enchanting\models\item\es
 f210d09f71bc4b53598758801118acbc9ea2713e assets\better-enchanting\models\item\infused_lapis.json
 5dade9a6c1394c93ce35a4767f47b5cc5cb22d55 assets\better-enchanting\models\item\essence_of_experience.json
 7b0bd6d42adad16d9b6d6178453ee261a465e91b assets\better-enchanting\models\item\essence_of_feather.json
-2d1eddb79c9541cb0d3b6a7e9c0d50ca20977340 assets\better-enchanting\models\item\magic_shard_full.json
 ecae7e7ec9e7e90ca8784ed2e94ff4244a2eb76f assets\better-enchanting\models\item\essence_of_multishot.json
+2d1eddb79c9541cb0d3b6a7e9c0d50ca20977340 assets\better-enchanting\models\item\magic_shard_full.json
 3f3ddfcab227584a7e1eeafab748ca5b36745bbb assets\better-enchanting\models\item\essence_of_channeling.json
 260689db05523f96694d536756325fe1ed160b35 assets\better-enchanting\models\item\essence_of_sharpness.json
 d54c4ece56dcd36cb3d27d5873deefd192f2d11c assets\better-enchanting\models\item\essence_of_quick_charge.json

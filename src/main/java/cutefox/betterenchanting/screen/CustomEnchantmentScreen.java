@@ -280,7 +280,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
             if (this.isPointWithinBounds(72, 14, 15, 15, mouseX, mouseY)){
                 List<Text> list = Lists.newArrayList();
                 MutableText mutableText,mutableText2,mutableText3;
-                mutableText3 = Text.translatable("container.foxden.enchant.charge");
+                mutableText3 = Text.translatable("container.better-enchanting.enchant.charge");
                 mutableText = Text.translatable("container.enchant.lapis.many", 5);
                 mutableText2 = Text.translatable("container.enchant.level.many", 10);
 
