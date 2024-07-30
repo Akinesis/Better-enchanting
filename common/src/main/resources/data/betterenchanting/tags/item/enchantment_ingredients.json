@@ -7,8 +7,8 @@
     "minecraft:golden_carrot",
     "minecraft:piston",
     "minecraft:heart_of_the_sea",
-    "better-enchanting:magic_shard_full",
-    "better-enchanting:magic_shard_dull",
-    "better-enchanting:infused_lapis"
+    "betterenchanting:magic_shard_full",
+    "betterenchanting:magic_shard_dull",
+    "betterenchanting:infused_lapis"
   ]
 }

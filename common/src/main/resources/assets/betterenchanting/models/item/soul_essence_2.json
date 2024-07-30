@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "better-enchanting:item/soul_essence_2"
+    "layer0": "betterenchanting:item/soul_essence_2"
   }
 }

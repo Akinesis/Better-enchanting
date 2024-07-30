@@ -25,7 +25,7 @@
       "conditions": {
         "items": [
           {
-            "items": "better-enchanting:infused_lapis"
+            "items": "betterenchanting:infused_lapis"
           }
         ]
       },
@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "better-enchanting:magic_shard_dull"
+        "recipe": "betterenchanting:magic_shard_dull"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -48,7 +48,7 @@
   ],
   "rewards": {
     "recipes": [
-      "better-enchanting:magic_shard_dull"
+      "betterenchanting:magic_shard_dull"
     ]
   }
 }

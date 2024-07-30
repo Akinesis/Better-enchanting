@@ -33,7 +33,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "better-enchanting:infused_lapis"
+        "recipe": "betterenchanting:infused_lapis"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -48,7 +48,7 @@
   ],
   "rewards": {
     "recipes": [
-      "better-enchanting:infused_lapis"
+      "betterenchanting:infused_lapis"
     ]
   }
 }

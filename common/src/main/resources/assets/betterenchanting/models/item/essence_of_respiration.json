@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "better-enchanting:item/essence_of_respiration"
+    "layer0": "betterenchanting:item/essence_of_respiration"
   }
 }

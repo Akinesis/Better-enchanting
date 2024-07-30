@@ -18,10 +18,10 @@
       "item": "minecraft:gold_block"
     },
     "I": {
-      "item": "better-enchanting:infused_lapis"
+      "item": "betterenchanting:infused_lapis"
     },
     "S": {
-      "item": "better-enchanting:magic_shard_full"
+      "item": "betterenchanting:magic_shard_full"
     }
   },
   "pattern": [
@@ -31,6 +31,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "better-enchanting:essence_of_silk_touch"
+    "id": "betterenchanting:essence_of_silk_touch"
   }
 }

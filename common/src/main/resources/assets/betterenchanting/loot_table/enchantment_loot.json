@@ -7,12 +7,12 @@
         {
           "type": "minecraft:tag",
           "expand": true,
-          "name": "better-enchanting:enchantment_essence"
+          "name": "betterenchanting:enchantment_essence"
         },
         {
           "type": "minecraft:tag",
           "expand": true,
-          "name": "better-enchanting:enchantment_ingredients"
+          "name": "betterenchanting:enchantment_ingredients"
         }
       ],
       "rolls": 1.0

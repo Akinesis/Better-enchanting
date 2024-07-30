@@ -9,6 +9,7 @@ import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import org.spongepowered.asm.mixin.injection.callback.LocalCapture;
@@ -18,6 +19,9 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandlerMixin{
 
     @Shadow
     private Property levelCost;
+
+    private int materialRepairLevelCost;
+    private boolean shouldAddRepairCost;
 
     @Inject(method = "updateResult", at = @At("HEAD"), cancellable = true)
     public void preventCombineEnchantedItem(CallbackInfo ci){
@@ -38,6 +42,31 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandlerMixin{
             }
         }
 
+    }
+
+    @Inject(method = "updateResult", at = @At("HEAD"))
+    public void resetMaterialLevelCost(CallbackInfo ci) {
+        materialRepairLevelCost = 0;
+    }
+
+    @Inject(method = "updateResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V", ordinal = 0))
+    public void addMaterialLevelCost(CallbackInfo ci) {
+        materialRepairLevelCost++;
+    }
+
+    @Inject(method = "updateResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/AnvilScreenHandler;getNextCost(I)I"), locals = LocalCapture.CAPTURE_FAILHARD)
+    public void getShouldAddRepairCost(CallbackInfo ci, ItemStack itemStack, int i, long l, int j) {
+        shouldAddRepairCost = i - materialRepairLevelCost > 0 || j > 0;
+    }
+
+    @Redirect(method = "updateResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/AnvilScreenHandler;getNextCost(I)I"))
+    public int getNextCostConditional(int cost) {
+        // Only increase repairCost of the item if the increase is not caused by
+        // material repair
+        if (!shouldAddRepairCost) {
+            return cost;
+        }
+        return AnvilScreenHandler.getNextCost(cost);
     }
 
     @Inject(method = "updateResult",

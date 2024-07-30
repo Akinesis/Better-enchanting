@@ -3,11 +3,11 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "better-enchanting:soul_essence_2"
+      "item": "betterenchanting:soul_essence_2"
     }
   ],
   "result": {
     "count": 1,
-    "id": "better-enchanting:soul_essence_1"
+    "id": "betterenchanting:soul_essence_1"
   }
 }

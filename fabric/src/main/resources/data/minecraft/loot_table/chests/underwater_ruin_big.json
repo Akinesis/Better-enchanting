@@ -72,7 +72,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "better-enchanting:enchantment_loot",
+          "value": "betterenchanting:enchantment_loot",
           "weight": 5
         },
         {

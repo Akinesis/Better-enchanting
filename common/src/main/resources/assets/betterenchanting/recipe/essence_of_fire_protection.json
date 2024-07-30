@@ -9,13 +9,13 @@
       "item": "minecraft:end_stone"
     },
     "I": {
-      "item": "better-enchanting:infused_lapis"
+      "item": "betterenchanting:infused_lapis"
     },
     "M": {
       "item": "minecraft:magma_block"
     },
     "S": {
-      "item": "better-enchanting:magic_shard_full"
+      "item": "betterenchanting:magic_shard_full"
     }
   },
   "pattern": [
@@ -25,6 +25,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "better-enchanting:essence_of_fire_protection"
+    "id": "betterenchanting:essence_of_fire_protection"
   }
 }

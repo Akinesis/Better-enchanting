@@ -4,6 +4,9 @@ import cutefox.betterenchanting.registry.*;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
+import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
@@ -19,7 +22,7 @@ public class BetterEnchantingFabric implements ModInitializer {
 	// It is considered best practice to use your mod id as the logger's name.
 	// That way, it's clear which mod wrote info, warnings, and errors.
     public static final Logger LOGGER = LoggerFactory.getLogger("betterenchanting");
-	public static final String MOD_ID = "betterenchanting";
+	public static final String MOD_ID = "better-enchanting";
 
 	@Override
 	public void onInitialize() {
@@ -29,7 +32,8 @@ public class BetterEnchantingFabric implements ModInitializer {
 		ModTradeOffers.removeEnchantedBooks();
 		ModLootTableModifiers.modifyLootTables();
 
-		Registry.register(Registries.ITEM_GROUP, Utils.id("item_group"), ITEM_GROUP);
+		//Registry.register(Registries.ITEM_GROUP, Utils.id("item_group"), ITEM_GROUP);
+		PayloadTypeRegistry.playS2C().register(EnchantingIngredientMapPayload.ID, EnchantingIngredientMapPayload.CODEC);
 
 		addEventListner();
 		if(FabricLoader.getInstance().isModLoaded("incantationem")){
@@ -40,7 +44,12 @@ public class BetterEnchantingFabric implements ModInitializer {
 	}
 
 	private void addEventListner(){
-
+		ServerPlayConnectionEvents.JOIN.register((handler, sender, server) -> {
+		server.execute(() -> {
+			ServerPlayNetworking.send(handler.player,
+					new EnchantingIngredientMapPayload(ModEnchantIngredientMap.jsonMap));
+			});
+		});
 		ServerLifecycleEvents.SERVER_STARTED.register(e -> {
 			ModEnchantIngredientMap.genMapFromJson(e.getWorld(ServerWorld.OVERWORLD));
 		});

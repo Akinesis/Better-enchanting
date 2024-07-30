@@ -1,20 +1,27 @@
 package cutefox.betterenchanting.registry;
 
 import dev.architectury.platform.Platform;
+import com.google.common.base.Charsets;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import cutefox.betterenchanting.BetterEnchanting;
+import cutefox.betterenchanting.registry.ModItems;
+import io.netty.buffer.ByteBuf;
+import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
+import java.lang.reflect.Type;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
@@ -25,11 +32,13 @@ public class ModEnchantIngredientMap {
 
     public static HashMap<String, List<String>> defaultMap = new HashMap<>();
     public static HashMap<RegistryKey<Enchantment>, List<Item>> map = new HashMap<>();
+    public static Map<String, List<String>> jsonMap = new HashMap<>();
 
 
     static{
+        /*
         //Armor enchantment
-        /*defaultMap.put(Enchantments.PROTECTION.getValue().toString(), listOfIdentifiers(List.of(Items.COPPER_INGOT,Items.IRON_INGOT,Items.DIAMOND, ModItems.ESSENCE_OF_PROTECTION)));
+        defaultMap.put(Enchantments.PROTECTION.getValue().toString(), listOfIdentifiers(List.of(Items.COPPER_INGOT,Items.IRON_INGOT,Items.DIAMOND, ModItems.ESSENCE_OF_PROTECTION)));
         defaultMap.put(Enchantments.FIRE_PROTECTION.getValue().toString(), listOfIdentifiers(List.of(Items.MAGMA_BLOCK,Items.MAGMA_CREAM,Items.LAVA_BUCKET,ModItems.ESSENCE_OF_FIRE_PROTECTION)));
         defaultMap.put(Enchantments.FEATHER_FALLING.getValue().toString(), listOfIdentifiers(List.of(Items.FEATHER,Items.PHANTOM_MEMBRANE,Items.WIND_CHARGE,ModItems.ESSENCE_OF_FEATHER)));
         defaultMap.put(Enchantments.BLAST_PROTECTION.getValue().toString(), listOfIdentifiers(List.of(Items.GUNPOWDER, Items.TNT, Items.CREEPER_HEAD, ModItems.ESSENCE_OF_BLAST_PROTECTION)));
@@ -73,8 +82,8 @@ public class ModEnchantIngredientMap {
         //Trident enchantment
         defaultMap.put(Enchantments.CHANNELING.getValue().toString(), listOfIdentifiers(List.of(ModItems.ESSENCE_OF_CHANNELING)));
         defaultMap.put(Enchantments.IMPALING.getValue().toString(), listOfIdentifiers(List.of(Items.POINTED_DRIPSTONE,Items.IRON_BARS,Items.QUARTZ,Items.DIAMOND_SWORD,ModItems.ESSENCE_OF_IMPALING)));
-        defaultMap.put(Enchantments.LOYALTY.getValue().toString(), listOfIdentifiers(List.of(Items.NAUTILUS_SHELL,Items.NAUTILUS_SHELL,ModItems.ESSENCE_OF_LOYALTY)));
-        defaultMap.put(Enchantments.RIPTIDE.getValue().toString(), listOfIdentifiers(List.of(Items.NAUTILUS_SHELL,Items.NAUTILUS_SHELL,ModItems.ESSENCE_OF_RIPTIDE)));
+        defaultMap.put(Enchantments.LOYALTY.getValue().toString(), listOfIdentifiers(List.of(Items.BONE_BLOCK,Items.GOLDEN_CARROT,ModItems.ESSENCE_OF_LOYALTY)));
+        defaultMap.put(Enchantments.RIPTIDE.getValue().toString(), listOfIdentifiers(List.of(Items.WATER_BUCKET,Items.NAUTILUS_SHELL,ModItems.ESSENCE_OF_RIPTIDE)));
 
         //Crossbow enchantment
         defaultMap.put(Enchantments.MULTISHOT.getValue().toString(), listOfIdentifiers(List.of(ModItems.ESSENCE_OF_MULTISHOT)));
@@ -82,10 +91,10 @@ public class ModEnchantIngredientMap {
         defaultMap.put(Enchantments.QUICK_CHARGE.getValue().toString(), listOfIdentifiers(List.of(Items.AMETHYST_SHARD,Items.GLOWSTONE,ModItems.ESSENCE_OF_QUICK_CHARGE)));
 
         //Mace enchantment
-        defaultMap.put(Enchantments.DENSITY.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,Items.DIRT,Items.DIRT,ModItems.ESSENCE_OF_DENSITY)));
-        defaultMap.put(Enchantments.BREACH.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,Items.DIRT,ModItems.ESSENCE_OF_BREACH)));
-        defaultMap.put(Enchantments.WIND_BURST.getValue().toString(), listOfIdentifiers(List.of(Items.DIRT,Items.DIRT,ModItems.ESSENCE_OF_WIND)));
-*/
+        defaultMap.put(Enchantments.DENSITY.getValue().toString(), listOfIdentifiers(List.of(Items.STONE,Items.DEEPSLATE,Items.OBSIDIAN,Items.LODESTONE,ModItems.ESSENCE_OF_DENSITY)));
+        defaultMap.put(Enchantments.BREACH.getValue().toString(), listOfIdentifiers(List.of(Items.IRON_INGOT,Items.SMOOTH_STONE,Items.TNT,ModItems.ESSENCE_OF_BREACH)));
+        defaultMap.put(Enchantments.WIND_BURST.getValue().toString(), listOfIdentifiers(List.of(Items.SUGAR_CANE,Items.WIND_CHARGE,ModItems.ESSENCE_OF_WIND)));
+        */
     }
 
     public static void createMap() {
@@ -96,7 +105,7 @@ public class ModEnchantIngredientMap {
     public static void genMapFromJson(World world){
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        //Resolve default config for suported mod here. Put entry in default map
+        //Resolve default config for supported mod here. Put entry in default map
 
         try {
 
@@ -113,34 +122,40 @@ public class ModEnchantIngredientMap {
             }
 
             JsonReader reader = new JsonReader(new FileReader(configFile));
-            Map<String, List<String>> jsonMap = new HashMap<>();
             jsonMap = gson.fromJson(reader, Map.class);
-
-            RegistryKey<Enchantment> enchantementKey;
-            Enchantment enchantment;
-
-            for (String key : jsonMap.keySet()) {
-                Identifier enchantId = Identifier.of(key);
-                enchantment = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).get(enchantId);
-                Optional<RegistryKey<Enchantment>> optional = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment);
-                //enchantementKey = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment);
-
-                if (optional.isPresent()) {
-                    enchantementKey = optional.get();
-                    List<Item> ingredients = new ArrayList<>();
-
-                    jsonMap.get(key).forEach(s -> {
-                        Item temp;
-                        Identifier itemId = Identifier.of(s);
-                        temp = Registries.ITEM.get(itemId);
-                        ingredients.add(temp!=null?temp:Items.BARRIER);
-                    });
-
-                    map.put(enchantementKey, ingredients);
-                }
+            if (!world.isClient)
+            {
+                genMapFromJsonStringMap(world, jsonMap);
             }
-        }catch (Exception e){
+        } catch (Exception e){
             throw new RuntimeException(e.toString());
+        }
+    }
+
+    public static void genMapFromJsonStringMap(World world, Map<String, List<String>> stringMap) {
+        map = new HashMap<>();
+        RegistryKey<Enchantment> enchantementKey;
+        Enchantment enchantment;
+
+        for (String key : stringMap.keySet()) {
+            Identifier enchantId = Identifier.of(key);
+            enchantment = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).get(enchantId);
+            Optional<RegistryKey<Enchantment>> optional = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment);
+            //enchantementKey = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment);
+
+            if (optional.isPresent()) {
+                enchantementKey = optional.get();
+                List<Item> ingredients = new ArrayList<>();
+
+                stringMap.get(key).forEach(s -> {
+                    Item temp;
+                    Identifier itemId = Identifier.of(s);
+                    temp = Registries.ITEM.get(itemId);
+                    ingredients.add(temp!=null?temp:Items.BARRIER);
+                });
+
+                map.put(enchantementKey, ingredients);
+            }
         }
     }
 
@@ -159,4 +174,25 @@ public class ModEnchantIngredientMap {
         enchant.getValue().toString();
         return "";
     }
+
+    public static final PacketCodec<ByteBuf, Map<String, List<String>>> MAP_CODEC = new PacketCodec<ByteBuf, Map<String, List<String>>>() {
+        public Map<String, List<String>> decode(ByteBuf byteBuf) {
+            Gson gson = new GsonBuilder().create();
+            int length = byteBuf.readInt();
+            byte[] bytes = new byte[length];
+            byteBuf.readBytes(bytes);
+            String message = new String(bytes, Charsets.UTF_8);
+            Type mapType = new TypeToken<Map<String, List<String>>>() {
+            }.getType();
+            return gson.fromJson(message, mapType);
+        }
+
+        public void encode(ByteBuf byteBuf, Map<String, List<String>> blockPos) {
+            Gson gson = new GsonBuilder().create();
+            String json = gson.toJson(jsonMap);
+            byte[] bytes = json.getBytes(Charsets.UTF_8);
+            byteBuf.writeInt(bytes.length);
+            byteBuf.writeBytes(bytes);
+        }
+    };
 }

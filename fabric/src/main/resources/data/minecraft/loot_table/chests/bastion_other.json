@@ -146,17 +146,17 @@
         },
         {
           "type": "minecraft:item",
-          "name": "better-enchanting:soul_essence_1",
+          "name": "betterenchanting:soul_essence_1",
           "weight": 10
         },
         {
           "type": "minecraft:item",
-          "name": "better-enchanting:soul_essence_2",
+          "name": "betterenchanting:soul_essence_2",
           "weight": 10
         },
         {
           "type": "minecraft:item",
-          "name": "better-enchanting:soul_essence_3",
+          "name": "betterenchanting:soul_essence_3",
           "weight": 10
         }
       ],

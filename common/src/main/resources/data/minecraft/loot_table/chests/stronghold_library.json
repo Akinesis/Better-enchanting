@@ -46,7 +46,7 @@
         },
         {
           "type": "minecraft:loot_table",
-          "value": "better-enchanting:essence",
+          "value": "betterenchanting:essence",
           "weight": 10
         }
       ],

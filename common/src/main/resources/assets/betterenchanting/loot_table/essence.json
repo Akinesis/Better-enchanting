@@ -7,7 +7,7 @@
         {
           "type": "minecraft:tag",
           "expand": true,
-          "name": "better-enchanting:enchantment_essence"
+          "name": "betterenchanting:enchantment_essence"
         }
       ],
       "rolls": 1.0

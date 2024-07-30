@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "better-enchanting:essence_of_sneak_1"
+            "items": "betterenchanting:essence_of_sneak_1"
           }
         ]
       },
@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "items": "better-enchanting:essence_of_sneak_2"
+            "items": "betterenchanting:essence_of_sneak_2"
           }
         ]
       },
@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "better-enchanting:essence_of_sneak_1"
+        "recipe": "betterenchanting:essence_of_sneak_1"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "better-enchanting:essence_of_sneak_1"
+      "betterenchanting:essence_of_sneak_1"
     ]
   }
 }

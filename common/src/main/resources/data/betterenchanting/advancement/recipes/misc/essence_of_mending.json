@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "better-enchanting:essence_of_experience"
+            "items": "betterenchanting:essence_of_experience"
           }
         ]
       },
@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "items": "better-enchanting:magic_shard_full"
+            "items": "betterenchanting:magic_shard_full"
           }
         ]
       },
@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "better-enchanting:essence_of_mending"
+        "recipe": "betterenchanting:essence_of_mending"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "better-enchanting:essence_of_mending"
+      "betterenchanting:essence_of_mending"
     ]
   }
 }

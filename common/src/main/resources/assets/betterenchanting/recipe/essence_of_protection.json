@@ -3,19 +3,19 @@
   "category": "misc",
   "key": {
     "C": {
-      "item": "minecraft:crying_obsidian"
+      "item": "minecraft:shulker_shell"
     },
     "D": {
-      "item": "minecraft:dragon_breath"
+      "item": "minecraft:crying_obsidian"
     },
     "I": {
-      "item": "better-enchanting:infused_lapis"
+      "item": "betterenchanting:infused_lapis"
     },
     "N": {
-      "item": "minecraft:netherite_ingot"
+      "item": "minecraft:netherite_scrap"
     },
     "S": {
-      "item": "better-enchanting:magic_shard_full"
+      "item": "betterenchanting:magic_shard_full"
     }
   },
   "pattern": [
@@ -25,6 +25,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "better-enchanting:essence_of_protection"
+    "id": "betterenchanting:essence_of_protection"
   }
 }

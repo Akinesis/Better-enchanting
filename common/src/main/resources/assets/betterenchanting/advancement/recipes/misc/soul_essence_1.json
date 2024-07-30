@@ -5,7 +5,7 @@
       "conditions": {
         "items": [
           {
-            "items": "better-enchanting:soul_essence_1"
+            "items": "betterenchanting:soul_essence_1"
           }
         ]
       },
@@ -15,7 +15,7 @@
       "conditions": {
         "items": [
           {
-            "items": "better-enchanting:soul_essence_2"
+            "items": "betterenchanting:soul_essence_2"
           }
         ]
       },
@@ -23,7 +23,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "better-enchanting:soul_essence_1"
+        "recipe": "betterenchanting:soul_essence_1"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -37,7 +37,7 @@
   ],
   "rewards": {
     "recipes": [
-      "better-enchanting:soul_essence_1"
+      "betterenchanting:soul_essence_1"
     ]
   }
 }

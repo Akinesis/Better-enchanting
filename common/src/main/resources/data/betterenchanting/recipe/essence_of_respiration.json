@@ -6,7 +6,7 @@
       "item": "minecraft:conduit"
     },
     "I": {
-      "item": "better-enchanting:infused_lapis"
+      "item": "betterenchanting:infused_lapis"
     },
     "P": {
       "item": "minecraft:pufferfish_bucket"
@@ -15,7 +15,7 @@
       "item": "minecraft:dark_prismarine"
     },
     "S": {
-      "item": "better-enchanting:magic_shard_full"
+      "item": "betterenchanting:magic_shard_full"
     }
   },
   "pattern": [
@@ -25,6 +25,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "better-enchanting:essence_of_respiration"
+    "id": "betterenchanting:essence_of_respiration"
   }
 }

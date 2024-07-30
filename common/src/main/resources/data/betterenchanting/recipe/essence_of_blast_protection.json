@@ -6,13 +6,13 @@
       "item": "minecraft:creeper_head"
     },
     "I": {
-      "item": "better-enchanting:infused_lapis"
+      "item": "betterenchanting:infused_lapis"
     },
     "O": {
       "item": "minecraft:obsidian"
     },
     "S": {
-      "item": "better-enchanting:magic_shard_full"
+      "item": "betterenchanting:magic_shard_full"
     },
     "W": {
       "item": "minecraft:nether_star"
@@ -25,6 +25,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "better-enchanting:essence_of_blast_protection"
+    "id": "betterenchanting:essence_of_blast_protection"
   }
 }

@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "better-enchanting:item/infused_lapis"
+    "layer0": "betterenchanting:item/infused_lapis"
   }
 }

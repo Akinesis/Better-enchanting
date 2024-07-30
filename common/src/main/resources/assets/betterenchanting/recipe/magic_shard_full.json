@@ -9,10 +9,10 @@
       "item": "minecraft:emerald"
     },
     "L": {
-      "item": "better-enchanting:infused_lapis"
+      "item": "betterenchanting:infused_lapis"
     },
     "S": {
-      "item": "better-enchanting:magic_shard_dull"
+      "item": "betterenchanting:magic_shard_dull"
     }
   },
   "pattern": [
@@ -22,6 +22,6 @@
   ],
   "result": {
     "count": 1,
-    "id": "better-enchanting:magic_shard_full"
+    "id": "betterenchanting:magic_shard_full"
   }
 }

@@ -3,11 +3,11 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "better-enchanting:essence_of_sneak_3"
+      "item": "betterenchanting:essence_of_sneak_3"
     }
   ],
   "result": {
     "count": 1,
-    "id": "better-enchanting:essence_of_sneak_2"
+    "id": "betterenchanting:essence_of_sneak_2"
   }
 }
