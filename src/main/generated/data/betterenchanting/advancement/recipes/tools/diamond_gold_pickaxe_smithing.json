@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_diamond_upgrade_smithing_template": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betterenchanting:diamond_upgrade_smithing_template"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betterenchanting:diamond_gold_pickaxe_smithing"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_diamond_upgrade_smithing_template"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betterenchanting:diamond_gold_pickaxe_smithing"
+    ]
+  }
+}

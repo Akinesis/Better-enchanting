@@ -280,7 +280,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
             if (this.isPointWithinBounds(72, 14, 15, 15, mouseX, mouseY)){
                 List<Text> list = Lists.newArrayList();
                 MutableText mutableText,mutableText2,mutableText3;
-                mutableText3 = Text.translatable("container.better-enchanting.enchant.charge");
+                mutableText3 = Text.translatable("container.betterenchanting.enchant.charge");
                 mutableText = Text.translatable("container.enchant.lapis.many", 5);
                 mutableText2 = Text.translatable("container.enchant.level.many", 10);
 
@@ -369,7 +369,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                                     list.add(mutableText2.formatted(client.player.experienceLevel >= enchantLevelCost ? Formatting.GRAY : Formatting.RED));
 
                                     MutableText mutableText3;
-                                    mutableText3 = Text.translatable("container.better-enchanting.enchant.material.one", enchantIngredientCost, Text.translatable(enchantIngredientStack.getTranslationKey()));
+                                    mutableText3 = Text.translatable("container.betterenchanting.enchant.material.one", enchantIngredientCost, Text.translatable(enchantIngredientStack.getTranslationKey()));
 
                                     if(handler.getSlot(2).getStack().getItem() != enchantIngredient)
                                         list.add(mutableText3.formatted(Formatting.RED));

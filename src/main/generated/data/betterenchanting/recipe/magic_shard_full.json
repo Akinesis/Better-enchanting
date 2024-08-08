@@ -1,0 +1,27 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:experience_bottle"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "L": {
+      "item": "betterenchanting:infused_lapis"
+    },
+    "S": {
+      "item": "betterenchanting:magic_shard_dull"
+    }
+  },
+  "pattern": [
+    " B ",
+    "ESE",
+    "LBL"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterenchanting:magic_shard_full"
+  }
+}

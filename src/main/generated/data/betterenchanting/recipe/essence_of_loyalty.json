@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:ender_pearl"
+    },
+    "B": {
+      "item": "minecraft:ghast_tear"
+    },
+    "C": {
+      "item": "minecraft:lead"
+    },
+    "I": {
+      "item": "betterenchanting:infused_lapis"
+    },
+    "S": {
+      "item": "betterenchanting:magic_shard_full"
+    }
+  },
+  "pattern": [
+    " I ",
+    "ASA",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterenchanting:essence_of_loyalty"
+  }
+}

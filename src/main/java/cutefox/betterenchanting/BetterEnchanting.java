@@ -66,7 +66,7 @@ public class BetterEnchanting implements ModInitializer {
 
 	private static final ItemGroup ITEM_GROUP = FabricItemGroup.builder()
 			.icon(() -> new ItemStack(ModItems.ESSENCE_OF_PROTECTION))
-			.displayName(Text.translatable("itemGroup.better-enchanting.item_group"))
+			.displayName(Text.translatable("itemGroup.betterenchanting.item_group"))
 			.entries((context, entries) -> {
 				entries.addAll(ModItems.MOD_ITEM_LIST.stream().map(i -> i.getDefaultStack()).toList());
 			})

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:spectral_arrow"
+    },
+    "B": {
+      "item": "minecraft:end_rod"
+    },
+    "C": {
+      "item": "minecraft:trident"
+    },
+    "I": {
+      "item": "betterenchanting:infused_lapis"
+    },
+    "S": {
+      "item": "betterenchanting:magic_shard_full"
+    }
+  },
+  "pattern": [
+    " I ",
+    "ASA",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterenchanting:essence_of_piercing"
+  }
+}

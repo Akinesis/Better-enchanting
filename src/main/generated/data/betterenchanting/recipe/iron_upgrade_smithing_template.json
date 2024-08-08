@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:brick"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "pattern": [
+    "IBI",
+    "IBI",
+    "III"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterenchanting:iron_upgrade_smithing_template"
+  }
+}

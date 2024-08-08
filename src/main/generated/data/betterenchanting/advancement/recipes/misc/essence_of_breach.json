@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_magic_shard_full": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betterenchanting:magic_shard_full"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betterenchanting:essence_of_breach"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_magic_shard_full"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betterenchanting:essence_of_breach"
+    ]
+  }
+}

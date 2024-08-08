@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:lapis_block"
+    },
+    "B": {
+      "item": "minecraft:emerald_block"
+    },
+    "C": {
+      "item": "minecraft:golden_apple"
+    },
+    "D": {
+      "item": "minecraft:iron_block"
+    },
+    "E": {
+      "item": "minecraft:gold_block"
+    },
+    "I": {
+      "item": "betterenchanting:infused_lapis"
+    },
+    "S": {
+      "item": "betterenchanting:magic_shard_full"
+    }
+  },
+  "pattern": [
+    "DIE",
+    "ASA",
+    "BCB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterenchanting:essence_of_silk_touch"
+  }
+}

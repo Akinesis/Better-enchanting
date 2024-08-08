@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_amethyst_shard": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:amethyst_shard"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_experience_bottle": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:experience_bottle"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_infused_lapis": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betterenchanting:infused_lapis"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_magic_shard_dull": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betterenchanting:magic_shard_dull"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betterenchanting:magic_shard_full"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_amethyst_shard",
+      "has_experience_bottle",
+      "has_infused_lapis",
+      "has_magic_shard_dull"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betterenchanting:magic_shard_full"
+    ]
+  }
+}

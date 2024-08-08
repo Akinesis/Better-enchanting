@@ -1,0 +1,65 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_diamond": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:diamond"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_iron_upgrade_smithing_template": {
+      "conditions": {
+        "items": [
+          {
+            "items": "betterenchanting:iron_upgrade_smithing_template"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_netherite_upgrade_smithing_template": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:netherite_upgrade_smithing_template"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_smithing_table": {
+      "conditions": {
+        "items": [
+          {
+            "items": "minecraft:smithing_table"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "betterenchanting:diamond_upgrade_smithing_template"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_diamond",
+      "has_smithing_table",
+      "has_netherite_upgrade_smithing_template",
+      "has_iron_upgrade_smithing_template"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "betterenchanting:diamond_upgrade_smithing_template"
+    ]
+  }
+}

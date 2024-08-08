@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "item": "minecraft:blaze_rod"
+    },
+    "D": {
+      "item": "minecraft:dragon_breath"
+    },
+    "I": {
+      "item": "betterenchanting:infused_lapis"
+    },
+    "R": {
+      "item": "minecraft:rose_bush"
+    },
+    "S": {
+      "item": "betterenchanting:magic_shard_full"
+    }
+  },
+  "pattern": [
+    " I ",
+    "RSR",
+    "BDB"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterenchanting:essence_of_thorn"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:shulker_box"
+    },
+    "G": {
+      "item": "minecraft:glowstone"
+    },
+    "I": {
+      "item": "betterenchanting:infused_lapis"
+    },
+    "M": {
+      "item": "minecraft:phantom_membrane"
+    },
+    "S": {
+      "item": "betterenchanting:magic_shard_full"
+    }
+  },
+  "pattern": [
+    " I ",
+    "MSM",
+    "AGA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterenchanting:essence_of_feather"
+  }
+}

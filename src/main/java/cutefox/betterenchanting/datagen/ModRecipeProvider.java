@@ -8,8 +8,10 @@ import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
+import net.minecraft.data.server.recipe.SmithingTransformRecipeJsonBuilder;
 import net.minecraft.item.Item;
 import net.minecraft.item.Items;
+import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 
@@ -24,6 +26,249 @@ public class ModRecipeProvider extends FabricRecipeProvider {
     @Override
     public void generate(RecipeExporter exporter) {
         BetterEnchanting.LOGGER.info("Generating recipes for : "+BetterEnchanting.MOD_ID);
+
+        //region UPGRADE TEMPLATE
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.IRON_UPGRADE_SMITHING_TEMPLATE, 1)
+                .pattern("IBI")
+                .pattern("IBI")
+                .pattern("III")
+                .input('I', Items.IRON_INGOT)
+                .input('B', Items.BRICK)
+                .criterion(hasItem(Items.IRON_INGOT), conditionsFromItem(Items.IRON_INGOT))
+                .criterion(hasItem(Items.SMITHING_TABLE), conditionsFromItem(Items.SMITHING_TABLE))
+                .criterion(hasItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id(getRecipeName(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE, 1)
+                .pattern("DID")
+                .pattern("DID")
+                .pattern("DDD")
+                .input('D', Items.DIAMOND)
+                .input('I', Items.IRON_INGOT)
+                .criterion(hasItem(Items.DIAMOND), conditionsFromItem(Items.DIAMOND))
+                .criterion(hasItem(Items.SMITHING_TABLE), conditionsFromItem(Items.SMITHING_TABLE))
+                .criterion(hasItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE))
+                .criterion(hasItem(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id(getRecipeName(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE)));
+
+        //endregion
+
+        //region SMITHING RECIPE
+
+        //Stone to Iron
+        SmithingTransformRecipeJsonBuilder.create(
+                Ingredient.ofItems(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE),
+                Ingredient.ofItems(Items.STONE_AXE),
+                Ingredient.ofItems(Items.IRON_INGOT),
+                RecipeCategory.TOOLS,
+                Items.IRON_AXE)
+                .criterion(hasItem(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("iron_axe_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                Ingredient.ofItems(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE),
+                Ingredient.ofItems(Items.STONE_PICKAXE),
+                Ingredient.ofItems(Items.IRON_INGOT),
+                RecipeCategory.TOOLS,
+                Items.IRON_PICKAXE)
+                .criterion(hasItem(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("iron_pickaxe_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                Ingredient.ofItems(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE),
+                Ingredient.ofItems(Items.STONE_HOE),
+                Ingredient.ofItems(Items.IRON_INGOT),
+                RecipeCategory.TOOLS,
+                Items.IRON_HOE)
+                .criterion(hasItem(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("iron_hoe_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                Ingredient.ofItems(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE),
+                Ingredient.ofItems(Items.STONE_SHOVEL),
+                Ingredient.ofItems(Items.IRON_INGOT),
+                RecipeCategory.TOOLS,
+                Items.IRON_SHOVEL)
+                .criterion(hasItem(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("iron_shovel_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                Ingredient.ofItems(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE),
+                Ingredient.ofItems(Items.STONE_SWORD),
+                Ingredient.ofItems(Items.IRON_INGOT),
+                RecipeCategory.COMBAT,
+                Items.IRON_SWORD)
+                .criterion(hasItem(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("iron_sword_smithing"));
+
+        //Gold to Diamond
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.GOLDEN_AXE),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.TOOLS,
+                        Items.DIAMOND_AXE)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_gold_axe_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.GOLDEN_PICKAXE),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.TOOLS,
+                        Items.DIAMOND_PICKAXE)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_gold_pickaxe_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.GOLDEN_HOE),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.TOOLS,
+                        Items.DIAMOND_HOE)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_gold_hoe_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.GOLDEN_SHOVEL),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.TOOLS,
+                        Items.DIAMOND_SHOVEL)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_gold_shovel_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.GOLDEN_SWORD),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.COMBAT,
+                        Items.DIAMOND_SWORD)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_gold_sword_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.GOLDEN_HELMET),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.COMBAT,
+                        Items.DIAMOND_HELMET)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_gold_helmet_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.GOLDEN_CHESTPLATE),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.COMBAT,
+                        Items.DIAMOND_CHESTPLATE)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_gold_chestplate_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.GOLDEN_LEGGINGS),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.COMBAT,
+                        Items.DIAMOND_LEGGINGS)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_gold_leggings_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.GOLDEN_BOOTS),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.COMBAT,
+                        Items.DIAMOND_BOOTS)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_gold_boots_smithing"));
+
+        //Iron to Diamond
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.IRON_AXE),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.TOOLS,
+                        Items.DIAMOND_AXE)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_iron_axe_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.IRON_PICKAXE),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.TOOLS,
+                        Items.DIAMOND_PICKAXE)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_iron_pickaxe_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.IRON_HOE),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.TOOLS,
+                        Items.DIAMOND_HOE)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_iron_hoe_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.IRON_SHOVEL),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.TOOLS,
+                        Items.DIAMOND_SHOVEL)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_iron_shovel_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.IRON_SWORD),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.COMBAT,
+                        Items.DIAMOND_SWORD)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_iron_sword_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.IRON_HELMET),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.COMBAT,
+                        Items.DIAMOND_HELMET)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_iron_helmet_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.IRON_CHESTPLATE),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.COMBAT,
+                        Items.DIAMOND_CHESTPLATE)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_iron_chestplate_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.IRON_LEGGINGS),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.COMBAT,
+                        Items.DIAMOND_LEGGINGS)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_iron_leggings_smithing"));
+
+        SmithingTransformRecipeJsonBuilder.create(
+                        Ingredient.ofItems(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE),
+                        Ingredient.ofItems(Items.IRON_BOOTS),
+                        Ingredient.ofItems(Items.DIAMOND),
+                        RecipeCategory.COMBAT,
+                        Items.DIAMOND_BOOTS)
+                .criterion(hasItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE))
+                .offerTo(exporter, Utils.id("diamond_iron_boots_smithing"));
+
+        //endregion
 
         //region ENCHANTMENT INGREDIENTS
 
