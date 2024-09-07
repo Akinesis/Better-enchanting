@@ -12,7 +12,7 @@
 		"sources": "https://github.com/Akinesis/better-enchanting"
 	},
 	"license": "CC0-1.0",
-	"icon": "assets/better-enchanting/icon.png",
+	"icon": "assets/betterenchanting/icon.png",
 	"environment": "*",
 	"entrypoints": {
 		"main": [

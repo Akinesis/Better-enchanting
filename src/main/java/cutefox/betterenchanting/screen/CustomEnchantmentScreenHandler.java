@@ -259,15 +259,23 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
 
     private List<EnchantmentLevelEntry> getListOfApplicableEnchantments(DynamicRegistryManager registryManager, ItemStack itemToEnchant, int numberOfBookshelf){
         Optional<RegistryEntryList.Named<Enchantment>> enchantingTableList = registryManager.get(RegistryKeys.ENCHANTMENT).getEntryList(EnchantmentTags.IN_ENCHANTING_TABLE);
-        Optional<RegistryEntryList.Named<Enchantment>> treasureList = registryManager.get(RegistryKeys.ENCHANTMENT).getEntryList(ModEnchantmentTags.BENEFICIAL_TREASURE);
+        //Optional<RegistryEntryList.Named<Enchantment>> treasureList = registryManager.get(RegistryKeys.ENCHANTMENT).getEntryList(ModEnchantmentTags.BENEFICIAL_TREASURE);
+        Optional<RegistryEntryList.Named<Enchantment>> treasureList = registryManager.get(RegistryKeys.ENCHANTMENT).getEntryList(EnchantmentTags.TREASURE);
+        Optional<RegistryEntryList.Named<Enchantment>> cursesList = registryManager.get(RegistryKeys.ENCHANTMENT).getEntryList(EnchantmentTags.CURSE);
         if (enchantingTableList.isEmpty()) {
             return List.of();
         }else{
             RegistryEntryList.Named enchantingTableEnchants = enchantingTableList.get();
-            List<EnchantmentLevelEntry> list = ModEnchantmentHelper.getPossibleEntries(numberOfBookshelf, itemToEnchant, enchantingTableEnchants.stream());
+            List<EnchantmentLevelEntry> list = ModEnchantmentHelper.getPossibleEntries(numberOfBookshelf, itemToEnchant, enchantingTableEnchants.stream(), null);
+
+            RegistryEntryList.Named cursed;
+            if(!cursesList.isEmpty())
+                cursed = cursesList.get();
+            else
+                cursed = null;
 
             if( !treasureList.isEmpty())
-                list.addAll(ModEnchantmentHelper.getPossibleEntries(numberOfBookshelf, itemToEnchant, ((RegistryEntryList.Named)treasureList.get()).stream()));
+                list.addAll(ModEnchantmentHelper.getPossibleEntries(numberOfBookshelf, itemToEnchant, ((RegistryEntryList.Named)treasureList.get()).stream(), cursed));
 
             if(itemToEnchant.isIn(ItemTags.AXES))
                 list.addAll(ModEnchantmentHelper.addSwordEnchantToAxes(numberOfBookshelf, enchantingTableEnchants.stream()));

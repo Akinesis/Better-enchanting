@@ -13,7 +13,7 @@ public class ModLootTables {
     public static final RegistryKey<LootTable> ENCHANTMENT_LOOT = register("enchantment_loot");
 
     public static void registerLootTables(){
-        BetterEnchanting.LOGGER.info("Registering loot tables for mod "+ BetterEnchanting.MOD_ID);
+        BetterEnchanting.LOGGER.info("Registering loot tables for "+ BetterEnchanting.MOD_ID);
     }
 
     private static RegistryKey<LootTable> register(String id) {

@@ -17,6 +17,7 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.util.collection.IndexedIterable;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -87,7 +88,7 @@ public class ModEnchantmentHelper {
             return tempValue>ingredient.getMaxCount()?ingredient.getMaxCount():tempValue;
     }
 
-    public static List<EnchantmentLevelEntry> getPossibleEntries(int bookshelfCount, ItemStack stack, Stream<RegistryEntry<Enchantment>> possibleEnchantments){
+    public static List<EnchantmentLevelEntry> getPossibleEntries(int bookshelfCount, ItemStack stack, Stream<RegistryEntry<Enchantment>> possibleEnchantments, @Nullable RegistryEntryList.Named cursed){
 
         List<EnchantmentLevelEntry> list = Lists.newArrayList();
         boolean isBook = stack.isOf(Items.BOOK);
@@ -99,7 +100,15 @@ public class ModEnchantmentHelper {
         }).forEach((enchantmentx) -> {
             Enchantment enchantment = enchantmentx.value();
 
-            if(isCompatible(stack.getEnchantments().getEnchantments(), enchantmentx)){
+            //TODO : Offer a better way to identify cursed enchants with tags
+            boolean enchantIsCursed = false;
+            if(cursed != null)
+                enchantIsCursed = cursed.contains(enchantmentx);
+
+            //boolean enchantNameIsCursed = enchantment.toString().toLowerCase().contains("curse") || enchantment.description().toString().contains("curse");
+            boolean enchantNameIsCursed = false;
+
+            if(isCompatible(stack.getEnchantments().getEnchantments(), enchantmentx) && !(enchantIsCursed || enchantNameIsCursed)){
                 for(int j = enchantment.getMaxLevel(); j >= enchantment.getMinLevel(); --j) {
                     if (getBookshelfCountRequierment(enchantment, j) <= bookshelfCount) {
                         list.add(new EnchantmentLevelEntry(enchantmentx, j));

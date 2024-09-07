@@ -5,7 +5,8 @@
 	"mixins": [
 		"AnvilScreenHandlerMixin",
 		"EnchantingTableMixin",
-		"ForgingScreenHandlerMixin"
+		"ForgingScreenHandlerMixin",
+		"LootTableMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1

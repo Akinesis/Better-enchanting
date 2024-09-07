@@ -23,7 +23,7 @@ public abstract class EnchantingTableMixin {
             at = @At(value = "RETURN", ordinal = 0),
             cancellable = true,
             locals = LocalCapture.CAPTURE_FAILHARD)
-    public void createCustomEnchantScreen(BlockState state, World world, BlockPos pos, CallbackInfoReturnable<NamedScreenHandlerFactory> cir, BlockEntity blockEntity, Text text){
+    public void betterEnchanting$createCustomEnchantScreen(BlockState state, World world, BlockPos pos, CallbackInfoReturnable<NamedScreenHandlerFactory> cir, BlockEntity blockEntity, Text text){
 
         //Return custom factory
         NamedScreenHandlerFactory retrunFactory = null;
