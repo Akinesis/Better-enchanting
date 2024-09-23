@@ -41,15 +41,18 @@ public abstract class LootTableMixin {
 
     @Shadow protected abstract List<Integer> getFreeSlots(Inventory inventory, Random random);
 
-    @Redirect(method = "supplyInventory", at = @At(value = "INVOKE", target = "Lnet/minecraft/inventory/Inventory;setStack(ILnet/minecraft/item/ItemStack;)V", ordinal = 1))
-    public void betterEnchanting$replaceEnchantedBook(Inventory inventory, int slotId, ItemStack itemStack){
+    @Inject(method = "supplyInventory", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;isEmpty()Z"))
+    public void betterEnchanting$replaceEnchantedBook(Inventory inventory, LootContextParameterSet parameters, long seed, CallbackInfo ci, @Local LocalRef<ItemStack> localRef){
 
+        if(localRef.get().isEmpty())
+            return;
 
         int i = 0;
         ItemStack newItem;
+        ItemStack localRefItemStack = localRef.get().copy();
 
-        if(itemStack.getItem().equals(Items.ENCHANTED_BOOK)){
-            ItemEnchantmentsComponent bookEnchants = EnchantmentHelper.getEnchantments(itemStack);
+        if(localRefItemStack.getItem().equals(Items.ENCHANTED_BOOK)){
+            ItemEnchantmentsComponent bookEnchants = EnchantmentHelper.getEnchantments(localRefItemStack);
 
 
             for(Object2IntMap.Entry<RegistryEntry<Enchantment>> ench : bookEnchants.getEnchantmentEntries()){
@@ -73,12 +76,10 @@ public abstract class LootTableMixin {
                 if(i > 0)
                     this.essences.add(newItem);
                 else
-                    itemStack = newItem;
+                    localRef.set(newItem);
                 i++;
             }
         }
-
-        inventory.setStack(slotId, itemStack);
     }
 
     //@Inject(method = "supplyInventory", at = @At(value = "RETURN"), locals = LocalCapture.CAPTURE_FAILHARD)

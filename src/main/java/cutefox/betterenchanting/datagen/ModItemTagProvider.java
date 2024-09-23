@@ -91,7 +91,25 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.ESSENCE_OF_QUICK_CHARGE)
                 .add(ModItems.ESSENCE_OF_DENSITY)
                 .add(ModItems.ESSENCE_OF_WIND)
-                .add(ModItems.ESSENCE_OF_BREACH);
+                .add(ModItems.ESSENCE_OF_BREACH)
+                .add(ModItems.ESSENCE_OF_POISON)
+                .add(ModItems.ESSENCE_OF_POISON_PROTECTION)
+                .add(ModItems.ESSENCE_OF_MINING)
+                .add(ModItems.ESSENCE_OF_SMELTING)
+                .add(ModItems.ESSENCE_OF_SIGHT)
+                .add(ModItems.ESSENCE_OF_LEVITATION)
+                .add(ModItems.ESSENCE_OF_FORAGING)
+                .add(ModItems.ESSENCE_OF_STRIKE)
+                .add(ModItems.ESSENCE_OF_HEALTH)
+                .add(ModItems.ESSENCE_OF_VAMPIRISM)
+                .add(ModItems.ESSENCE_OF_AGILITY)
+                .add(ModItems.ESSENCE_OF_COMBAT)
+                .add(ModItems.ESSENCE_OF_BUILDING)
+                .add(ModItems.ESSENCE_OF_FEAR)
+                .add(ModItems.ESSENCE_OF_REACH)
+                .add(ModItems.ESSENCE_OF_PULLING)
+                .add(ModItems.ESSENCE_OF_FOOD);
+
 
     }
 }

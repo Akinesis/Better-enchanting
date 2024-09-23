@@ -2,6 +2,7 @@ package cutefox.betterenchanting.registry;
 
 import cutefox.betterenchanting.BetterEnchanting;
 import cutefox.betterenchanting.Utils;
+import cutefox.betterenchanting.item.ItemWithRemainderChance;
 import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.FoodComponent;
 import net.minecraft.item.Item;
@@ -31,7 +32,7 @@ public class ModItems {
     public static final List<Item> MOD_ITEM_LIST = new ArrayList<>();
     public static final Item INFUSED_LAPIS = registerItem("infused_lapis", new Item(new Item.Settings()));
     public static final Item MAGIC_SHARD_DULL = registerItem("magic_shard_dull", new Item(new Item.Settings()));
-    public static final Item MAGIC_SHARD_FULL = registerItem("magic_shard_full", new Item(new Item.Settings().maxCount(16).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item MAGIC_SHARD_FULL = registerItem("magic_shard_full", new ItemWithRemainderChance(new Item.Settings().maxCount(16).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true).recipeRemainder(ModItems.MAGIC_SHARD_DULL)));
     //endregion
 
     //region UPGRADE TEMPLATES
@@ -99,6 +100,27 @@ public class ModItems {
     public static final Item ESSENCE_OF_DENSITY = registerItem("essence_of_density", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
     public static final Item ESSENCE_OF_BREACH = registerItem("essence_of_breach", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
     public static final Item ESSENCE_OF_WIND = registerItem("essence_of_wind", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+
+
+    //Neo Enchant Plus
+    public static final Item ESSENCE_OF_POISON = registerItem("essence_of_poison", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_POISON_PROTECTION = registerItem("essence_of_poison_protection", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_MINING = registerItem("essence_of_mining", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_SMELTING = registerItem("essence_of_smelting", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_SIGHT = registerItem("essence_of_sight", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_LEVITATION = registerItem("essence_of_levitation", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_FORAGING = registerItem("essence_of_foraging", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_STRIKE = registerItem("essence_of_strike", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_HEALTH = registerItem("essence_of_health", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_VAMPIRISM = registerItem("essence_of_vampirism", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_AGILITY = registerItem("essence_of_agility", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_COMBAT = registerItem("essence_of_combat", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_BUILDING = registerItem("essence_of_building", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_FEAR = registerItem("essence_of_fear", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_REACH = registerItem("essence_of_reach", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_PULLING = registerItem("essence_of_pulling", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_FOOD = registerItem("essence_of_food", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+
 
     //endregion
 

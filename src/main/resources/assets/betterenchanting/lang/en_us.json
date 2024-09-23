@@ -52,6 +52,23 @@
   "item.betterenchanting.essence_of_breach": "Essence Of Breach",
   "item.betterenchanting.essence_of_wind": "Essence Of Wind",
 
+  "item.betterenchanting.essence_of_poison": "Essence Of Poison",
+  "item.betterenchanting.essence_of_poison_protection": "Essence Of Poison Protection",
+  "item.betterenchanting.essence_of_mining": "Essence Of Mining",
+  "item.betterenchanting.essence_of_smelting": "Essence Of Smelting",
+  "item.betterenchanting.essence_of_sight": "Essence Of Sight",
+  "item.betterenchanting.essence_of_levitation": "Essence Of Levitation",
+  "item.betterenchanting.essence_of_foraging": "Essence Of Foraging",
+  "item.betterenchanting.essence_of_strike": "Essence Of Strike",
+  "item.betterenchanting.essence_of_health": "Essence Of Health",
+  "item.betterenchanting.essence_of_vampirism": "Essence Of Vampirism",
+  "item.betterenchanting.essence_of_agility": "Essence Of Agility",
+  "item.betterenchanting.essence_of_combat": "Essence Of Combat",
+  "item.betterenchanting.essence_of_building": "Essence Of Building",
+  "item.betterenchanting.essence_of_fear": "Essence Of Fear",
+  "item.betterenchanting.essence_of_reach": "Essence Of Reach",
+  "item.betterenchanting.essence_of_pulling": "Essence Of Pulling",
+  "item.betterenchanting.essence_of_food": "Essence Of Food",
 
 
   "container.betterenchanting.enchant.material.one": "%s %s",

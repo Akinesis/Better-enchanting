@@ -122,8 +122,21 @@ public class ModEnchantIngredientMap {
 
             JsonReader reader = new JsonReader(new FileReader(configFile));
             jsonMap = gson.fromJson(reader, Map.class);
-            if (!world.isClient)
-            {
+            reader.close();
+
+            //get enchant present in default map but not in config and
+            Map<String, List<String>> missingEntries = getEnchantNotPresentInConfig();
+
+            //Append entries not present in config file
+            if(!missingEntries.isEmpty()){
+                BufferedWriter writer = new BufferedWriter(new FileWriter(configFile));
+                jsonMap.putAll(missingEntries);
+                String temp = gson.toJson(jsonMap);
+                writer.append(temp);
+                writer.close();
+            }
+
+            if (!world.isClient){
                 genMapFromJsonStringMap(world, jsonMap);
             }
         } catch (Exception e){
@@ -170,9 +183,16 @@ public class ModEnchantIngredientMap {
         return list;
     }
 
-    private String getEnchantIdentifier(RegistryKey<Enchantment> enchant){
-        enchant.getValue().toString();
-        return "";
+    private static Map<String, List<String>> getEnchantNotPresentInConfig() throws Exception{
+
+        Map<String, List<String>> missingEntries = new HashMap<>();
+
+        for(String enchant : defaultMap.keySet()){
+            if(!jsonMap.keySet().contains(enchant))
+                missingEntries.put(enchant, defaultMap.get(enchant));
+        }
+
+        return missingEntries;
     }
 
     public static final PacketCodec<ByteBuf, Map<String, List<String>>> MAP_CODEC = new PacketCodec<ByteBuf, Map<String, List<String>>>() {
@@ -195,4 +215,45 @@ public class ModEnchantIngredientMap {
             byteBuf.writeBytes(bytes);
         }
     };
+
+    public static void loadNeoEnchantConfig(){
+
+        defaultMap.put("enchantplus:bow/accuracy_shot", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_ARROWS)));
+        defaultMap.put("enchantplus:boots/agility", listOfIdentifiers(List.of(Items.SUGAR_CANE,Items.WIND_CHARGE,Items.WIND_CHARGE,Items.SUGAR_CANE,ModItems.ESSENCE_OF_AGILITY)));
+        defaultMap.put("enchantplus:elytra/armored", listOfIdentifiers(List.of(Items.SUGAR_CANE,Items.WIND_CHARGE,Items.WIND_CHARGE,ModItems.ESSENCE_OF_PROTECTION)));
+        defaultMap.put("enchantplus:sword/attack_speed", listOfIdentifiers(List.of(Items.WIND_CHARGE,ModItems.ESSENCE_OF_COMBAT)));
+        defaultMap.put("enchantplus:helmet/auto_feed", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_FOOD)));
+        defaultMap.put("enchantplus:tools/auto_smelt", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_SMELTING)));
+        defaultMap.put("enchantplus:bow/breezing_arrow", listOfIdentifiers(List.of(Items.WIND_CHARGE,Items.WIND_CHARGE,ModItems.ESSENCE_OF_ARROWS)));
+        defaultMap.put("enchantplus:helmet/bright_vision", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_SIGHT)));
+        defaultMap.put("enchantplus:chestplate/builder_arm", listOfIdentifiers(List.of(Items.SUGAR_CANE,Items.WIND_CHARGE,Items.WIND_CHARGE,Items.SUGAR_CANE,ModItems.ESSENCE_OF_BUILDING)));
+        defaultMap.put("enchantplus:bow/echo_shot", listOfIdentifiers(List.of(Items.ECHO_SHARD,Items.SCULK_SENSOR,ModItems.ESSENCE_OF_ARROWS)));
+        defaultMap.put("enchantplus:pickaxe/experimental_bedrock_breaker", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_MINING)));
+        defaultMap.put("enchantplus:bow/explosive_arrow", listOfIdentifiers(List.of(Items.TNT,Items.CREEPER_HEAD,ModItems.ESSENCE_OF_ARROWS)));
+        defaultMap.put("enchantplus:leggings/fast_swim", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_SEA)));
+        defaultMap.put("enchantplus:sword/fear", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_FEAR)));
+        defaultMap.put("enchantplus:armor/fury", listOfIdentifiers(List.of(Items.SUGAR_CANE,Items.WIND_CHARGE,Items.WIND_CHARGE,ModItems.ESSENCE_OF_COMBAT)));
+        defaultMap.put("enchantplus:boots/lava_walker", listOfIdentifiers(List.of(Items.WIND_CHARGE,Items.WIND_CHARGE,ModItems.ESSENCE_OF_FIRE)));
+        defaultMap.put("enchantplus:leggings/leaping", listOfIdentifiers(List.of(Items.WIND_CHARGE,ModItems.ESSENCE_OF_AGILITY)));
+        defaultMap.put("enchantplus:sword/life_steal", listOfIdentifiers(List.of(Items.SWEET_BERRIES,Items.IRON_SWORD,ModItems.ESSENCE_OF_VAMPIRISM)));
+        defaultMap.put("enchantplus:armor/lifeplus", listOfIdentifiers(List.of(Items.APPLE,Items.RABBIT_STEW,Items.NETHER_WART_BLOCK,Items.DRAGON_HEAD,ModItems.ESSENCE_OF_HEALTH)));
+        defaultMap.put("enchantplus:trident/magical_water", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_SEA)));
+        defaultMap.put("enchantplus:tools/miningplus", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_MINING)));
+        defaultMap.put("enchantplus:sword/poison_aspect", listOfIdentifiers(List.of(Items.SPIDER_EYE,Items.PUFFERFISH_BUCKET,Items.POISONOUS_POTATO,ModItems.ESSENCE_OF_POISON)));
+        defaultMap.put("enchantplus:sword/pull", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_PULLING)));
+        defaultMap.put("enchantplus:sword/reach", listOfIdentifiers(List.of(Items.WIND_CHARGE,Items.WIND_CHARGE,ModItems.ESSENCE_OF_REACH)));
+        defaultMap.put("enchantplus:hoe/scyther", listOfIdentifiers(List.of(Items.WIND_CHARGE,Items.WIND_CHARGE,ModItems.ESSENCE_OF_FORAGING)));
+        defaultMap.put("enchantplus:boots/sky_walk", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_WIND)));
+        defaultMap.put("enchantplus:pickaxe/spawner_touch", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_SILK_TOUCH)));
+        defaultMap.put("enchantplus:boots/step_assist", listOfIdentifiers(List.of(Items.SUGAR_CANE,Items.WIND_CHARGE,ModItems.ESSENCE_OF_AGILITY)));
+        defaultMap.put("enchantplus:bow/storm_arrow", listOfIdentifiers(List.of(Items.WIND_CHARGE,ModItems.ESSENCE_OF_ARROWS)));
+        defaultMap.put("enchantplus:mace/striker", listOfIdentifiers(List.of(Items.LIGHTNING_ROD,ModItems.ESSENCE_OF_STRIKE)));
+        defaultMap.put("enchantplus:axe/timber", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_FORAGING)));
+        defaultMap.put("enchantplus:pickaxe/vein_miner", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_MINING)));
+        defaultMap.put("enchantplus:armor/venom_protection", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_POISON_PROTECTION)));
+        defaultMap.put("enchantplus:helmet/voidless", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_LEVITATION)));
+        defaultMap.put("enchantplus:mace/wind_propulsion", listOfIdentifiers(List.of(Items.TNT,Items.WIND_CHARGE,ModItems.ESSENCE_OF_WIND)));
+        defaultMap.put("enchantplus:sword/xp_boost", listOfIdentifiers(List.of(Items.ENDER_EYE,ModItems.MAGIC_SHARD_DULL,ModItems.ESSENCE_OF_EXPERIENCE)));
+
+    }
 }

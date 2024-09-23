@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:nether_wart_block"
+    },
+    "D": {
+      "item": "minecraft:diamond_sword"
+    },
+    "I": {
+      "item": "betterenchanting:infused_lapis"
+    },
+    "N": {
+      "item": "minecraft:flint"
+    },
+    "S": {
+      "item": "betterenchanting:magic_shard_full"
+    }
+  },
+  "pattern": [
+    " I ",
+    "NSN",
+    "CDC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterenchanting:essence_of_vampirism"
+  }
+}

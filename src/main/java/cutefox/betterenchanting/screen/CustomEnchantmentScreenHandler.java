@@ -51,6 +51,8 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
     public final int[] enchantmentLevel;
     private List<EnchantmentLevelEntry> possibleEnchantments;
     public static final int ENCHANT_ARRAY_SIZE = 40;
+    public static final int SHARD_FILLING_LAPIS_COST = 3;
+    public static final int SHARD_FILLING_EXPERIENCE_COST = 5;
 
     public CustomEnchantmentScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
@@ -229,17 +231,17 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
             ItemStack itemToEnchant = this.inventory.getStack(0);
             ItemStack lapisStack = this.inventory.getStack(1);
 
-            if ((lapisStack.isEmpty() || lapisStack.getCount() < 5) && !player.isInCreativeMode()) {
+            if ((lapisStack.isEmpty() || lapisStack.getCount() < SHARD_FILLING_LAPIS_COST) && !player.isInCreativeMode()) {
                 return false;
-            } else if (itemToEnchant.isEmpty() || (player.experienceLevel < 10) && !player.isInCreativeMode()) {
+            } else if (itemToEnchant.isEmpty() || (player.experienceLevel < SHARD_FILLING_EXPERIENCE_COST) && !player.isInCreativeMode()) {
                 return false;
             }else {
                 this.context.run((world, pos) -> {
                     this.inventory.setStack(0, new ItemStack(ModItems.MAGIC_SHARD_FULL,1));
 
-                    lapisStack.decrementUnlessCreative(5, player);
+                    lapisStack.decrementUnlessCreative(SHARD_FILLING_LAPIS_COST, player);
                     if(!player.isInCreativeMode())
-                        player.applyEnchantmentCosts(itemToEnchant, 10);
+                        player.applyEnchantmentCosts(itemToEnchant, SHARD_FILLING_EXPERIENCE_COST);
 
                     this.inventory.markDirty();
                     this.onContentChanged(this.inventory);

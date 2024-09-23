@@ -36,6 +36,23 @@
     "betterenchanting:essence_of_quick_charge",
     "betterenchanting:essence_of_density",
     "betterenchanting:essence_of_wind",
-    "betterenchanting:essence_of_breach"
+    "betterenchanting:essence_of_breach",
+    "betterenchanting:essence_of_poison",
+    "betterenchanting:essence_of_poison_protection",
+    "betterenchanting:essence_of_mining",
+    "betterenchanting:essence_of_smelting",
+    "betterenchanting:essence_of_sight",
+    "betterenchanting:essence_of_levitation",
+    "betterenchanting:essence_of_foraging",
+    "betterenchanting:essence_of_strike",
+    "betterenchanting:essence_of_health",
+    "betterenchanting:essence_of_vampirism",
+    "betterenchanting:essence_of_agility",
+    "betterenchanting:essence_of_combat",
+    "betterenchanting:essence_of_building",
+    "betterenchanting:essence_of_fear",
+    "betterenchanting:essence_of_reach",
+    "betterenchanting:essence_of_pulling",
+    "betterenchanting:essence_of_food"
   ]
 }

@@ -73,7 +73,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandlerMixin{
             at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/AnvilScreenHandler;sendContentUpdates()V"),
             locals = LocalCapture.CAPTURE_FAILHARD,
             cancellable = true)
-    public void preventRepaireCost(CallbackInfo ci, ItemStack itemStack, int i, long l, int j, ItemStack itemStack2){
+    public void betterEnchanting$preventRepaireCost(CallbackInfo ci, ItemStack itemStack, int i, long l, int j, ItemStack itemStack2){
         AnvilScreenHandler screenHandler = (AnvilScreenHandler) (Object) this;
 
         levelCost.set(j);

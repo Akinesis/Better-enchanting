@@ -153,7 +153,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
             indexStartOffset = 0;
 
         if(this.handler.enchantmentId[0] == -5){
-            if(this.client.player.experienceLevel < 10)
+            if(this.client.player.experienceLevel < CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST)
                 q = Colors.RED;
 
             context.drawTexture(TEXTURE, localWidth+63, localHeight+14, 182, 32, 16,16);
@@ -161,7 +161,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
             context.drawGuiTexture(MAGIC_SHARD_FULL, localWidth+72,localHeight+14,16,16);
 
             if(!playerInCreative)
-                context.drawTextWithShadow(this.textRenderer, ""+10, localWidth+18+72 - this.textRenderer.getWidth(""+10), localHeight+14+8, q);
+                context.drawTextWithShadow(this.textRenderer, ""+CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST, localWidth+18+72 - this.textRenderer.getWidth(""+CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST), localHeight+14+8, q);
 
             return;
         }
@@ -281,15 +281,15 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                 List<Text> list = Lists.newArrayList();
                 MutableText mutableText,mutableText2,mutableText3;
                 mutableText3 = Text.translatable("container.betterenchanting.enchant.charge");
-                mutableText = Text.translatable("container.enchant.lapis.many", 5);
-                mutableText2 = Text.translatable("container.enchant.level.many", 10);
+                mutableText = Text.translatable("container.enchant.lapis.many", CustomEnchantmentScreenHandler.SHARD_FILLING_LAPIS_COST);
+                mutableText2 = Text.translatable("container.enchant.level.many", CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST);
 
                 list.add(mutableText3);
 
                 if (!isInCreative) {
                     list.add(ScreenTexts.EMPTY);
-                    list.add(mutableText.formatted(lapisCount >= 5 ? Formatting.GRAY : Formatting.RED));
-                    list.add(mutableText2.formatted(client.player.experienceLevel >= 10 ? Formatting.GRAY : Formatting.RED));
+                    list.add(mutableText.formatted(lapisCount >= CustomEnchantmentScreenHandler.SHARD_FILLING_LAPIS_COST ? Formatting.GRAY : Formatting.RED));
+                    list.add(mutableText2.formatted(client.player.experienceLevel >= CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST ? Formatting.GRAY : Formatting.RED));
                 }
 
                 context.drawTooltip(this.textRenderer, list, mouseX, mouseY);

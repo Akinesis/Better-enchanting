@@ -1,4 +1,4 @@
-// 1.21	2024-08-08T13:07:16.9954379	Better Enchanting/minecraft:chest Loot Table
+// 1.21.1	2024-09-23T19:50:11.6503641	Better Enchanting/minecraft:chest Loot Table
 adef208210be1c0374f6bb6c260e48ee4e5c1db1 data\betterenchanting\loot_table\enchantment_ingredient.json
 41840b684eb27a83e272251c3f0bf1e60608b9ab data\betterenchanting\loot_table\essence.json
 86f9930dc7f71bfd0ee1d44bf32491c080c76461 data\betterenchanting\loot_table\enchantment_loot.json
