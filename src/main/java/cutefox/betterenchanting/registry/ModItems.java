@@ -14,22 +14,14 @@ import java.util.List;
 
 public class ModItems {
 
-    private static Item.Settings foodItem(FoodComponent component){
-        return new Item.Settings().food(component);
-    }
-
     public static void registerModItems(){
         BetterEnchanting.LOGGER.info("Registering mod iems for : "+ BetterEnchanting.MOD_ID);
     }
 
 
-    //region MATERIALS
-    //public static final Item STEEL_BLEND = registerItem("steel_blend", new Item(new Item.Settings()));
-    //public static final Item STEEL_INGOT = registerItem("steel_ingot", new Item(new Item.Settings()));
-    //endregion
-
     //region ENCHANTMENT INGREDIENTS
     public static final List<Item> MOD_ITEM_LIST = new ArrayList<>();
+    public static final List<Item> MOD_ITEM_LIST_BUMBLEZONE_COMPAT = new ArrayList<>();
     public static final Item INFUSED_LAPIS = registerItem("infused_lapis", new Item(new Item.Settings()));
     public static final Item MAGIC_SHARD_DULL = registerItem("magic_shard_dull", new Item(new Item.Settings()));
     public static final Item MAGIC_SHARD_FULL = registerItem("magic_shard_full", new ItemWithRemainderChance(new Item.Settings().maxCount(16).component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true).recipeRemainder(ModItems.MAGIC_SHARD_DULL)));
@@ -121,12 +113,26 @@ public class ModItems {
     public static final Item ESSENCE_OF_PULLING = registerItem("essence_of_pulling", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
     public static final Item ESSENCE_OF_FOOD = registerItem("essence_of_food", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
 
+    //The Bumblezone
+    public static final Item ESSENCE_OF_NEUROTOXIN = registerItemBulblezoneCompat("essence_of_neurotoxin", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_COMB_CUTTER = registerItemBulblezoneCompat("essence_of_comb_cutter", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+
+    //Dungeons and Taverns
+    public static final Item ESSENCE_OF_PHOTOSYNTHESIS = registerItem("essence_of_photosynthesis", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_GRAVITY = registerItem("essence_of_gravity", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_WINGS = registerItem("essence_of_wings", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
 
     //endregion
 
     private static Item registerItem(String id, Item item){
         Item i = Registry.register(Registries.ITEM, Utils.id(id), item);
         MOD_ITEM_LIST.add(i);
+        return i;
+    }
+
+    private static Item registerItemBulblezoneCompat(String id, Item item){
+        Item i = Registry.register(Registries.ITEM, Utils.id(id), item);
+        MOD_ITEM_LIST_BUMBLEZONE_COMPAT.add(i);
         return i;
     }
 

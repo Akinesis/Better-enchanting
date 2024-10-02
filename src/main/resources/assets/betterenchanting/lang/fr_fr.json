@@ -70,6 +70,13 @@
   "item.betterenchanting.essence_of_pulling": "Essence de capture",
   "item.betterenchanting.essence_of_food": "Essence de nourriture",
 
+  "item.betterenchanting.essence_of_comb_cutter": "Essence de découpe-ruche",
+  "item.betterenchanting.essence_of_neurotoxin": "Essence de  neurotoxine",
+
+  "item.betterenchanting.essence_of_photosynthesis": "Essence de photosynthèse",
+  "item.betterenchanting.essence_of_gravity": "Essence de gravité",
+  "item.betterenchanting.essence_of_wings": "Essence d'ailes",
+
   "container.betterenchanting.enchant.material.one": "%s %s",
   "container.betterenchanting.enchant.charge": "Charger éclat magique",
 

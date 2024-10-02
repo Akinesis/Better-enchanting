@@ -70,7 +70,13 @@
   "item.betterenchanting.essence_of_pulling": "Essence Of Pulling",
   "item.betterenchanting.essence_of_food": "Essence Of Food",
 
+  "item.betterenchanting.essence_of_comb_cutter": "Essence Of Comb Cutter",
+  "item.betterenchanting.essence_of_neurotoxin": "Essence Of Neurotoxin",
 
+  "item.betterenchanting.essence_of_photosynthesis": "Essence Of Photosynthesis",
+  "item.betterenchanting.essence_of_gravity": "Essence Of Gravity",
+  "item.betterenchanting.essence_of_wings": "Essence Of Wings",
+  
   "container.betterenchanting.enchant.material.one": "%s %s",
   "container.betterenchanting.enchant.charge": "Charge Magic Shard",
 

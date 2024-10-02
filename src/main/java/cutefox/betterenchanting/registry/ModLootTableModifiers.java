@@ -29,23 +29,8 @@ public class ModLootTableModifiers {
                 builder.modifyPools( p -> {
                     p.with(LootTableEntry.builder(ModLootTables.ESSENCE_TABLE));
                 });
-
             }
         });
-
-        /*LootTableEvents.MODIFY.register((key, builder, source)->{
-            if(source.isBuiltin() && LootTables.ANCIENT_CITY_CHEST == key){
-
-                builder.modifyPools( p -> {
-
-                    p.with(ItemEntry.builder(ModItems.ESSENCE_OF_SNEAK_1).weight(3))
-                            .with(ItemEntry.builder(ModItems.ESSENCE_OF_SNEAK_2).weight(3))
-                            .with(ItemEntry.builder(ModItems.ESSENCE_OF_SNEAK_3).weight(3));
-
-                });
-            }
-        });*/
-
 
     }
 

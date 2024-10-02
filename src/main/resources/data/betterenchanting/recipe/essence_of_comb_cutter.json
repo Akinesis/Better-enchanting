@@ -1,0 +1,35 @@
+{
+  "fabric:load_conditions": [
+    {
+      "condition": "betterenchanting:bumblezone"
+    }
+  ],
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "the_bumblezone:pollen_puff"
+    },
+    "D": {
+      "item": "minecraft:honeycomb_block"
+    },
+    "I": {
+      "item": "betterenchanting:infused_lapis"
+    },
+    "N": {
+      "item": "minecraft:shears"
+    },
+    "S": {
+      "item": "betterenchanting:magic_shard_full"
+    }
+  },
+  "pattern": [
+    " I ",
+    "NSN",
+    "CDC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterenchanting:essence_of_comb_cutter"
+  }
+}

@@ -1,7 +1,9 @@
 package cutefox.betterenchanting.datagen;
 
+
 import cutefox.betterenchanting.BetterEnchanting;
 import cutefox.betterenchanting.Utils;
+import cutefox.betterenchanting.conditions.BumblezoneCompatCondition;
 import cutefox.betterenchanting.conditions.NeoEnchantCompatCondition;
 import cutefox.betterenchanting.registry.ModItems;
 import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
@@ -22,6 +24,7 @@ import java.util.concurrent.CompletableFuture;
 public class ModRecipeProvider extends FabricRecipeProvider {
 
     private static final ResourceCondition NEO_ENCHANT = new NeoEnchantCompatCondition();
+    private static final ResourceCondition BUMBLEZONE = new BumblezoneCompatCondition();
 
     public ModRecipeProvider(FabricDataOutput output, CompletableFuture<RegistryWrapper.WrapperLookup> registriesFuture) {
         super(output, registriesFuture);
@@ -825,7 +828,7 @@ public class ModRecipeProvider extends FabricRecipeProvider {
 
         //endregion
 
-        //region NEO_ENCHANTMENT
+        //region NEO ENCHANT PLUS
 
         recipeItem = ModItems.ESSENCE_OF_POISON;
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
@@ -1048,10 +1051,34 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
                 .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
 
-        //enregion
+        //endregion
 
-        //region COMPATIBLE MODS
-        //Add call to individual class for compatible mods
+        //region THE BUMBLEZONE
+        /*recipeItem = ModItems.ESSENCE_OF_NEUROTOXIN;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', BzItems.BEE_STINGER.get())
+                .input('N', BzItems.STINGER_SPEAR.get())
+                .input('D', BzItems.BEE_SOUP.get())
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(withConditions(exporter,BUMBLEZONE), Utils.id(getRecipeName(recipeItem)));
+
+        recipeItem = ModItems.ESSENCE_OF_COMB_CUTTER;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', BzItems.POLLEN_PUFF.get())
+                .input('N', Items.SHEARS)
+                .input('D', Items.HONEYCOMB_BLOCK)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(withConditions(exporter,BUMBLEZONE), Utils.id(getRecipeName(recipeItem)));*/
         //endregion
 
     }
