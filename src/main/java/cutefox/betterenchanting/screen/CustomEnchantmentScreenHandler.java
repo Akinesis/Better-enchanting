@@ -115,7 +115,7 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
     public void onContentChanged(Inventory inventory) {
         if (inventory == this.inventory) {
             ItemStack itemStack = inventory.getStack(0);
-            if (!itemStack.isEmpty() && itemStack.getItem().isEnchantable(itemStack)) {
+            if (!itemStack.isEmpty() && ModEnchantmentHelper.itemIsEnchantable(itemStack)) {
                 this.context.run((world, pos) -> {
                     IndexedIterable<RegistryEntry<Enchantment>> indexedIterable = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getIndexedEntries();
                     int i = 0;

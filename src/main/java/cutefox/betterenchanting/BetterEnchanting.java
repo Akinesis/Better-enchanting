@@ -26,7 +26,9 @@ public class BetterEnchanting implements ModInitializer {
 	public static final String MOD_ID = "BetterEnchanting";
 	public static boolean NEO_ENCHANT_PRESENT = false;
 	public static boolean BUMBLEZONE_PRESENT = false;
+	public static boolean REPLANTMENT_PRESENT = false;
 	public static boolean DUNGEONS_AND_TAVERNS_PRESENT = false;
+	public static boolean HORSESHOES_PRESENT = false;
 
 	@Override
 	public void onInitialize() {
@@ -42,6 +44,11 @@ public class BetterEnchanting implements ModInitializer {
 
 		if(FabricLoader.getInstance().isModLoaded("incantationem")){
 			LOGGER.info("Mod incantationem is loded ! ");
+		}
+
+		if(FabricLoader.getInstance().isModLoaded("horseshoes")){
+			LOGGER.info("Mod horseshoes is loded ! ");
+			HORSESHOES_PRESENT = true;
 		}
 
 		if(FabricLoader.getInstance().isModLoaded("mr_dungeons_andtaverns")){
@@ -79,6 +86,11 @@ public class BetterEnchanting implements ModInitializer {
 			if(e.getResourceManager().getAllNamespaces().contains("enchantplus")){
 				NEO_ENCHANT_PRESENT = true;
 				ModEnchantIngredientMap.loadNeoEnchantConfig();
+			}
+
+			if(e.getResourceManager().getAllNamespaces().contains("replantment")){
+				REPLANTMENT_PRESENT = true;
+				ModEnchantIngredientMap.loadReplantmentConfig();
 			}
 
 			if(e.getResourceManager().getAllNamespaces().contains("nova_structures")){

@@ -6,7 +6,8 @@
 		"AnvilScreenHandlerMixin",
 		"EnchantingTableMixin",
 		"ForgingScreenHandlerMixin",
-		"LootTableMixin"
+		"LootTableMixin",
+		"MixinTradeOffers"
 	],
 	"injectors": {
 		"defaultRequire": 1

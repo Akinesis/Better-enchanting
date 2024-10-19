@@ -52,6 +52,7 @@ dependencies {
 	modCompileOnly "maven.modrinth:incantationem:ivGrgU5k"
 
 	//The Bumblezone
+	modCompileOnly "maven.modrinth:tyg1IZwj:${project.horseshoes_version_id}"
 	modCompileOnly "maven.modrinth:eA8SXqWL:${project.bublezone_version_id}"
 	modCompileOnly "com.teamresourceful.resourcefullib:resourcefullib-fabric-1.21:3.0.10"
 
@@ -67,6 +68,9 @@ processResources {
 
 tasks.withType(JavaCompile).configureEach {
 	it.options.release = 21
+}
+loom {
+	accessWidenerPath = file("src/main/resources/betterenchanting.accesswidener")
 }
 
 java {

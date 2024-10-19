@@ -1,11 +1,10 @@
 package cutefox.betterenchanting;
 
-import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import cutefox.betterenchanting.datagen.ModEnchantIngredientMap;
 import cutefox.betterenchanting.registry.ModEnchantmentTags;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
-import net.fabricmc.fabric.impl.registry.sync.RegistrySyncManager;
+import net.hyper_pigeon.horseshoes.Horseshoes;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
@@ -14,18 +13,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.registry.DynamicRegistryManager;
-import net.minecraft.registry.Registries;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.tag.EnchantmentTags;
 import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.server.world.ServerWorld;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.collection.IndexedIterable;
 import net.minecraft.world.World;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -161,5 +155,18 @@ public class ModEnchantmentHelper {
             }
         }
         return true;
+    }
+
+    public static boolean itemIsEnchantable(ItemStack itemStacks){
+
+        List<Item> enchantableModdedItems = new ArrayList<>();
+
+        if(BetterEnchanting.HORSESHOES_PRESENT)
+            enchantableModdedItems.addAll(List.of(
+                    Horseshoes.DIAMOND_HORSESHOES_ITEM,
+                    Horseshoes.IRON_HORSESHOES_ITEM,
+                    Horseshoes.GOLD_HORSESHOES_ITEM));
+
+        return enchantableModdedItems.contains(itemStacks.getItem()) || itemStacks.getItem().isEnchantable(itemStacks);
     }
 }

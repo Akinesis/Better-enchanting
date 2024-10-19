@@ -280,4 +280,8 @@ public class ModEnchantIngredientMap {
         defaultMap.put("nova_structures:piercing", listOfIdentifiers(List.of(Items.FLINT, Items.ARROW, Items.IRON_SWORD, Items.TRIDENT,ModItems.ESSENCE_OF_PIERCING)));
         defaultMap.put("nova_structures:power", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_POWER)));
     }
+
+    public static void loadReplantmentConfig(){
+        defaultMap.put("replantment:replant", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_FORAGING)));
+    }
 }
