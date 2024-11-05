@@ -1,7 +1,7 @@
 package cutefox.betterenchanting.registry;
 
 import cutefox.betterenchanting.BetterEnchanting;
-import cutefox.betterenchanting.Utils;
+import cutefox.betterenchanting.Util.Utils;
 import net.minecraft.item.Item;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.tag.TagKey;

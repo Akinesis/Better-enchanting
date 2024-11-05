@@ -33,27 +33,6 @@ public class ModModelProvider extends FabricModelProvider {
         ModItems.MOD_ITEM_LIST.stream().forEach(item -> {
             itemModelGenerator.register(item, Models.GENERATED);
         });
-        /*
-        itemModelGenerator.register(ModItems.INFUSED_LAPIS, Models.GENERATED);
-        itemModelGenerator.register(ModItems.MAGIC_SHARD_DULL, Models.GENERATED);
-        itemModelGenerator.register(ModItems.MAGIC_SHARD_FULL, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ESSENCE_OF_PROTECTION, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ESSENCE_OF_FIRE_PROTECTION, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ESSENCE_OF_BLAST_PROTECTION, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ESSENCE_OF_PROJECTILE_PROTECTION, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ESSENCE_OF_EXPERIENCE, Models.GENERATED);
-        itemModelGenerator.register(ModItems.SOUL_ESSENCE_1, Models.GENERATED);
-        itemModelGenerator.register(ModItems.SOUL_ESSENCE_2, Models.GENERATED);
-        itemModelGenerator.register(ModItems.SOUL_ESSENCE_3, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ESSENCE_OF_SNEAK_1, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ESSENCE_OF_SNEAK_2, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ESSENCE_OF_SNEAK_3, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ESSENCE_OF_SWEEPING, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ESSENCE_OF_ARROWS, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ESSENCE_OF_FEATHER, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ESSENCE_OF_ICE, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ESSENCE_OF_ARROWS, Models.GENERATED);
-        itemModelGenerator.register(ModItems.ESSENCE_OF_ARROWS, Models.GENERATED);*/
         //endregion
 
     }

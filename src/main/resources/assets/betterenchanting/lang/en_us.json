@@ -76,6 +76,9 @@
   "item.betterenchanting.essence_of_photosynthesis": "Essence Of Photosynthesis",
   "item.betterenchanting.essence_of_gravity": "Essence Of Gravity",
   "item.betterenchanting.essence_of_wings": "Essence Of Wings",
+
+  "item.betterenchanting.essence_of_capacity": "Essence Of Capacity",
+  "item.betterenchanting.essence_of_refill": "Essence Of Refill",
   
   "container.betterenchanting.enchant.material.one": "%s %s",
   "container.betterenchanting.enchant.charge": "Charge Magic Shard",

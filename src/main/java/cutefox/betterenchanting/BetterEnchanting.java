@@ -1,5 +1,8 @@
 package cutefox.betterenchanting;
 
+import cutefox.betterenchanting.Util.BetterEnchantingApi;
+import cutefox.betterenchanting.Util.EnchantingIngredientMapPayload;
+import cutefox.betterenchanting.Util.Utils;
 import cutefox.betterenchanting.conditions.ModConfigConditions;
 import cutefox.betterenchanting.datagen.ModEnchantIngredientMap;
 import cutefox.betterenchanting.registry.*;
@@ -12,12 +15,15 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 
 public class BetterEnchanting implements ModInitializer {
@@ -29,6 +35,7 @@ public class BetterEnchanting implements ModInitializer {
 	public static boolean REPLANTMENT_PRESENT = false;
 	public static boolean DUNGEONS_AND_TAVERNS_PRESENT = false;
 	public static boolean HORSESHOES_PRESENT = false;
+	public static boolean DIVERSITY_PRESENT = false;
 
 	@Override
 	public void onInitialize() {
@@ -36,25 +43,7 @@ public class BetterEnchanting implements ModInitializer {
 
 		ModConfigConditions.registerConditions();
 
-		if(FabricLoader.getInstance().isModLoaded("the_bumblezone")){
-			LOGGER.info("Mod Bumblezone is loded ! ");
-			BUMBLEZONE_PRESENT = true;
-			ModEnchantIngredientMap.loadBumblezoneConfig();
-		}
-
-		if(FabricLoader.getInstance().isModLoaded("incantationem")){
-			LOGGER.info("Mod incantationem is loded ! ");
-		}
-
-		if(FabricLoader.getInstance().isModLoaded("horseshoes")){
-			LOGGER.info("Mod horseshoes is loded ! ");
-			HORSESHOES_PRESENT = true;
-		}
-
-		if(FabricLoader.getInstance().isModLoaded("mr_dungeons_andtaverns")){
-			LOGGER.info("Mod nova_structures (Dungeon and Taverns) is loaded ! ");
-			DUNGEONS_AND_TAVERNS_PRESENT = true;
-		}
+		checkForCompat();
 
 		ModItems.registerModItems();
 		ModScreenHandlerType.registerModScreenHandlers();
@@ -102,6 +91,10 @@ public class BetterEnchanting implements ModInitializer {
 			ModEnchantIngredientMap.genMapFromJson(e.getWorld(ServerWorld.OVERWORLD));
 		});
 
+		ServerLifecycleEvents.SERVER_STARTING.register(e -> {
+			Utils.setRegistryManager(e.getRegistryManager());
+		});
+
 	}
 
 	private ItemGroup generateItemGroup(){
@@ -119,11 +112,31 @@ public class BetterEnchanting implements ModInitializer {
 		return itemGroup;
 	}
 
-	private static final ItemGroup ITEM_GROUP = FabricItemGroup.builder()
-			.icon(() -> new ItemStack(ModItems.ESSENCE_OF_PROTECTION))
-			.displayName(Text.translatable("itemGroup.betterenchanting.item_group"))
-			.entries((context, entries) -> {
-				entries.addAll(ModItems.MOD_ITEM_LIST.stream().map(i -> i.getDefaultStack()).toList());
-			})
-			.build();
+	private void checkForCompat(){
+		if(FabricLoader.getInstance().isModLoaded("the_bumblezone")){
+			LOGGER.info("Mod Bumblezone is present and loaded ; Building compat for "+BetterEnchanting.MOD_ID);
+			BUMBLEZONE_PRESENT = true;
+			ModEnchantIngredientMap.loadBumblezoneConfig();
+		}
+
+		if(FabricLoader.getInstance().isModLoaded("incantationem")){
+			LOGGER.info("Mod incantationem is present and loaded ; Building compat for "+BetterEnchanting.MOD_ID);
+		}
+
+		if(FabricLoader.getInstance().isModLoaded("horseshoes")){
+			LOGGER.info("Mod horseshoes is present ; Building compat for "+BetterEnchanting.MOD_ID);
+			HORSESHOES_PRESENT = true;
+		}
+
+		if(FabricLoader.getInstance().isModLoaded("mr_dungeons_andtaverns")){
+			LOGGER.info("Mod nova_structures (Dungeon and Taverns) is present and loaded ; Building compat for "+BetterEnchanting.MOD_ID);
+			DUNGEONS_AND_TAVERNS_PRESENT = true;
+		}
+
+		if(FabricLoader.getInstance().isModLoaded("diversity")){
+			LOGGER.info("Mod Diversity is present and loaded; Building compat for "+BetterEnchanting.MOD_ID);
+			DIVERSITY_PRESENT = true;
+			ModEnchantIngredientMap.loadDiversityConfig();
+		}
+	}
 }

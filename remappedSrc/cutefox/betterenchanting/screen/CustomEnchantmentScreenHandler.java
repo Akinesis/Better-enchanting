@@ -1,8 +1,7 @@
 package cutefox.betterenchanting.screen;
 
 import com.mojang.datafixers.util.Pair;
-import cutefox.betterenchanting.ModEnchantmentHelper;
-import cutefox.betterenchanting.registry.ModEnchantmentTags;
+import cutefox.betterenchanting.Util.ModEnchantmentHelper;
 import cutefox.betterenchanting.registry.ModItems;
 import cutefox.betterenchanting.registry.ModScreenHandlerType;
 import net.minecraft.advancement.criterion.Criteria;
@@ -21,9 +20,6 @@ import net.minecraft.item.Items;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
-import net.minecraft.registry.entry.RegistryEntryList;
-import net.minecraft.registry.tag.EnchantmentTags;
-import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.screen.PlayerScreenHandler;
 import net.minecraft.screen.Property;
 import net.minecraft.screen.ScreenHandler;
@@ -51,6 +47,8 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
     public final int[] enchantmentLevel;
     private List<EnchantmentLevelEntry> possibleEnchantments;
     public static final int ENCHANT_ARRAY_SIZE = 40;
+    public static final int SHARD_FILLING_LAPIS_COST = 3;
+    public static final int SHARD_FILLING_EXPERIENCE_COST = 5;
 
     public CustomEnchantmentScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, ScreenHandlerContext.EMPTY);
@@ -113,7 +111,7 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
     public void onContentChanged(Inventory inventory) {
         if (inventory == this.inventory) {
             ItemStack itemStack = inventory.getStack(0);
-            if (!itemStack.isEmpty() && itemStack.getItem().isEnchantable(itemStack)) {
+            if (!itemStack.isEmpty() && ModEnchantmentHelper.itemIsEnchantable(itemStack)) {
                 this.context.run((world, pos) -> {
                     IndexedIterable<RegistryEntry<Enchantment>> indexedIterable = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getIndexedEntries();
                     int i = 0;
@@ -132,6 +130,7 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
                     }
 
                     possibleEnchantments = getListOfApplicableEnchantments(world.getRegistryManager(), itemStack, i);
+
                     int increment = 0;
                     if( possibleEnchantments != null && !possibleEnchantments.isEmpty()){
                         for(EnchantmentLevelEntry enchant : possibleEnchantments){
@@ -168,78 +167,85 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
 
 
             Optional<RegistryEntry.Reference<Enchantment>> enchant =  player.getWorld().getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(this.enchantmentId[id]);
-            RegistryEntry<Enchantment> enchantEntry1 = player.getWorld().getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(enchant.get().value());
-            int displayedEnchantLevel = level + 1;
-            int enchantLevelCost = ModEnchantmentHelper.getEnchantmentLevelCost(enchant.get().value(),displayedEnchantLevel,itemToEnchant, player.getWorld());
-            int enchantLevReq = ModEnchantmentHelper.getEnchantmentLeveRequierment(enchant.get().value(),displayedEnchantLevel);
-            Item enchantIngredient = ModEnchantmentHelper.getEnchantIngredient(enchantEntry1.getKey().get(), level);
-            int enchantIngredientCost = ModEnchantmentHelper.getEnchantmentIngredientCost(enchant.get().value(),displayedEnchantLevel,enchantIngredient);
-            int tempLapisCost = (int)Math.floor(enchantLevelCost/2);
-            int lapisCost = tempLapisCost<=0?1:tempLapisCost;
-            boolean hasEnchantLevel = EnchantmentHelper.getLevel(enchantEntry1,itemToEnchant)>=displayedEnchantLevel;
 
-            if(level > 0 && !ModEnchantmentHelper.itemHasPreviousLevelOfEnchant(itemToEnchant, enchantEntry1, level) && !hasEnchantLevel){
-                return false;
+            if(!enchant.isEmpty()){
+                Enchantment enchantment = enchant.get().value();
+                RegistryEntry<Enchantment> enchantEntry1 = enchant.get();//player.getWorld().getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(enchantment);
+                int displayedEnchantLevel = level + 1;
+                int enchantLevelCost = ModEnchantmentHelper.getEnchantmentLevelCost(enchantment,displayedEnchantLevel,itemToEnchant, player.getWorld());
+                int enchantLevReq = ModEnchantmentHelper.getEnchantmentLeveRequierment(enchantment,displayedEnchantLevel);
+                //Item enchantIngredient = ModEnchantmentHelper.getEnchantIngredient(enchantEntry1.getKey().get(), level);
+                Item enchantIngredient = ModEnchantmentHelper.getEnchantIngredient(enchantment, level);
+                int enchantIngredientCost = ModEnchantmentHelper.getEnchantmentIngredientCost(enchantment,displayedEnchantLevel,enchantIngredient);
+                int tempLapisCost = (int)Math.floor(enchantLevelCost/2);
+                int lapisCost = tempLapisCost<=0?1:tempLapisCost;
+                boolean hasEnchantLevel = EnchantmentHelper.getLevel(enchantEntry1,itemToEnchant)>=displayedEnchantLevel;
+
+                if(level > 0 && !ModEnchantmentHelper.itemHasPreviousLevelOfEnchant(itemToEnchant, enchantEntry1, level) && !hasEnchantLevel){
+                    return false;
+                }
+
+                if(hasEnchantLevel)
+                    return false;
+
+
+                if ((lapisStack.isEmpty() || lapisStack.getCount() < lapisCost) && !player.isInCreativeMode()) {
+                    return false;
+                } else if (itemToEnchant.isEmpty() || (player.experienceLevel < enchantLevelCost || player.experienceLevel < enchantLevReq) && !player.isInCreativeMode()) {
+                    return false;
+                }else if((getSlot(2).getStack().getItem() != enchantIngredient || getSlot(2).getStack().getCount() < enchantIngredientCost) && !player.isInCreativeMode()){
+                    return false;
+                }else{
+                    //can enchant
+                    this.context.run((world, pos) -> {
+                        RegistryEntry<Enchantment> enchantEntry = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(enchant.get().value());
+
+                        //ItemStack itemToEnchantCopy = itemToEnchant;
+                        if(!player.isInCreativeMode())
+                            player.applyEnchantmentCosts(itemToEnchant, enchantLevelCost);
+                        itemToEnchant.addEnchantment(enchantEntry, displayedEnchantLevel);
+
+                        lapisStack.decrementUnlessCreative(lapisCost, player);
+                        if (lapisStack.isEmpty()) {
+                            this.inventory.setStack(1, ItemStack.EMPTY);
+                        }
+
+                        enchantMaterialStack.decrementUnlessCreative(enchantIngredientCost, player);
+                        if (enchantMaterialStack.isEmpty()) {
+                            this.inventory.setStack(2, ItemStack.EMPTY);
+                        }
+
+                        player.incrementStat(Stats.ENCHANT_ITEM);
+                        if (player instanceof ServerPlayerEntity) {
+                            Criteria.ENCHANTED_ITEM.trigger((ServerPlayerEntity)player, itemToEnchant, enchantLevelCost);
+                        }
+
+                        this.inventory.markDirty();
+                        this.onContentChanged(this.inventory);
+                        world.playSound(null, pos, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 1.0F, world.random.nextFloat() * 0.1F + 0.9F);
+
+                    });
+                    return true;
+                }
             }
-
-            if(hasEnchantLevel)
-                return false;
-
-
-            if ((lapisStack.isEmpty() || lapisStack.getCount() < lapisCost) && !player.isInCreativeMode()) {
-                return false;
-            } else if (itemToEnchant.isEmpty() || (player.experienceLevel < enchantLevelCost || player.experienceLevel < enchantLevReq) && !player.isInCreativeMode()) {
-                return false;
-            }else if((getSlot(2).getStack().getItem() != enchantIngredient || getSlot(2).getStack().getCount() < enchantIngredientCost) && !player.isInCreativeMode()){
-                return false;
-            }else{
-                //can enchant
-                this.context.run((world, pos) -> {
-                    RegistryEntry<Enchantment> enchantEntry = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(enchant.get().value());
-
-                    //ItemStack itemToEnchantCopy = itemToEnchant;
-                    if(!player.isInCreativeMode())
-                        player.applyEnchantmentCosts(itemToEnchant, enchantLevelCost);
-                    itemToEnchant.addEnchantment(enchantEntry, displayedEnchantLevel);
-
-                    lapisStack.decrementUnlessCreative(lapisCost, player);
-                    if (lapisStack.isEmpty()) {
-                        this.inventory.setStack(1, ItemStack.EMPTY);
-                    }
-
-                    enchantMaterialStack.decrementUnlessCreative(enchantIngredientCost, player);
-                    if (enchantMaterialStack.isEmpty()) {
-                        this.inventory.setStack(2, ItemStack.EMPTY);
-                    }
-
-                    player.incrementStat(Stats.ENCHANT_ITEM);
-                    if (player instanceof ServerPlayerEntity) {
-                        Criteria.ENCHANTED_ITEM.trigger((ServerPlayerEntity)player, itemToEnchant, enchantLevelCost);
-                    }
-
-                    this.inventory.markDirty();
-                    this.onContentChanged(this.inventory);
-                    world.playSound(null, pos, SoundEvents.BLOCK_ENCHANTMENT_TABLE_USE, SoundCategory.BLOCKS, 1.0F, world.random.nextFloat() * 0.1F + 0.9F);
-
-                });
-                return true;
-            }
+            Util.error("Enchantment not found for ID : " + id);
+            return false;
 
         }else if(enchantmentId[0] == -5){
             ItemStack itemToEnchant = this.inventory.getStack(0);
             ItemStack lapisStack = this.inventory.getStack(1);
 
-            if ((lapisStack.isEmpty() || lapisStack.getCount() < 5) && !player.isInCreativeMode()) {
+            if ((lapisStack.isEmpty() || lapisStack.getCount() < SHARD_FILLING_LAPIS_COST) && !player.isInCreativeMode()) {
                 return false;
-            } else if (itemToEnchant.isEmpty() || (player.experienceLevel < 10) && !player.isInCreativeMode()) {
+            } else if (itemToEnchant.isEmpty() || (player.experienceLevel < SHARD_FILLING_EXPERIENCE_COST) && !player.isInCreativeMode()) {
                 return false;
             }else {
                 this.context.run((world, pos) -> {
                     this.inventory.setStack(0, new ItemStack(ModItems.MAGIC_SHARD_FULL,1));
 
-                    lapisStack.decrementUnlessCreative(5, player);
+                    lapisStack.decrementUnlessCreative(SHARD_FILLING_LAPIS_COST, player);
                     if(!player.isInCreativeMode())
-                        player.applyEnchantmentCosts(itemToEnchant, 10);
+                        player.applyEnchantmentCosts(itemToEnchant, SHARD_FILLING_EXPERIENCE_COST);
 
                     this.inventory.markDirty();
                     this.onContentChanged(this.inventory);
@@ -258,22 +264,9 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
     }
 
     private List<EnchantmentLevelEntry> getListOfApplicableEnchantments(DynamicRegistryManager registryManager, ItemStack itemToEnchant, int numberOfBookshelf){
-        Optional<RegistryEntryList.Named<Enchantment>> enchantingTableList = registryManager.get(RegistryKeys.ENCHANTMENT).getEntryList(EnchantmentTags.IN_ENCHANTING_TABLE);
-        Optional<RegistryEntryList.Named<Enchantment>> treasureList = registryManager.get(RegistryKeys.ENCHANTMENT).getEntryList(ModEnchantmentTags.BENEFICIAL_TREASURE);
-        if (enchantingTableList.isEmpty()) {
-            return List.of();
-        }else{
-            RegistryEntryList.Named enchantingTableEnchants = enchantingTableList.get();
-            List<EnchantmentLevelEntry> list = ModEnchantmentHelper.getPossibleEntries(numberOfBookshelf, itemToEnchant, enchantingTableEnchants.stream());
 
-            if( !treasureList.isEmpty())
-                list.addAll(ModEnchantmentHelper.getPossibleEntries(numberOfBookshelf, itemToEnchant, ((RegistryEntryList.Named)treasureList.get()).stream()));
+       return ModEnchantmentHelper.getPossibleEntries(numberOfBookshelf, itemToEnchant, registryManager);
 
-            if(itemToEnchant.isIn(ItemTags.AXES))
-                list.addAll(ModEnchantmentHelper.addSwordEnchantToAxes(numberOfBookshelf, enchantingTableEnchants.stream()));
-
-            return list;
-        }
     }
 
     public int getLapisCount() {

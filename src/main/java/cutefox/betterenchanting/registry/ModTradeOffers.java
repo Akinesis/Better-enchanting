@@ -4,17 +4,12 @@ import com.google.common.collect.ImmutableMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectMap;
 import it.unimi.dsi.fastutil.ints.Int2ObjectOpenHashMap;
 import net.minecraft.block.Blocks;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.provider.TradeRebalanceEnchantmentProviders;
 import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
-import net.minecraft.item.map.MapDecorationTypes;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.entry.RegistryEntryList;
-import net.minecraft.registry.tag.EnchantmentTags;
-import net.minecraft.registry.tag.StructureTags;
 import net.minecraft.registry.tag.TagKey;
 import net.minecraft.util.math.random.Random;
 import net.minecraft.village.*;
@@ -182,11 +177,7 @@ public class ModTradeOffers extends TradeOffers {
                 VillagerType.TAIGA, new RebalancedEnchantmentIngredientsFactory(30, ModItemTags.LIBRARIAN_RARE_INGREDIENT)));
     }
 
-    private static record betterEnchanting$TypedWrapperFactory(Map<VillagerType, Factory> typeToFactory) implements Factory {
-
-        betterEnchanting$TypedWrapperFactory(Map<VillagerType, Factory> typeToFactory) {
-            this.typeToFactory = typeToFactory;
-        }
+    private record betterEnchanting$TypedWrapperFactory(Map<VillagerType, Factory> typeToFactory) implements Factory {
 
         public static betterEnchanting$TypedWrapperFactory of(Factory factory, VillagerType... types) {
             return new betterEnchanting$TypedWrapperFactory((Map) Arrays.stream(types).collect(Collectors.toMap((type) -> {
@@ -200,7 +191,7 @@ public class ModTradeOffers extends TradeOffers {
         public TradeOffer create(Entity entity, Random random) {
             if (entity instanceof VillagerDataContainer villagerDataContainer) {
                 VillagerType villagerType = villagerDataContainer.getVillagerData().getType();
-                Factory factory = (Factory)this.typeToFactory.get(villagerType);
+                Factory factory = this.typeToFactory.get(villagerType);
                 return factory == null ? null : factory.create(entity, random);
             } else {
                 return null;

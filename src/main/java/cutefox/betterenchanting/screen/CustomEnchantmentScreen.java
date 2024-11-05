@@ -2,8 +2,8 @@ package cutefox.betterenchanting.screen;
 
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
-import cutefox.betterenchanting.ModEnchantmentHelper;
-import cutefox.betterenchanting.Utils;
+import cutefox.betterenchanting.Util.ModEnchantmentHelper;
+import cutefox.betterenchanting.Util.Utils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
@@ -311,6 +311,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
 
             if(this.handler.enchantmentId[k] > -1){
                 Optional<RegistryEntry.Reference<Enchantment>> enchant = this.client.world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(this.handler.enchantmentId[k]);
+                Enchantment enchantment;
                 for(int l = 0; l < this.handler.enchantmentLevel[k]; l++){
                     //For each book of each line
                     if (enchant != null && !enchant.isEmpty()) {
@@ -319,13 +320,13 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                         if (this.isPointWithinBounds(72+(16*l)+(4*l), 14+(16*(k-indexStartOffset)), 16, 14, mouseX, mouseY)
                                 && l >= 0) {
                             //If mouse over the book of enchant k and level l
-
+                            enchantment = enchant.get().value();
                             RegistryEntry<Enchantment> enchantEntry = this.client.world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(enchant.get().value());
-                            Item enchantIngredient = ModEnchantmentHelper.getEnchantIngredient(enchantEntry.getKey().get(), l);
+                            Item enchantIngredient = ModEnchantmentHelper.getEnchantIngredient(enchantment, l);
                             int displayedEnchantLevel = l + 1;
-                            int enchantLevelCost = ModEnchantmentHelper.getEnchantmentLevelCost(enchant.get().value(),displayedEnchantLevel,stack, client.world);
-                            int enchantLevReq = ModEnchantmentHelper.getEnchantmentLeveRequierment(enchant.get().value(),displayedEnchantLevel);
-                            int enchantIngredientCost = ModEnchantmentHelper.getEnchantmentIngredientCost(enchant.get().value(),displayedEnchantLevel, enchantIngredient);
+                            int enchantLevelCost = ModEnchantmentHelper.getEnchantmentLevelCost(enchantment,displayedEnchantLevel,stack, client.world);
+                            int enchantLevReq = ModEnchantmentHelper.getEnchantmentLeveRequierment(enchantment,displayedEnchantLevel);
+                            int enchantIngredientCost = ModEnchantmentHelper.getEnchantmentIngredientCost(enchantment,displayedEnchantLevel, enchantIngredient);
                             int lapisCost = (int)Math.floor(enchantLevelCost/2);
                             lapisCost = lapisCost<=0?1:lapisCost;
 

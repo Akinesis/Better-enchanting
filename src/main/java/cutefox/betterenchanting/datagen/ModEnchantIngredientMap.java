@@ -8,6 +8,7 @@ import com.google.gson.stream.JsonReader;
 import com.telepathicgrunt.the_bumblezone.modinit.BzEnchantments;
 import com.telepathicgrunt.the_bumblezone.modinit.BzItems;
 import cutefox.betterenchanting.BetterEnchanting;
+import cutefox.betterenchanting.Util.Utils;
 import cutefox.betterenchanting.registry.ModItems;
 import io.netty.buffer.ByteBuf;
 import net.fabricmc.loader.api.FabricLoader;
@@ -18,7 +19,6 @@ import net.minecraft.item.Items;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
@@ -33,7 +33,9 @@ import java.util.*;
 public class ModEnchantIngredientMap {
 
     public static HashMap<String, List<String>> defaultMap = new HashMap<>();
-    public static HashMap<RegistryKey<Enchantment>, List<Item>> map = new HashMap<>();
+    private static final HashMap<Enchantment, List<Item>> ENCHANTMENT_INGREDIENTS_MAP = new HashMap<>();
+    private static HashMap<Enchantment, List<Item>> externalEnchantmentIngredientsMap = new HashMap<>();
+    private static HashMap<Enchantment, List<Item>> modedmap = new HashMap<>();
     public static Map<String, List<String>> jsonMap = new HashMap<>();
 
 
@@ -147,31 +149,62 @@ public class ModEnchantIngredientMap {
     }
 
     public static void genMapFromJsonStringMap(World world, Map<String, List<String>> stringMap) {
-        map = new HashMap<>();
-        RegistryKey<Enchantment> enchantementKey;
+        //enchantmentIngredientsMap;
         Enchantment enchantment;
 
         for (String key : stringMap.keySet()) {
             Identifier enchantId = Identifier.of(key);
             enchantment = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).get(enchantId);
-            Registry<Enchantment> enchantRegistry = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT);
-            Optional<RegistryKey<Enchantment>> optional = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment);
-            //enchantementKey = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment);
 
-            if (optional.isPresent()) {
-                enchantementKey = optional.get();
-                List<Item> ingredients = new ArrayList<>();
+            List<Item> ingredients = new ArrayList<>();
 
-                stringMap.get(key).forEach(s -> {
-                    Item temp;
-                    Identifier itemId = Identifier.of(s);
-                    temp = Registries.ITEM.get(itemId);
-                    ingredients.add(temp!=null?temp:Items.BARRIER);
-                });
+            stringMap.get(key).forEach(s -> {
+                Item temp;
+                Identifier itemId = Identifier.of(s);
+                temp = Registries.ITEM.get(itemId);
+                ingredients.add(temp!=null?temp:Items.BARRIER);
+            });
 
-                map.put(enchantementKey, ingredients);
+            ENCHANTMENT_INGREDIENTS_MAP.put(enchantment, ingredients);
+
+            //Merge map containing any entry added by external mods via API
+            //If externalMap contains enchants already present in default map, entry will be replaced by the new ones.
+            if(!externalEnchantmentIngredientsMap.isEmpty()){
+                ENCHANTMENT_INGREDIENTS_MAP.putAll(externalEnchantmentIngredientsMap);
             }
+
         }
+    }
+
+    /**
+     * Add the ingredients for the enchantment of the identifier in parameters
+     * If possible, prefer the {@link #addEnchantmentIngredient(Enchantment, List)} of this call.
+     * @param enchantmentId The Identifier of the enchantment
+     * @param ingredients A list of the ingredients for the enchantment, ordered by level. (so first entry is for Enchantment I, then Enchantment II etc.)
+     * @return True if enchantment is found and successfully added to the map. False otherwise.
+     */
+    private static boolean addEnchantmentIngredient(Identifier enchantmentId, List<Item> ingredients){
+        Registry<Enchantment> enchantRegistry =  Utils.getRegistryManager().get(RegistryKeys.ENCHANTMENT);
+        Enchantment enchantment = enchantRegistry.get(enchantmentId);
+
+        return addEnchantmentIngredient(enchantment, ingredients);
+
+    }
+
+    /**
+     * Add the ingredients for the enchantment of the identifier in parameters.
+     * This is the preferred method as it's the more robust and error-free one.
+     * @param enchantment The Enchantment to be added
+     * @param ingredients A list of the ingredients for the enchantment, ordered by level. (so first entry is for Enchantment I, then Enchantment II etc.)
+     * @return True if enchantment is found and successfully added to the map. False otherwise.
+     */
+    public static boolean addEnchantmentIngredient(Enchantment enchantment, List<Item> ingredients){
+
+        if(enchantment == null)
+            return false;
+
+        externalEnchantmentIngredientsMap.put(enchantment,ingredients);
+        return true;
     }
 
     private static List<String> listOfIdentifiers(List<Item> items){
@@ -217,6 +250,14 @@ public class ModEnchantIngredientMap {
             byteBuf.writeBytes(bytes);
         }
     };
+
+    public static Item getIngredientOfLevel(Enchantment enchantment, int enchantmentLevel){
+        if(ENCHANTMENT_INGREDIENTS_MAP.containsKey(enchantment))
+            if(ENCHANTMENT_INGREDIENTS_MAP.get(enchantment).size()>enchantmentLevel)
+                return ENCHANTMENT_INGREDIENTS_MAP.get(enchantment).get(enchantmentLevel);
+
+        return null;
+    }
 
     public static void loadNeoEnchantConfig(){
 
@@ -283,5 +324,18 @@ public class ModEnchantIngredientMap {
 
     public static void loadReplantmentConfig(){
         defaultMap.put("replantment:replant", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_FORAGING)));
+    }
+
+    public static void loadDiversityConfig(){
+        defaultMap.put("diversity:capacity",listOfIdentifiers(List.of(Items.CHEST,Items.ENDER_CHEST,ModItems.ESSENCE_OF_CAPACITY)));
+        defaultMap.put("diversity:refill",listOfIdentifiers(List.of(ModItems.ESSENCE_OF_REFILL)));
+    }
+
+    private static Map<Enchantment, List<Item>> getEnchantIngredientsMap(){
+        return ENCHANTMENT_INGREDIENTS_MAP;
+    }
+
+    public static List<Item> getIngredientsOfEnchantment(Enchantment enchantment) {
+        return ENCHANTMENT_INGREDIENTS_MAP.get(enchantment);
     }
 }

@@ -1,7 +1,7 @@
 package cutefox.betterenchanting.registry;
 
 import cutefox.betterenchanting.BetterEnchanting;
-import cutefox.betterenchanting.Utils;
+import cutefox.betterenchanting.Util.Utils;
 import cutefox.betterenchanting.screen.CustomEnchantmentScreenHandler;
 import net.minecraft.entity.player.PlayerInventory;
 import net.minecraft.registry.Registries;

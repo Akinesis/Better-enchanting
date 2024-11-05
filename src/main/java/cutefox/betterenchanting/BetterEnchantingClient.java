@@ -2,6 +2,7 @@ package cutefox.betterenchanting;
 
 import java.util.*;
 
+import cutefox.betterenchanting.Util.EnchantingIngredientMapPayload;
 import cutefox.betterenchanting.datagen.ModEnchantIngredientMap;
 import cutefox.betterenchanting.registry.ModHandledScreens;
 import net.fabricmc.api.ClientModInitializer;

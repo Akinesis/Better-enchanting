@@ -1,10 +1,9 @@
 package cutefox.betterenchanting.registry;
 
 import cutefox.betterenchanting.BetterEnchanting;
-import cutefox.betterenchanting.Utils;
+import cutefox.betterenchanting.Util.Utils;
 import cutefox.betterenchanting.item.ItemWithRemainderChance;
 import net.minecraft.component.DataComponentTypes;
-import net.minecraft.component.type.FoodComponent;
 import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
@@ -121,6 +120,11 @@ public class ModItems {
     public static final Item ESSENCE_OF_PHOTOSYNTHESIS = registerItem("essence_of_photosynthesis", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
     public static final Item ESSENCE_OF_GRAVITY = registerItem("essence_of_gravity", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
     public static final Item ESSENCE_OF_WINGS = registerItem("essence_of_wings", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+
+    //Diversity
+    public static final Item ESSENCE_OF_CAPACITY = registerItem("essence_of_capacity", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_REFILL = registerItem("essence_of_refill", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+
 
     //endregion
 

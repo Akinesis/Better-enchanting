@@ -1,4 +1,4 @@
-package cutefox.betterenchanting;
+package cutefox.betterenchanting.Util;
 
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;
@@ -9,14 +9,14 @@ import java.util.*;
 import cutefox.betterenchanting.datagen.ModEnchantIngredientMap;
 
 public record EnchantingIngredientMapPayload(Map<String, List<String>> map) implements CustomPayload {
-    public static final CustomPayload.Id<EnchantingIngredientMapPayload> ID = new CustomPayload.Id<>(
+    public static final Id<EnchantingIngredientMapPayload> ID = new Id<>(
             BetterEnchantingConstants.ENCHANT_INGREDIENT_MAP_PACKET_ID);
     public static final PacketCodec<RegistryByteBuf, EnchantingIngredientMapPayload> CODEC = PacketCodec.tuple(
             ModEnchantIngredientMap.MAP_CODEC, EnchantingIngredientMapPayload::map,
             EnchantingIngredientMapPayload::new);
 
     @Override
-    public CustomPayload.Id<? extends CustomPayload> getId() {
+    public Id<? extends CustomPayload> getId() {
         return ID;
     }
 }

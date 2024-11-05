@@ -5,7 +5,10 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import com.telepathicgrunt.the_bumblezone.modinit.BzEnchantments;
+import com.telepathicgrunt.the_bumblezone.modinit.BzItems;
 import cutefox.betterenchanting.BetterEnchanting;
+import cutefox.betterenchanting.Util.Utils;
 import cutefox.betterenchanting.registry.ModItems;
 import io.netty.buffer.ByteBuf;
 import net.fabricmc.loader.api.FabricLoader;
@@ -15,7 +18,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.Items;
 import net.minecraft.network.codec.PacketCodec;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.RegistryKey;
+import net.minecraft.registry.Registry;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
@@ -30,7 +33,9 @@ import java.util.*;
 public class ModEnchantIngredientMap {
 
     public static HashMap<String, List<String>> defaultMap = new HashMap<>();
-    public static HashMap<RegistryKey<Enchantment>, List<Item>> map = new HashMap<>();
+    private static final HashMap<Enchantment, List<Item>> ENCHANTMENT_INGREDIENTS_MAP = new HashMap<>();
+    private static HashMap<Enchantment, List<Item>> externalEnchantmentIngredientsMap = new HashMap<>();
+    private static HashMap<Enchantment, List<Item>> modedmap = new HashMap<>();
     public static Map<String, List<String>> jsonMap = new HashMap<>();
 
 
@@ -121,8 +126,21 @@ public class ModEnchantIngredientMap {
 
             JsonReader reader = new JsonReader(new FileReader(configFile));
             jsonMap = gson.fromJson(reader, Map.class);
-            if (!world.isClient)
-            {
+            reader.close();
+
+            //get enchant present in default map but not in config and
+            Map<String, List<String>> missingEntries = getEnchantNotPresentInConfig();
+
+            //Append entries not present in config file
+            if(!missingEntries.isEmpty()){
+                BufferedWriter writer = new BufferedWriter(new FileWriter(configFile));
+                jsonMap.putAll(missingEntries);
+                String temp = gson.toJson(jsonMap);
+                writer.append(temp);
+                writer.close();
+            }
+
+            if (!world.isClient){
                 genMapFromJsonStringMap(world, jsonMap);
             }
         } catch (Exception e){
@@ -131,30 +149,62 @@ public class ModEnchantIngredientMap {
     }
 
     public static void genMapFromJsonStringMap(World world, Map<String, List<String>> stringMap) {
-        map = new HashMap<>();
-        RegistryKey<Enchantment> enchantementKey;
+        //enchantmentIngredientsMap;
         Enchantment enchantment;
 
         for (String key : stringMap.keySet()) {
             Identifier enchantId = Identifier.of(key);
             enchantment = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).get(enchantId);
-            Optional<RegistryKey<Enchantment>> optional = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment);
-            //enchantementKey = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getKey(enchantment);
 
-            if (optional.isPresent()) {
-                enchantementKey = optional.get();
-                List<Item> ingredients = new ArrayList<>();
+            List<Item> ingredients = new ArrayList<>();
 
-                stringMap.get(key).forEach(s -> {
-                    Item temp;
-                    Identifier itemId = Identifier.of(s);
-                    temp = Registries.ITEM.get(itemId);
-                    ingredients.add(temp!=null?temp:Items.BARRIER);
-                });
+            stringMap.get(key).forEach(s -> {
+                Item temp;
+                Identifier itemId = Identifier.of(s);
+                temp = Registries.ITEM.get(itemId);
+                ingredients.add(temp!=null?temp:Items.BARRIER);
+            });
 
-                map.put(enchantementKey, ingredients);
+            ENCHANTMENT_INGREDIENTS_MAP.put(enchantment, ingredients);
+
+            //Merge map containing any entry added by external mods via API
+            //If externalMap contains enchants already present in default map, entry will be replaced by the new ones.
+            if(!externalEnchantmentIngredientsMap.isEmpty()){
+                ENCHANTMENT_INGREDIENTS_MAP.putAll(externalEnchantmentIngredientsMap);
             }
+
         }
+    }
+
+    /**
+     * Add the ingredients for the enchantment of the identifier in parameters
+     * If possible, prefer the {@link #addEnchantmentIngredient(Enchantment, List)} of this call.
+     * @param enchantmentId The Identifier of the enchantment
+     * @param ingredients A list of the ingredients for the enchantment, ordered by level. (so first entry is for Enchantment I, then Enchantment II etc.)
+     * @return True if enchantment is found and successfully added to the map. False otherwise.
+     */
+    private static boolean addEnchantmentIngredient(Identifier enchantmentId, List<Item> ingredients){
+        Registry<Enchantment> enchantRegistry =  Utils.getRegistryManager().get(RegistryKeys.ENCHANTMENT);
+        Enchantment enchantment = enchantRegistry.get(enchantmentId);
+
+        return addEnchantmentIngredient(enchantment, ingredients);
+
+    }
+
+    /**
+     * Add the ingredients for the enchantment of the identifier in parameters.
+     * This is the preferred method as it's the more robust and error-free one.
+     * @param enchantment The Enchantment to be added
+     * @param ingredients A list of the ingredients for the enchantment, ordered by level. (so first entry is for Enchantment I, then Enchantment II etc.)
+     * @return True if enchantment is found and successfully added to the map. False otherwise.
+     */
+    public static boolean addEnchantmentIngredient(Enchantment enchantment, List<Item> ingredients){
+
+        if(enchantment == null)
+            return false;
+
+        externalEnchantmentIngredientsMap.put(enchantment,ingredients);
+        return true;
     }
 
     private static List<String> listOfIdentifiers(List<Item> items){
@@ -168,9 +218,16 @@ public class ModEnchantIngredientMap {
         return list;
     }
 
-    private String getEnchantIdentifier(RegistryKey<Enchantment> enchant){
-        enchant.getValue().toString();
-        return "";
+    private static Map<String, List<String>> getEnchantNotPresentInConfig() throws Exception{
+
+        Map<String, List<String>> missingEntries = new HashMap<>();
+
+        for(String enchant : defaultMap.keySet()){
+            if(!jsonMap.keySet().contains(enchant))
+                missingEntries.put(enchant, defaultMap.get(enchant));
+        }
+
+        return missingEntries;
     }
 
     public static final PacketCodec<ByteBuf, Map<String, List<String>>> MAP_CODEC = new PacketCodec<ByteBuf, Map<String, List<String>>>() {
@@ -193,4 +250,87 @@ public class ModEnchantIngredientMap {
             byteBuf.writeBytes(bytes);
         }
     };
+
+    public static Item getIngredientOfLevel(Enchantment enchantment, int enchantmentLevel){
+        if(ENCHANTMENT_INGREDIENTS_MAP.containsKey(enchantment))
+            if(ENCHANTMENT_INGREDIENTS_MAP.get(enchantment).size()>enchantmentLevel)
+                return ENCHANTMENT_INGREDIENTS_MAP.get(enchantment).get(enchantmentLevel);
+
+        return null;
+    }
+
+    public static void loadNeoEnchantConfig(){
+
+        defaultMap.put("enchantplus:bow/accuracy_shot", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_ARROWS)));
+        defaultMap.put("enchantplus:boots/agility", listOfIdentifiers(List.of(Items.SUGAR,Items.RABBIT_STEW,Items.REDSTONE_BLOCK,Items.WIND_CHARGE,ModItems.ESSENCE_OF_AGILITY)));
+        defaultMap.put("enchantplus:elytra/armored", listOfIdentifiers(List.of(Items.IRON_BARS,Items.IRON_BLOCK,Items.OBSIDIAN,ModItems.ESSENCE_OF_PROTECTION)));
+        defaultMap.put("enchantplus:sword/attack_speed", listOfIdentifiers(List.of(Items.GOLDEN_APPLE,ModItems.ESSENCE_OF_COMBAT)));
+        defaultMap.put("enchantplus:helmet/auto_feed", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_FOOD)));
+        defaultMap.put("enchantplus:tools/auto_smelt", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_SMELTING)));
+        defaultMap.put("enchantplus:bow/breezing_arrow", listOfIdentifiers(List.of(Items.CROSSBOW,Items.WIND_CHARGE,ModItems.ESSENCE_OF_ARROWS)));
+        defaultMap.put("enchantplus:helmet/bright_vision", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_SIGHT)));
+        defaultMap.put("enchantplus:chestplate/builder_arm", listOfIdentifiers(List.of(Items.CRAFTING_TABLE,Items.COBBLED_DEEPSLATE,Items.GRASS_BLOCK,Items.CRAFTER,ModItems.ESSENCE_OF_BUILDING)));
+        defaultMap.put("enchantplus:bow/echo_shot", listOfIdentifiers(List.of(Items.ECHO_SHARD,Items.SCULK_SENSOR,ModItems.ESSENCE_OF_ARROWS)));
+        defaultMap.put("enchantplus:pickaxe/experimental_bedrock_breaker", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_MINING)));
+        defaultMap.put("enchantplus:bow/explosive_arrow", listOfIdentifiers(List.of(Items.TNT,Items.CREEPER_HEAD,ModItems.ESSENCE_OF_ARROWS)));
+        defaultMap.put("enchantplus:leggings/fast_swim", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_SEA)));
+        defaultMap.put("enchantplus:sword/fear", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_FEAR)));
+        defaultMap.put("enchantplus:armor/fury", listOfIdentifiers(List.of(Items.SUGAR,Items.IRON_SWORD,Items.DIAMOND_AXE,ModItems.ESSENCE_OF_COMBAT)));
+        defaultMap.put("enchantplus:boots/lava_walker", listOfIdentifiers(List.of(Items.MAGMA_BLOCK,Items.LAVA_BUCKET,ModItems.ESSENCE_OF_FIRE)));
+        defaultMap.put("enchantplus:leggings/leaping", listOfIdentifiers(List.of(Items.PISTON,ModItems.ESSENCE_OF_AGILITY)));
+        defaultMap.put("enchantplus:sword/life_steal", listOfIdentifiers(List.of(Items.SWEET_BERRIES,Items.IRON_SWORD,ModItems.ESSENCE_OF_VAMPIRISM)));
+        defaultMap.put("enchantplus:armor/lifeplus", listOfIdentifiers(List.of(Items.APPLE,Items.RABBIT_STEW,Items.NETHER_WART_BLOCK,Items.DRAGON_HEAD,ModItems.ESSENCE_OF_HEALTH)));
+        defaultMap.put("enchantplus:trident/magical_water", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_SEA)));
+        defaultMap.put("enchantplus:tools/miningplus", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_MINING)));
+        defaultMap.put("enchantplus:sword/poison_aspect", listOfIdentifiers(List.of(Items.SPIDER_EYE,Items.PUFFERFISH_BUCKET,Items.POISONOUS_POTATO,ModItems.ESSENCE_OF_POISON)));
+        defaultMap.put("enchantplus:sword/pull", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_PULLING)));
+        defaultMap.put("enchantplus:sword/reach", listOfIdentifiers(List.of(Items.STICK,Items.LIGHTNING_ROD,ModItems.ESSENCE_OF_REACH)));
+        defaultMap.put("enchantplus:hoe/scyther", listOfIdentifiers(List.of(Items.HAY_BLOCK,Items.GOLDEN_HOE,ModItems.ESSENCE_OF_FORAGING)));
+        defaultMap.put("enchantplus:boots/sky_walk", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_WIND)));
+        defaultMap.put("enchantplus:pickaxe/spawner_touch", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_SILK_TOUCH)));
+        defaultMap.put("enchantplus:boots/step_assist", listOfIdentifiers(List.of(Items.SMOOTH_STONE_SLAB,Items.RABBIT_FOOT,ModItems.ESSENCE_OF_AGILITY)));
+        defaultMap.put("enchantplus:bow/storm_arrow", listOfIdentifiers(List.of(Items.COPPER_BLOCK,ModItems.ESSENCE_OF_ARROWS)));
+        defaultMap.put("enchantplus:mace/striker", listOfIdentifiers(List.of(Items.LIGHTNING_ROD,ModItems.ESSENCE_OF_STRIKE)));
+        defaultMap.put("enchantplus:axe/timber", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_FORAGING)));
+        defaultMap.put("enchantplus:pickaxe/vein_miner", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_MINING)));
+        defaultMap.put("enchantplus:armor/venom_protection", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_POISON_PROTECTION)));
+        defaultMap.put("enchantplus:helmet/voidless", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_LEVITATION)));
+        defaultMap.put("enchantplus:mace/wind_propulsion", listOfIdentifiers(List.of(Items.TNT,Items.WIND_CHARGE,ModItems.ESSENCE_OF_WIND)));
+        defaultMap.put("enchantplus:sword/xp_boost", listOfIdentifiers(List.of(Items.ENDER_EYE,ModItems.MAGIC_SHARD_DULL,ModItems.ESSENCE_OF_EXPERIENCE)));
+
+    }
+
+    public static void loadBumblezoneConfig(){
+        defaultMap.put(BzEnchantments.NEUROTOXINS.toString(), listOfIdentifiers(List.of(BzItems.BEE_SOUP.get(),ModItems.ESSENCE_OF_NEUROTOXIN)));
+        defaultMap.put(BzEnchantments.POTENT_POISON.toString(), listOfIdentifiers(List.of(Items.FERMENTED_SPIDER_EYE,Items.PUFFERFISH_BUCKET,ModItems.ESSENCE_OF_POISON)));
+        defaultMap.put(BzEnchantments.COMB_CUTTER.toString(), listOfIdentifiers(List.of(BzItems.POROUS_HONEYCOMB.get(),ModItems.ESSENCE_OF_COMB_CUTTER)));
+
+    }
+
+    public static void loadDungeonsAndTavernsConfig() {
+        defaultMap.put("nova_structures:antidote", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_POISON_PROTECTION)));
+        defaultMap.put("nova_structures:ghasted", listOfIdentifiers(List.of(Items.GHAST_TEAR, Items.FIRE_CHARGE, ModItems.ESSENCE_OF_ARROWS)));
+        defaultMap.put("nova_structures:gravity", listOfIdentifiers(List.of(Items.OBSIDIAN, Items.LODESTONE, ModItems.ESSENCE_OF_GRAVITY)));
+        defaultMap.put("nova_structures:illagers_bane", listOfIdentifiers(List.of(Items.CACTUS, Items.IRON_SWORD, Items.IRON_BLOCK, Items.OMINOUS_BOTTLE, ModItems.ESSENCE_OF_COMBAT)));
+        defaultMap.put("nova_structures:traveler", listOfIdentifiers(List.of(Items.GOLDEN_CARROT, Items.RABBIT_FOOT, ModItems.ESSENCE_OF_AGILITY)));
+        defaultMap.put("nova_structures:outreach", listOfIdentifiers(List.of(Items.SUGAR_CANE, Items.WIND_CHARGE, Items.SUGAR_CANE, ModItems.ESSENCE_OF_REACH)));
+        defaultMap.put("nova_structures:photosynthesis", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_PHOTOSYNTHESIS)));
+        defaultMap.put("nova_structures:wax_wings", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_WINGS)));
+        defaultMap.put("nova_structures:wither_coated", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_BUILDING)));
+        defaultMap.put("nova_structures:multishot", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_MULTISHOT)));
+        defaultMap.put("nova_structures:piercing", listOfIdentifiers(List.of(Items.FLINT, Items.ARROW, Items.IRON_SWORD, Items.TRIDENT,ModItems.ESSENCE_OF_PIERCING)));
+        defaultMap.put("nova_structures:power", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_POWER)));
+    }
+
+    public static void loadReplantmentConfig(){
+        defaultMap.put("replantment:replant", listOfIdentifiers(List.of(ModItems.ESSENCE_OF_FORAGING)));
+    }
+
+    private static Map<Enchantment, List<Item>> getEnchantIngredientsMap(){
+        return ENCHANTMENT_INGREDIENTS_MAP;
+    }
+
+    public static List<Item> getIngredientsOfEnchantment(Enchantment enchantment) {
+        return ENCHANTMENT_INGREDIENTS_MAP.get(enchantment);
+    }
 }

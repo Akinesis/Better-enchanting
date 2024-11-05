@@ -1,4 +1,4 @@
-package cutefox.betterenchanting;
+package cutefox.betterenchanting.Util;
 
 import net.minecraft.network.RegistryByteBuf;
 import net.minecraft.network.codec.PacketCodec;

@@ -2,8 +2,8 @@ package cutefox.betterenchanting.screen;
 
 import com.google.common.collect.Lists;
 import com.mojang.blaze3d.systems.RenderSystem;
-import cutefox.betterenchanting.ModEnchantmentHelper;
-import cutefox.betterenchanting.Utils;
+import cutefox.betterenchanting.Util.ModEnchantmentHelper;
+import cutefox.betterenchanting.Util.Utils;
 import net.fabricmc.api.EnvType;
 import net.fabricmc.api.Environment;
 import net.minecraft.client.gui.DrawContext;
@@ -153,7 +153,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
             indexStartOffset = 0;
 
         if(this.handler.enchantmentId[0] == -5){
-            if(this.client.player.experienceLevel < 10)
+            if(this.client.player.experienceLevel < CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST)
                 q = Colors.RED;
 
             context.drawTexture(TEXTURE, localWidth+63, localHeight+14, 182, 32, 16,16);
@@ -161,7 +161,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
             context.drawGuiTexture(MAGIC_SHARD_FULL, localWidth+72,localHeight+14,16,16);
 
             if(!playerInCreative)
-                context.drawTextWithShadow(this.textRenderer, ""+10, localWidth+18+72 - this.textRenderer.getWidth(""+10), localHeight+14+8, q);
+                context.drawTextWithShadow(this.textRenderer, ""+CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST, localWidth+18+72 - this.textRenderer.getWidth(""+CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST), localHeight+14+8, q);
 
             return;
         }
@@ -280,16 +280,16 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
             if (this.isPointWithinBounds(72, 14, 15, 15, mouseX, mouseY)){
                 List<Text> list = Lists.newArrayList();
                 MutableText mutableText,mutableText2,mutableText3;
-                mutableText3 = Text.translatable("container.better-enchanting.enchant.charge");
-                mutableText = Text.translatable("container.enchant.lapis.many", 5);
-                mutableText2 = Text.translatable("container.enchant.level.many", 10);
+                mutableText3 = Text.translatable("container.betterenchanting.enchant.charge");
+                mutableText = Text.translatable("container.enchant.lapis.many", CustomEnchantmentScreenHandler.SHARD_FILLING_LAPIS_COST);
+                mutableText2 = Text.translatable("container.enchant.level.many", CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST);
 
                 list.add(mutableText3);
 
                 if (!isInCreative) {
                     list.add(ScreenTexts.EMPTY);
-                    list.add(mutableText.formatted(lapisCount >= 5 ? Formatting.GRAY : Formatting.RED));
-                    list.add(mutableText2.formatted(client.player.experienceLevel >= 10 ? Formatting.GRAY : Formatting.RED));
+                    list.add(mutableText.formatted(lapisCount >= CustomEnchantmentScreenHandler.SHARD_FILLING_LAPIS_COST ? Formatting.GRAY : Formatting.RED));
+                    list.add(mutableText2.formatted(client.player.experienceLevel >= CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST ? Formatting.GRAY : Formatting.RED));
                 }
 
                 context.drawTooltip(this.textRenderer, list, mouseX, mouseY);
@@ -311,6 +311,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
 
             if(this.handler.enchantmentId[k] > -1){
                 Optional<RegistryEntry.Reference<Enchantment>> enchant = this.client.world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(this.handler.enchantmentId[k]);
+                Enchantment enchantment;
                 for(int l = 0; l < this.handler.enchantmentLevel[k]; l++){
                     //For each book of each line
                     if (enchant != null && !enchant.isEmpty()) {
@@ -319,13 +320,13 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                         if (this.isPointWithinBounds(72+(16*l)+(4*l), 14+(16*(k-indexStartOffset)), 16, 14, mouseX, mouseY)
                                 && l >= 0) {
                             //If mouse over the book of enchant k and level l
-
+                            enchantment = enchant.get().value();
                             RegistryEntry<Enchantment> enchantEntry = this.client.world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(enchant.get().value());
-                            Item enchantIngredient = ModEnchantmentHelper.getEnchantIngredient(enchantEntry.getKey().get(), l);
+                            Item enchantIngredient = ModEnchantmentHelper.getEnchantIngredient(enchantment, l);
                             int displayedEnchantLevel = l + 1;
-                            int enchantLevelCost = ModEnchantmentHelper.getEnchantmentLevelCost(enchant.get().value(),displayedEnchantLevel,stack, client.world);
-                            int enchantLevReq = ModEnchantmentHelper.getEnchantmentLeveRequierment(enchant.get().value(),displayedEnchantLevel);
-                            int enchantIngredientCost = ModEnchantmentHelper.getEnchantmentIngredientCost(enchant.get().value(),displayedEnchantLevel, enchantIngredient);
+                            int enchantLevelCost = ModEnchantmentHelper.getEnchantmentLevelCost(enchantment,displayedEnchantLevel,stack, client.world);
+                            int enchantLevReq = ModEnchantmentHelper.getEnchantmentLeveRequierment(enchantment,displayedEnchantLevel);
+                            int enchantIngredientCost = ModEnchantmentHelper.getEnchantmentIngredientCost(enchantment,displayedEnchantLevel, enchantIngredient);
                             int lapisCost = (int)Math.floor(enchantLevelCost/2);
                             lapisCost = lapisCost<=0?1:lapisCost;
 
@@ -369,7 +370,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                                     list.add(mutableText2.formatted(client.player.experienceLevel >= enchantLevelCost ? Formatting.GRAY : Formatting.RED));
 
                                     MutableText mutableText3;
-                                    mutableText3 = Text.translatable("container.better-enchanting.enchant.material.one", enchantIngredientCost, Text.translatable(enchantIngredientStack.getTranslationKey()));
+                                    mutableText3 = Text.translatable("container.betterenchanting.enchant.material.one", enchantIngredientCost, Text.translatable(enchantIngredientStack.getTranslationKey()));
 
                                     if(handler.getSlot(2).getStack().getItem() != enchantIngredient)
                                         list.add(mutableText3.formatted(Formatting.RED));

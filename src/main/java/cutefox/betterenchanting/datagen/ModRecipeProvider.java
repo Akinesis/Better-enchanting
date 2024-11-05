@@ -2,7 +2,7 @@ package cutefox.betterenchanting.datagen;
 
 
 import cutefox.betterenchanting.BetterEnchanting;
-import cutefox.betterenchanting.Utils;
+import cutefox.betterenchanting.Util.Utils;
 import cutefox.betterenchanting.conditions.BumblezoneCompatCondition;
 import cutefox.betterenchanting.conditions.NeoEnchantCompatCondition;
 import cutefox.betterenchanting.registry.ModItems;
@@ -20,6 +20,7 @@ import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
 
 import java.util.concurrent.CompletableFuture;
+
 
 public class ModRecipeProvider extends FabricRecipeProvider {
 
@@ -1051,6 +1052,34 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
                 .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
 
+        //endregion
+
+        //region DIVERSITY
+        recipeItem = ModItems.ESSENCE_OF_REFILL;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.ENDER_PEARL)
+                .input('N', Items.SLIME_BLOCK)
+                .input('D', Items.ENDER_EYE)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+
+        recipeItem = ModItems.ESSENCE_OF_CAPACITY;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.GOLD_BLOCK)
+                .input('N', Items.LEATHER_LEGGINGS)
+                .input('D', Items.ENDER_CHEST)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
         //endregion
 
         //region THE BUMBLEZONE

@@ -1,9 +1,11 @@
-package cutefox.betterenchanting;
+package cutefox.betterenchanting.Util;
 
 import com.google.common.collect.Lists;
+import cutefox.betterenchanting.BetterEnchanting;
 import cutefox.betterenchanting.datagen.ModEnchantIngredientMap;
 import cutefox.betterenchanting.registry.ModEnchantmentTags;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
+import net.hyper_pigeon.horseshoes.Horseshoes;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
@@ -11,26 +13,19 @@ import net.minecraft.enchantment.Enchantments;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
+import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.RegistryKey;
 import net.minecraft.registry.RegistryKeys;
 import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
-import net.minecraft.util.collection.IndexedIterable;
+import net.minecraft.registry.tag.EnchantmentTags;
+import net.minecraft.registry.tag.ItemTags;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Stream;
 
 public class ModEnchantmentHelper {
-
-    public static Enchantment getEnchantById(World world, int id){
-        IndexedIterable<RegistryEntry<Enchantment>> indexedIterable = world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getIndexedEntries();
-
-        return indexedIterable.get(id).value();
-    }
 
     public static int getEnchantmentLevelCost(Enchantment enchantment, int enchantLevel, ItemStack stack, World world){
         float tempCost = (8f/enchantment.getWeight())+enchantLevel;
@@ -68,12 +63,12 @@ public class ModEnchantmentHelper {
         return tempReq<=3?0:tempReq;
     }
 
-    public static Item getEnchantIngredient(RegistryKey<Enchantment> enchantment, int enchantLevel){
-        if(ModEnchantIngredientMap.map.containsKey(enchantment))
-            if(ModEnchantIngredientMap.map.get(enchantment).size()>enchantLevel)
-                return ModEnchantIngredientMap.map.get(enchantment).get(enchantLevel);
+    public static Item getEnchantIngredient(Enchantment enchantment, int enchantLevel){
+        return ModEnchantIngredientMap.getIngredientOfLevel(enchantment,enchantLevel);
+    }
 
-        return null;
+    public static List<Item> getIngredientsOfEnchantment(Enchantment enchantment){
+        return ModEnchantIngredientMap.getIngredientsOfEnchantment(enchantment);
     }
 
     public static int getEnchantmentIngredientCost(Enchantment value, int displayedEnchantLevel, Item ingredient) {
@@ -87,29 +82,59 @@ public class ModEnchantmentHelper {
             return tempValue>ingredient.getMaxCount()?ingredient.getMaxCount():tempValue;
     }
 
-    public static List<EnchantmentLevelEntry> getPossibleEntries(int bookshelfCount, ItemStack stack, Stream<RegistryEntry<Enchantment>> possibleEnchantments){
+    public static List<EnchantmentLevelEntry> getPossibleEntries(int bookshelfCount, ItemStack itemToEnchant, DynamicRegistryManager registryManager){
 
+        if(itemToEnchant.isOf(Items.BOOK))
+            return List.of();
+
+        Optional<RegistryEntryList.Named<Enchantment>> enchantingTableList = registryManager.get(RegistryKeys.ENCHANTMENT).getEntryList(EnchantmentTags.IN_ENCHANTING_TABLE);
+        Optional<RegistryEntryList.Named<Enchantment>> treasureList = registryManager.get(RegistryKeys.ENCHANTMENT).getEntryList(EnchantmentTags.TREASURE);
+
+        Stream <RegistryEntry<Enchantment>> concatEnchantList;
         List<EnchantmentLevelEntry> list = Lists.newArrayList();
-        boolean isBook = stack.isOf(Items.BOOK);
-        if(isBook)
+
+        if(enchantingTableList.isEmpty())
             return list;
 
-        possibleEnchantments.filter((enchant) -> {
-            return enchant.value().isAcceptableItem(stack);
-        }).forEach((enchantmentx) -> {
-            Enchantment enchantment = enchantmentx.value();
+        if(!treasureList.isEmpty())
+            concatEnchantList = Stream.concat(enchantingTableList.get().stream(), treasureList.get().stream());
+        else
+            concatEnchantList = enchantingTableList.get().stream();
 
-            if(isCompatible(stack.getEnchantments().getEnchantments(), enchantmentx)){
-                for(int j = enchantment.getMaxLevel(); j >= enchantment.getMinLevel(); --j) {
-                    if (getBookshelfCountRequierment(enchantment, j) <= bookshelfCount) {
-                        list.add(new EnchantmentLevelEntry(enchantmentx, j));
-                        break;
+        List<RegistryKey<Enchantment>> swordEnchants = new ArrayList<>();
+
+        swordEnchants.add(Enchantments.FIRE_ASPECT);
+        swordEnchants.add(Enchantments.LOOTING);
+        swordEnchants.add(Enchantments.KNOCKBACK);
+        //TODO: ADD MODDED SWORD ENCHANTS
+        //swordEnchants.add(RegistryKey.of(RegistryKeys.ENCHANTMENT, Identifier.of("mod_identifier:moded_enchant")));
+
+        concatEnchantList
+                .filter(enchant -> {
+                        boolean validEnchant;
+                        if(enchant.isIn(EnchantmentTags.CURSE))
+                            return false;
+                        validEnchant = enchant.value().isAcceptableItem(itemToEnchant);
+                        if(validEnchant == false && itemToEnchant.isIn(ItemTags.AXES) && swordEnchants.contains(enchant.getKey().get()))
+                            validEnchant = true;
+                        return validEnchant;
+                })
+                .forEach(enchant -> {
+
+                    Enchantment enchantmentValue = enchant.value();
+
+                    if(isCompatible(itemToEnchant.getEnchantments().getEnchantments(), enchant)){
+                        for(int j = enchantmentValue.getMaxLevel(); j >= enchantmentValue.getMinLevel(); --j) {
+                            if (getBookshelfCountRequierment(enchantmentValue, j) <= bookshelfCount) {
+                                list.add(new EnchantmentLevelEntry(enchant, j));
+                                break;
+                            }
+                        }
                     }
-                }
-            }
-        });
+                });
 
         return list;
+
     }
 
     public static boolean itemHasPreviousLevelOfEnchant(ItemStack stack, RegistryEntry<Enchantment> enchant, int targetLevel){
@@ -133,27 +158,16 @@ public class ModEnchantmentHelper {
         return true;
     }
 
-    public static List<EnchantmentLevelEntry> addSwordEnchantToAxes(int bookshelfCount, Stream<RegistryEntry<Enchantment>> possibleEnchantments){
+    public static boolean itemIsEnchantable(ItemStack itemStacks){
 
-        List<EnchantmentLevelEntry> enchantToAdd = new ArrayList<>();
-        List<RegistryKey<Enchantment>> swordEnchants = new ArrayList<>();
+        List<Item> enchantableModdedItems = new ArrayList<>();
 
-        swordEnchants.add(Enchantments.FIRE_ASPECT);
-        swordEnchants.add(Enchantments.LOOTING);
-        swordEnchants.add(Enchantments.KNOCKBACK);
+        if(BetterEnchanting.HORSESHOES_PRESENT)
+            enchantableModdedItems.addAll(List.of(
+                    Horseshoes.DIAMOND_HORSESHOES_ITEM,
+                    Horseshoes.IRON_HORSESHOES_ITEM,
+                    Horseshoes.GOLD_HORSESHOES_ITEM));
 
-        possibleEnchantments.filter(e -> {
-            return swordEnchants.contains(e.getKey().get());
-        }).forEach(enchantmentx -> {
-            Enchantment enchantment = enchantmentx.value();
-            for(int j = enchantment.getMaxLevel(); j >= enchantment.getMinLevel(); --j) {
-                if (getBookshelfCountRequierment(enchantment, j) <= bookshelfCount) {
-                    enchantToAdd.add(new EnchantmentLevelEntry(enchantmentx, j));
-                    break;
-                }
-            }
-        });
-
-        return enchantToAdd;
+        return enchantableModdedItems.contains(itemStacks.getItem()) || itemStacks.getItem().isEnchantable(itemStacks);
     }
 }

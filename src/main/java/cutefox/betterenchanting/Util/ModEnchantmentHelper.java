@@ -1,6 +1,7 @@
-package cutefox.betterenchanting;
+package cutefox.betterenchanting.Util;
 
 import com.google.common.collect.Lists;
+import cutefox.betterenchanting.BetterEnchanting;
 import cutefox.betterenchanting.datagen.ModEnchantIngredientMap;
 import cutefox.betterenchanting.registry.ModEnchantmentTags;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -62,12 +63,12 @@ public class ModEnchantmentHelper {
         return tempReq<=3?0:tempReq;
     }
 
-    public static Item getEnchantIngredient(RegistryKey<Enchantment> enchantment, int enchantLevel){
-        if(ModEnchantIngredientMap.map.containsKey(enchantment))
-            if(ModEnchantIngredientMap.map.get(enchantment).size()>enchantLevel)
-                return ModEnchantIngredientMap.map.get(enchantment).get(enchantLevel);
+    public static Item getEnchantIngredient(Enchantment enchantment, int enchantLevel){
+        return ModEnchantIngredientMap.getIngredientOfLevel(enchantment,enchantLevel);
+    }
 
-        return null;
+    public static List<Item> getIngredientsOfEnchantment(Enchantment enchantment){
+        return ModEnchantIngredientMap.getIngredientsOfEnchantment(enchantment);
     }
 
     public static int getEnchantmentIngredientCost(Enchantment value, int displayedEnchantLevel, Item ingredient) {

@@ -24,7 +24,7 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandlerMixin{
     private boolean shouldAddRepairCost;
 
     @Inject(method = "updateResult", at = @At("HEAD"), cancellable = true)
-    public void preventCombineEnchantedItem(CallbackInfo ci){
+    public void betterEnchanting$preventCombineEnchantedItem(CallbackInfo ci){
         ItemStack firstStack = input.getStack(0);
         ItemStack secondStack = input.getStack(1);
 
@@ -45,22 +45,22 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandlerMixin{
     }
 
     @Inject(method = "updateResult", at = @At("HEAD"))
-    public void resetMaterialLevelCost(CallbackInfo ci) {
+    public void betterEnchanting$resetMaterialLevelCost(CallbackInfo ci) {
         materialRepairLevelCost = 0;
     }
 
     @Inject(method = "updateResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;setDamage(I)V", ordinal = 0))
-    public void addMaterialLevelCost(CallbackInfo ci) {
+    public void betterEnchanting$addMaterialLevelCost(CallbackInfo ci) {
         materialRepairLevelCost++;
     }
 
     @Inject(method = "updateResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/AnvilScreenHandler;getNextCost(I)I"), locals = LocalCapture.CAPTURE_FAILHARD)
-    public void getShouldAddRepairCost(CallbackInfo ci, ItemStack itemStack, int i, long l, int j) {
+    public void betterEnchanting$getShouldAddRepairCost(CallbackInfo ci, ItemStack itemStack, int i, long l, int j) {
         shouldAddRepairCost = i - materialRepairLevelCost > 0 || j > 0;
     }
 
     @Redirect(method = "updateResult", at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/AnvilScreenHandler;getNextCost(I)I"))
-    public int getNextCostConditional(int cost) {
+    public int betterEnchanting$getNextCostConditional(int cost) {
         // Only increase repairCost of the item if the increase is not caused by
         // material repair
         if (!shouldAddRepairCost) {
@@ -73,14 +73,14 @@ public abstract class AnvilScreenHandlerMixin extends ForgingScreenHandlerMixin{
             at = @At(value = "INVOKE", target = "Lnet/minecraft/screen/AnvilScreenHandler;sendContentUpdates()V"),
             locals = LocalCapture.CAPTURE_FAILHARD,
             cancellable = true)
-    public void preventRepaireCost(CallbackInfo ci, ItemStack itemStack, int i, long l, int j, ItemStack itemStack2){
+    public void betterEnchanting$preventRepaireCost(CallbackInfo ci, ItemStack itemStack, int i, long l, int j, ItemStack itemStack2){
         AnvilScreenHandler screenHandler = (AnvilScreenHandler) (Object) this;
 
         levelCost.set(j);
     }
 
     @Inject(method = "canTakeOutput", at = @At("HEAD"), cancellable = true)
-    public void canTakeFreeOutput(PlayerEntity player, boolean present, CallbackInfoReturnable<Boolean> cir){
+    public void betterEnchanting$canTakeFreeOutput(PlayerEntity player, boolean present, CallbackInfoReturnable<Boolean> cir){
         cir.setReturnValue((player.isInCreativeMode() || player.experienceLevel >= this.levelCost.get()) && this.levelCost.get() >= 0);
     }
 }

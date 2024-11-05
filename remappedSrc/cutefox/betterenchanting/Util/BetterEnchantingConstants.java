@@ -1,4 +1,4 @@
-package cutefox.betterenchanting;
+package cutefox.betterenchanting.Util;
 
 import net.minecraft.util.Identifier;
 
