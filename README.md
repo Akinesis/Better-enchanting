@@ -25,12 +25,12 @@ Add the folowing to your repositories in your build.gradle
 
 and either
 ```
-modImplementation "maven.modrinth.better-enchanting:BETTER_ENCHANTING_VERSION"
+modImplementation "maven.modrinth:better-enchanting:BETTER_ENCHANTING_VERSION"
 ```
 or
 
 ```
-modCompileOnly "maven.modrinth.better-enchanting:BETTER_ENCHANTING_VERSION"
+modCompileOnly "maven.modrinth:better-enchanting:BETTER_ENCHANTING_VERSION"
 ```
 
 depending or wherase you whant Better Enchanting to be optional or not to work with your mod.
