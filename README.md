@@ -10,17 +10,17 @@ Either by adding reference to enchantment add buy other mods / datapack or to ov
 
 Add the folowing to your repositories in your build.gradle
 ```
-	exclusiveContent {
-		forRepository {
-			maven {
-				name = "Modrinth"
-				url = "https://api.modrinth.com/maven"
-			}
-		}
-		filter {
-			includeGroup "maven.modrinth"
+exclusiveContent {
+	forRepository {
+		maven {
+			name = "Modrinth"
+			url = "https://api.modrinth.com/maven"
 		}
 	}
+	filter {
+		includeGroup "maven.modrinth"
+	}
+}
 ```
 
 and either
