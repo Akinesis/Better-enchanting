@@ -37,13 +37,13 @@ import java.util.Optional;
 
 @Environment(EnvType.CLIENT)
 public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScreenHandler> {
-    private static final Identifier ENCHANTMENT_BOOK = Utils.id("container/enchanting_table/enchantment_book");
     private static final Identifier ENCHANTMENT_BOOK_DISABLED = Utils.id("container/enchanting_table/enchantment_book_disabled");
     private static final Identifier ENCHANTMENT_BOOK_HIGHLIGHTED = Utils.id("container/enchanting_table/enchantment_book_highlighted");
     private static final Identifier SCROLLER = Utils.id("container/enchanting_table/scroller");
     private static final Identifier SCROLLER_DISABLED = Utils.id("container/enchanting_table/scroller_disabled");
     private static final Identifier BOOK_SLOT_SELECTOR = Utils.id("container/enchanting_table/book_slot_selector");
-    private static final Identifier TEXTURE = Utils.id("textures/gui/container/custom_enchanting_table.png");
+    private static final Identifier BOOK_GRAY_OVERLAY = Utils.id("container/enchanting_table/book_gray_overlay");
+    private static final Identifier ENCHANTING_TABLE_BACKGROUND = Utils.id("textures/gui/container/custom_enchanting_table.png");
     private static final Identifier MAGIC_SHARD_FULL = Utils.id("container/enchanting_table/magic_shard_full");
     private static final Identifier BOOK_TEXTURE = Identifier.ofVanilla("textures/entity/enchanting_table_book.png");
     private static final Identifier CHECKMARK = Identifier.ofVanilla("icon/checkmark");
@@ -117,6 +117,9 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
 
                     int computedButtonId = (k*10)+l;
 
+                    if (k >=indexStartOffset+7)
+                        return super.mouseClicked(mouseX, mouseY, button);
+
                     if (r >= 0 && s >= 0 && r < 15 && s < 15 && this.handler.onButtonClick(this.client.player, computedButtonId)) {
                         selectedSlot[0] = k;
                         selectedSlot[1] = l;
@@ -135,18 +138,13 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
         if(!client.player.isInCreativeMode())
             context.drawText(this.textRenderer, Text.of("XP : "+this.client.player.experienceLevel),10, 74, Colors.GREEN, true);
 
-    }
-
-    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
         int localWidth = (this.width - this.backgroundWidth) / 2;
         int localHeight = (this.height - this.backgroundHeight) / 2;
-        context.drawTexture(TEXTURE, localWidth, localHeight, 0, 0, this.backgroundWidth, this.backgroundHeight);
-        this.drawBook(context, localWidth-3 , localHeight+24, delta);
+
         boolean playerInCreative = client.player.isInCreativeMode();
-        int q = 8453920;
+        int q = Colors.GREEN;
 
         int numberOfPossibleEnchants = 0;
-
         Identifier bookToDraw;
 
         if(handler.getSlot(0).getStack().isEmpty())
@@ -156,12 +154,10 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
             if(this.client.player.experienceLevel < CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST)
                 q = Colors.RED;
 
-            context.drawTexture(TEXTURE, localWidth+63, localHeight+14, 182, 32, 16,16);
-
-            context.drawGuiTexture(MAGIC_SHARD_FULL, localWidth+72,localHeight+14,16,16);
+            context.drawGuiTexture(MAGIC_SHARD_FULL, 72,14,16,16);
 
             if(!playerInCreative)
-                context.drawTextWithShadow(this.textRenderer, ""+CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST, localWidth+18+72 - this.textRenderer.getWidth(""+CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST), localHeight+14+8, q);
+                context.drawTextWithShadow(this.textRenderer, ""+CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST, 18+72 - this.textRenderer.getWidth(""+CustomEnchantmentScreenHandler.SHARD_FILLING_EXPERIENCE_COST), 14+8, q);
 
             return;
         }
@@ -173,9 +169,10 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
             if(k<indexStartOffset)
                 continue;
 
+            //If item is not Magic Shard, draw books
             if(this.handler.enchantmentId[k] > -1){
 
-                bookToDraw = ENCHANTMENT_BOOK;
+                bookToDraw = null;
                 if(numberOfPossibleEnchants >= 7)
                     break;
 
@@ -183,19 +180,10 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
 
                 Optional<RegistryEntry.Reference<Enchantment>> enchant = this.client.world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(this.handler.enchantmentId[k]);
 
-                //Draw tree first row
-                if(k == 0){
-                    context.drawTexture(TEXTURE, localWidth+63, localHeight+14, 182, 0, 16,16);
-                }else if(k ==14 || this.handler.enchantmentId[k+1]<=-1){
-                    context.drawTexture(TEXTURE, localWidth+63, localHeight+14+(16*(k-indexStartOffset)), 182, 32, 16,16);
-                }else {
-                    boolean lastEntry = numberOfPossibleEnchants >=7;
-                    context.drawTexture(TEXTURE, localWidth+63, localHeight+14+(16*(k-indexStartOffset)), 182, 16, lastEntry?13:16,16);
-                }
-
                 //Draw books and connexions
                 for(int l = 0; l < this.handler.enchantmentLevel[k]; l++){
 
+                    q = Colors.GREEN;
                     int r = mouseX - (localWidth+72+(16*l)+(4*l));
                     int s = mouseY - (localHeight+14+(16*(k-indexStartOffset)));
 
@@ -206,9 +194,11 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                         RegistryEntry<Enchantment> enchantEntry = this.client.world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(enchant.get().value());
                         boolean hasEnchantLevel = EnchantmentHelper.getLevel(enchantEntry,stack)>=l+1;
 
-                        if (r >= 0 && s >= 0 && r < 15 && s < 15 && !hasEnchantLevel) {
-                            bookToDraw = ENCHANTMENT_BOOK_HIGHLIGHTED;
-                        }
+                        /*if (r >= 0 && s >= 0 && r < 15 && s < 15 && !hasEnchantLevel) {
+                            //bookToDraw = ENCHANTMENT_BOOK_HIGHLIGHTED;
+                            frameBook = true;
+                        }*/
+                        boolean frameBook = (r >= 0 && s >= 0 && r < 15 && s < 15 && !hasEnchantLevel);
                         RenderSystem.enableBlend();
 
                         if(this.client.player.experienceLevel < enchantLevelReq && !hasEnchantLevel && !playerInCreative){
@@ -217,21 +207,101 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
 
                         if(l > 0 && !ModEnchantmentHelper.itemHasPreviousLevelOfEnchant(stack, enchantEntry, l) && !hasEnchantLevel){
                             bookToDraw = ENCHANTMENT_BOOK_DISABLED;
+                            //context.drawGuiTexture(BOOK_GRAY_OVERLAY, 72+(16*l)+(4*l), 14+(16*(k-indexStartOffset)), 200, 16,16);
                         }
 
                         if(this.client.player.experienceLevel < enchantLevelCost && !hasEnchantLevel){
                             q = Colors.RED;
                         }
 
-                        context.drawTexture(TEXTURE, localWidth+68+(16*l)+(4*l), localHeight+14+(16*(k-indexStartOffset)), 198, 0, 4,16);
-                        if(!this.client.player.isInCreativeMode() && bookToDraw != ENCHANTMENT_BOOK_DISABLED && !hasEnchantLevel)
-                            context.drawTextWithShadow(this.textRenderer, ""+enchantLevelCost, localWidth+18+72+(16*l)+(4*l) - this.textRenderer.getWidth(""+enchantLevelCost), localHeight+14+8+(16*(k-indexStartOffset)), q);
 
-                        context.drawGuiTexture(bookToDraw, localWidth+72+(16*l)+(4*l), localHeight+14+(16*(k-indexStartOffset)), 16, 16);
+                        //Draw the enchanted book texture.
+                        ItemStack enchantedBook = new ItemStack(Items.ENCHANTED_BOOK);
+                        enchantedBook.addEnchantment(enchantEntry, l+1);
+                        //context.drawGuiTexture(bookToDraw, localWidth+72+(16*l)+(4*l), localHeight+14+(16*(k-indexStartOffset)), 16, 16);
 
                         if(hasEnchantLevel){
-                            context.drawGuiTexture(CHECKMARK, localWidth+72+(16*l)+(4*l), localHeight+14+(16*(k-indexStartOffset)), 10, 10);
+                            context.drawGuiTexture(CHECKMARK, 72+(16*l)+(4*l), 14+(16*(k-indexStartOffset)), 350, 10,10);
                         }
+
+
+                        if(bookToDraw == ENCHANTMENT_BOOK_DISABLED)
+                            context.drawGuiTexture(ENCHANTMENT_BOOK_DISABLED, 72+(16*l)+(4*l), 14+(16*(k-indexStartOffset)), 200, 16,16);
+                        else
+                            context.drawItem(enchantedBook, 72+(16*l)+(4*l), 14+(16*(k-indexStartOffset)),1,-150);
+
+                        if (frameBook)
+                            context.drawGuiTexture(BOOK_SLOT_SELECTOR, 72+(16*l)+(4*l), 14+(16*(k-indexStartOffset)), 300, 16,16);
+
+                        RenderSystem.disableBlend();
+
+                        context.getMatrices().push();
+                        context.getMatrices().translate(0,0,350);
+                        if(!this.client.player.isInCreativeMode() && bookToDraw != ENCHANTMENT_BOOK_DISABLED && !hasEnchantLevel)
+                            context.drawTextWithShadow(this.textRenderer, ""+enchantLevelCost, 18+72+(16*l)+(4*l) - this.textRenderer.getWidth(""+enchantLevelCost), 14+8+(16*(k-indexStartOffset)), q);
+                        context.getMatrices().pop();
+
+                    }
+                }
+            }
+        }
+
+    }
+
+    protected void drawBackground(DrawContext context, float delta, int mouseX, int mouseY) {
+        int localWidth = (this.width - this.backgroundWidth) / 2;
+        int localHeight = (this.height - this.backgroundHeight) / 2;
+        context.drawTexture(ENCHANTING_TABLE_BACKGROUND, localWidth, localHeight, 0, 0, this.backgroundWidth, this.backgroundHeight);
+        this.drawBook(context, localWidth-3 , localHeight+24, delta);
+        boolean playerInCreative = client.player.isInCreativeMode();
+        int q = 8453920;
+
+        int numberOfPossibleEnchants = 0;
+
+        if(handler.getSlot(0).getStack().isEmpty())
+            indexStartOffset = 0;
+
+        if(this.handler.enchantmentId[0] == -5){
+            context.drawTexture(ENCHANTING_TABLE_BACKGROUND, localWidth+63, localHeight+14, 182, 32, 16,16);
+
+            return;
+        }
+
+        for(int k = 0; k<handler.ENCHANT_ARRAY_SIZE; k++){
+
+            if(k<indexStartOffset)
+                continue;
+
+            //If item is not Magic Shard, draw books
+            if(this.handler.enchantmentId[k] > -1){
+
+                if(numberOfPossibleEnchants >= 7)
+                    break;
+
+                numberOfPossibleEnchants++;
+
+                Optional<RegistryEntry.Reference<Enchantment>> enchant = this.client.world.getRegistryManager().get(RegistryKeys.ENCHANTMENT).getEntry(this.handler.enchantmentId[k]);
+
+                //Draw tree first row
+                if(k == 0){
+                    context.drawTexture(ENCHANTING_TABLE_BACKGROUND, localWidth+63, localHeight+14, 182, 0, 16,16);
+                }else if(k ==14 || this.handler.enchantmentId[k+1]<=-1){
+                    context.drawTexture(ENCHANTING_TABLE_BACKGROUND, localWidth+63, localHeight+14+(16*(k-indexStartOffset)), 182, 32, 16,16);
+                }else {
+                    boolean lastEntry = numberOfPossibleEnchants >=7;
+                    context.drawTexture(ENCHANTING_TABLE_BACKGROUND, localWidth+63, localHeight+14+(16*(k-indexStartOffset)), 182, 16, lastEntry?13:16,16);
+                }
+
+                //Draw books and connexions
+                for(int l = 0; l < this.handler.enchantmentLevel[k]; l++){
+
+                    if (enchant != null && !enchant.isEmpty()) {
+
+                        RenderSystem.enableBlend();
+
+
+                        context.drawTexture(ENCHANTING_TABLE_BACKGROUND, localWidth+68+(16*l)+(4*l), localHeight+14+(16*(k-indexStartOffset)), 198, 0, 4,16);
+
 
                         RenderSystem.disableBlend();
                     }
@@ -340,6 +410,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
                             boolean hasEnchantLevel = EnchantmentHelper.getLevel(enchantEntry,stack)>=l+1;
 
                             ItemStack enchantIngredientStack;
+
                             if(enchantIngredient != null){
                                 enchantIngredientStack = new ItemStack(enchantIngredient, 1);
                             }else {

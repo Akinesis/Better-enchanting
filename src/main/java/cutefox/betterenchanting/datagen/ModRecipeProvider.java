@@ -1052,6 +1052,45 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
                 .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
 
+        recipeItem = ModItems.ESSENCE_OF_PHOTOSYNTHESIS;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.GLOWSTONE)
+                .input('N', Items.SMOOTH_QUARTZ)
+                .input('D', Items.GOLDEN_APPLE)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+
+        recipeItem = ModItems.ESSENCE_OF_WINGS;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.END_ROD)
+                .input('N', Items.FEATHER)
+                .input('D', Items.WIND_CHARGE)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+
+        recipeItem = ModItems.ESSENCE_OF_GRAVITY;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.OBSIDIAN)
+                .input('N', Items.RAW_IRON_BLOCK)
+                .input('D', Items.LODESTONE)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+
         //endregion
 
         //region DIVERSITY
@@ -1078,6 +1117,21 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('C', Items.GOLD_BLOCK)
                 .input('N', Items.LEATHER_LEGGINGS)
                 .input('D', Items.ENDER_CHEST)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+        //endregion
+
+        //region TOSS UP
+        recipeItem = ModItems.ESSENCE_OF_EXPLOSION;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.TNT)
+                .input('N', Items.FIRE_CHARGE)
+                .input('D', Items.NETHER_STAR)
                 .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
                 .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
         //endregion

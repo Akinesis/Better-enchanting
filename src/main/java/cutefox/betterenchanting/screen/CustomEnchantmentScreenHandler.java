@@ -299,18 +299,37 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
                 if (!this.insertItem(itemStack2, 2, 38, true)) {
                     return ItemStack.EMPTY;
                 }
-            } else if (itemStack2.isOf(Items.LAPIS_LAZULI)) {
+            } else if (slot == 2) {
+                if (!this.insertItem(itemStack2, 2, 38, true)) {
+                    return ItemStack.EMPTY;
+                }
+            }  else if (itemStack2.isOf(Items.LAPIS_LAZULI)) {
                 if (!this.insertItem(itemStack2, 1, 2, true)) {
                     return ItemStack.EMPTY;
                 }
             } else {
+                int slotIdToInsert = 0;
+                //Is not lapis
                 if (this.slots.get(0).hasStack() || !this.slots.get(0).canInsert(itemStack2)) {
-                    return ItemStack.EMPTY;
+                    //Item slot is full or can't insert
+                    if (this.slots.get(2).hasStack() || !this.slots.get(2).canInsert(itemStack2)) {
+                        //Ingredint slot is also full and can't insert
+                        return ItemStack.EMPTY;
+                    }
+                    slotIdToInsert = 2;
+                }//Can insert is slot 0 (item to enchant)
+
+
+                ItemStack insertedStack;
+                if(slotIdToInsert == 0){
+                    insertedStack = itemStack2.copyWithCount(1);
+                    itemStack2.decrement(1);
+                }else{
+                    insertedStack = itemStack2.copy();
+                    itemStack2.setCount(0);
                 }
 
-                ItemStack itemStack3 = itemStack2.copyWithCount(1);
-                itemStack2.decrement(1);
-                this.slots.get(0).setStack(itemStack3);
+                this.slots.get(slotIdToInsert).setStack(insertedStack);
             }
 
             if (itemStack2.isEmpty()) {

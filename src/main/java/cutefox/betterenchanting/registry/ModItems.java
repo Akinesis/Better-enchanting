@@ -125,6 +125,9 @@ public class ModItems {
     public static final Item ESSENCE_OF_CAPACITY = registerItem("essence_of_capacity", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
     public static final Item ESSENCE_OF_REFILL = registerItem("essence_of_refill", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
 
+    //Toss Up
+    public static final Item ESSENCE_OF_EXPLOSION = registerItem("essence_of_explosion", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+
 
     //endregion
 

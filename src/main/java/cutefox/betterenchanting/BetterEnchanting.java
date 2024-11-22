@@ -36,6 +36,7 @@ public class BetterEnchanting implements ModInitializer {
 	public static boolean DUNGEONS_AND_TAVERNS_PRESENT = false;
 	public static boolean HORSESHOES_PRESENT = false;
 	public static boolean DIVERSITY_PRESENT = false;
+	public static boolean TOSS_UP_PRESENT = false;
 
 	@Override
 	public void onInitialize() {
@@ -88,6 +89,12 @@ public class BetterEnchanting implements ModInitializer {
 				ModEnchantIngredientMap.loadDungeonsAndTavernsConfig();
 			}
 
+			if(e.getResourceManager().getAllNamespaces().contains("toss_up") && !TOSS_UP_PRESENT){
+				LOGGER.info("Mod Toss Up is present and loaded ; Building compat for "+BetterEnchanting.MOD_ID);
+				TOSS_UP_PRESENT = true;
+				ModEnchantIngredientMap.loadTossUpConfig();
+			}
+
 			ModEnchantIngredientMap.genMapFromJson(e.getWorld(ServerWorld.OVERWORLD));
 		});
 
@@ -131,6 +138,12 @@ public class BetterEnchanting implements ModInitializer {
 		if(FabricLoader.getInstance().isModLoaded("mr_dungeons_andtaverns")){
 			LOGGER.info("Mod nova_structures (Dungeon and Taverns) is present and loaded ; Building compat for "+BetterEnchanting.MOD_ID);
 			DUNGEONS_AND_TAVERNS_PRESENT = true;
+		}
+
+		if(FabricLoader.getInstance().isModLoaded("toss_up")){
+			LOGGER.info("Mod Toss Up is present and loaded ; Building compat for "+BetterEnchanting.MOD_ID);
+			TOSS_UP_PRESENT = true;
+			ModEnchantIngredientMap.loadTossUpConfig();
 		}
 
 		if(FabricLoader.getInstance().isModLoaded("diversity")){

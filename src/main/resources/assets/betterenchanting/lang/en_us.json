@@ -79,7 +79,9 @@
 
   "item.betterenchanting.essence_of_capacity": "Essence Of Capacity",
   "item.betterenchanting.essence_of_refill": "Essence Of Refill",
-  
+
+  "item.betterenchanting.essence_of_explosion": "Essence Of Explosion",
+
   "container.betterenchanting.enchant.material.one": "%s %s",
   "container.betterenchanting.enchant.charge": "Charge Magic Shard",
 

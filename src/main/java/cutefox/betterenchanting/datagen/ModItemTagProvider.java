@@ -96,8 +96,12 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.ESSENCE_OF_REACH)
                 .add(ModItems.ESSENCE_OF_PULLING)
                 .add(ModItems.ESSENCE_OF_FOOD)
+                .add(ModItems.ESSENCE_OF_PHOTOSYNTHESIS)
+                .add(ModItems.ESSENCE_OF_GRAVITY)
+                .add(ModItems.ESSENCE_OF_WINGS)
                 .add(ModItems.ESSENCE_OF_NEUROTOXIN)
-                .add(ModItems.ESSENCE_OF_COMB_CUTTER);
+                .add(ModItems.ESSENCE_OF_COMB_CUTTER)
+                .add(ModItems.ESSENCE_OF_EXPLOSION);
 
         getOrCreateTagBuilder(ModItemTags.NEOENCHANT_ESSENCE)
                 .add(ModItems.ESSENCE_OF_POISON)

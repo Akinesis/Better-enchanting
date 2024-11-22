@@ -338,4 +338,8 @@ public class ModEnchantIngredientMap {
     public static List<Item> getIngredientsOfEnchantment(Enchantment enchantment) {
         return ENCHANTMENT_INGREDIENTS_MAP.get(enchantment);
     }
+
+    public static void loadTossUpConfig() {
+        defaultMap.put("toss_up:toss_up",listOfIdentifiers(List.of(Items.TNT,Items.FIRE_CHARGE,ModItems.ESSENCE_OF_EXPLOSION)));
+    }
 }
