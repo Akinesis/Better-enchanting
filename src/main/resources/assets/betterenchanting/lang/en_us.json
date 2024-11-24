@@ -82,6 +82,17 @@
 
   "item.betterenchanting.essence_of_explosion": "Essence Of Explosion",
 
+  "item.betterenchanting.essence_of_multi_roll": "Essence Of Rolling",
+  "item.betterenchanting.essence_of_longfoot": "Essence Of Longfoot",
+  "item.betterenchanting.essence_of_critical_spell": "Essence Of Critical Magic",
+  "item.betterenchanting.essence_of_energy": "Essence Of Energy",
+  "item.betterenchanting.essence_of_haste": "Essence Of Haste",
+  "item.betterenchanting.essence_of_magic_protection": "Essence Of Magic Protction",
+  "item.betterenchanting.essence_of_soulfrost": "Essence Of Soulfrost",
+  "item.betterenchanting.essence_of_spell_power": "Essence Of Spell POwer",
+  "item.betterenchanting.essence_of_sunfire": "Essence Of Sunfire",
+  "item.betterenchanting.essence_of_spell_infinity": "Essence Of Spell Infinity",
+
   "container.betterenchanting.enchant.material.one": "%s %s",
   "container.betterenchanting.enchant.charge": "Charge Magic Shard",
 

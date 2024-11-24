@@ -128,6 +128,19 @@ public class ModItems {
     //Toss Up
     public static final Item ESSENCE_OF_EXPLOSION = registerItem("essence_of_explosion", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
 
+    //Spell engine
+    public static final Item ESSENCE_OF_MULTI_ROLL = registerItem("essence_of_multi_roll", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_LONGFOOT = registerItem("essence_of_longfoot", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+
+    public static final Item ESSENCE_OF_CRITICAL_SPELL = registerItem("essence_of_critical_spell", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_ENERGY = registerItem("essence_of_energy", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_HASTE = registerItem("essence_of_haste", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_MAGIC_PROTECTION = registerItem("essence_of_magic_protection", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_SOULFROST = registerItem("essence_of_soulfrost", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_SPELL_POWER = registerItem("essence_of_spell_power", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_SUNFIRE = registerItem("essence_of_sunfire", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+    public static final Item ESSENCE_OF_SPELL_INFINITY = registerItem("essence_of_spell_infinity", new Item(new Item.Settings().maxCount(1).fireproof().component(DataComponentTypes.ENCHANTMENT_GLINT_OVERRIDE, true)));
+
 
     //endregion
 

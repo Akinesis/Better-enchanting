@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:copper_ingot"
+    },
+    "D": {
+      "item": "minecraft:trident"
+    },
+    "I": {
+      "item": "betterenchanting:infused_lapis"
+    },
+    "N": {
+      "item": "minecraft:lightning_rod"
+    },
+    "S": {
+      "item": "betterenchanting:magic_shard_full"
+    }
+  },
+  "pattern": [
+    " I ",
+    "NSN",
+    "CDC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterenchanting:essence_of_energy"
+  }
+}

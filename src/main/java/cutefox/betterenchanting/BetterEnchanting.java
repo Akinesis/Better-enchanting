@@ -37,6 +37,8 @@ public class BetterEnchanting implements ModInitializer {
 	public static boolean HORSESHOES_PRESENT = false;
 	public static boolean DIVERSITY_PRESENT = false;
 	public static boolean TOSS_UP_PRESENT = false;
+	public static boolean SPELL_POWER_PRESENT = false;
+	public static boolean COMBAT_ROLL_PRESENT = false;
 
 	@Override
 	public void onInitialize() {
@@ -150,6 +152,18 @@ public class BetterEnchanting implements ModInitializer {
 			LOGGER.info("Mod Diversity is present and loaded; Building compat for "+BetterEnchanting.MOD_ID);
 			DIVERSITY_PRESENT = true;
 			ModEnchantIngredientMap.loadDiversityConfig();
+		}
+
+		if(FabricLoader.getInstance().isModLoaded("spell_power")){
+			LOGGER.info("Mod Spell Power is present and loaded; Building compat for "+BetterEnchanting.MOD_ID);
+			SPELL_POWER_PRESENT = true;
+			ModEnchantIngredientMap.loadSpellPowerConfig();
+		}
+
+		if(FabricLoader.getInstance().isModLoaded("combat_roll")){
+			LOGGER.info("Mod Combat Roll is present and loaded; Building compat for "+BetterEnchanting.MOD_ID);
+			COMBAT_ROLL_PRESENT = true;
+			ModEnchantIngredientMap.loadCombatRollConfig();
 		}
 	}
 }

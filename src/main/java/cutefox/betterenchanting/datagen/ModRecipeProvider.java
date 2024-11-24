@@ -18,6 +18,7 @@ import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.ItemTags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -1134,6 +1135,140 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .input('D', Items.NETHER_STAR)
                 .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
                 .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+        //endregion
+
+        //region COMABT ROLL
+        recipeItem = ModItems.ESSENCE_OF_MULTI_ROLL;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.PISTON)
+                .input('N', ItemTags.BEDS)
+                .input('D', Items.WIND_CHARGE)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+
+        recipeItem = ModItems.ESSENCE_OF_LONGFOOT;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.END_ROD)
+                .input('N', Items.REDSTONE_BLOCK)
+                .input('D', Items.DIAMOND_BOOTS)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+
+        recipeItem = ModItems.ESSENCE_OF_CRITICAL_SPELL;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.GLOWSTONE)
+                .input('N', Items.REDSTONE_BLOCK)
+                .input('D', Items.EMERALD_BLOCK)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+
+        recipeItem = ModItems.ESSENCE_OF_ENERGY;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.COPPER_INGOT)
+                .input('N', Items.LIGHTNING_ROD)
+                .input('D', Items.TRIDENT)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+
+        recipeItem = ModItems.ESSENCE_OF_HASTE;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.SUGAR)
+                .input('N', Items.BLAZE_POWDER)
+                .input('D', Items.DIAMOND)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+
+        recipeItem = ModItems.ESSENCE_OF_MAGIC_PROTECTION;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.DIAMOND)
+                .input('N', Items.IRON_BARS)
+                .input('D', Items.CRYING_OBSIDIAN)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+
+        recipeItem = ModItems.ESSENCE_OF_SOULFROST;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.QUARTZ_BLOCK)
+                .input('N', Items.SNOW_BLOCK)
+                .input('D', Items.BLUE_ICE)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+
+        recipeItem = ModItems.ESSENCE_OF_SPELL_POWER;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.ENDER_PEARL)
+                .input('N', Items.BLAZE_ROD)
+                .input('D', Items.DIAMOND_BOOTS)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+
+        recipeItem = ModItems.ESSENCE_OF_SUNFIRE;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.BLAZE_ROD)
+                .input('N', Items.FIRE_CHARGE)
+                .input('D', Items.CAMPFIRE)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+
+        recipeItem = ModItems.ESSENCE_OF_SPELL_INFINITY;
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, recipeItem, 1)
+                .pattern(" I ")
+                .pattern("NSN")
+                .pattern("CDC")
+                .input('S', ModItems.MAGIC_SHARD_FULL)
+                .input('I', ModItems.INFUSED_LAPIS)
+                .input('C', Items.AMETHYST_BLOCK)
+                .input('N', Items.QUARTZ_BLOCK)
+                .input('D', Items.NETHER_STAR)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .offerTo(exporter, Utils.id(getRecipeName(recipeItem)));
+
+
         //endregion
 
         //region THE BUMBLEZONE

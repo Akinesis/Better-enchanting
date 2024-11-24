@@ -101,7 +101,9 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.ESSENCE_OF_WINGS)
                 .add(ModItems.ESSENCE_OF_NEUROTOXIN)
                 .add(ModItems.ESSENCE_OF_COMB_CUTTER)
-                .add(ModItems.ESSENCE_OF_EXPLOSION);
+                .add(ModItems.ESSENCE_OF_EXPLOSION)
+                .add(ModItems.ESSENCE_OF_MULTI_ROLL)
+                .add(ModItems.ESSENCE_OF_LONGFOOT);
 
         getOrCreateTagBuilder(ModItemTags.NEOENCHANT_ESSENCE)
                 .add(ModItems.ESSENCE_OF_POISON)
@@ -126,6 +128,18 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.ESSENCE_OF_POISON)
                 .add(ModItems.ESSENCE_OF_NEUROTOXIN)
                 .add(ModItems.ESSENCE_OF_COMB_CUTTER);
+
+        getOrCreateTagBuilder(ModItemTags.SPELL_POWER_ESSENCE)
+                .add(ModItems.ESSENCE_OF_MULTI_ROLL)
+                .add(ModItems.ESSENCE_OF_LONGFOOT)
+                .add(ModItems.ESSENCE_OF_CRITICAL_SPELL)
+                .add(ModItems.ESSENCE_OF_ENERGY)
+                .add(ModItems.ESSENCE_OF_HASTE)
+                .add(ModItems.ESSENCE_OF_MAGIC_PROTECTION)
+                .add(ModItems.ESSENCE_OF_SOULFROST)
+                .add(ModItems.ESSENCE_OF_SPELL_POWER)
+                .add(ModItems.ESSENCE_OF_SPELL_INFINITY)
+                .add(ModItems.ESSENCE_OF_SUNFIRE);
 
 
     }

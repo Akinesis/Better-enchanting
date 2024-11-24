@@ -342,4 +342,21 @@ public class ModEnchantIngredientMap {
     public static void loadTossUpConfig() {
         defaultMap.put("toss_up:toss_up",listOfIdentifiers(List.of(Items.TNT,Items.FIRE_CHARGE,ModItems.ESSENCE_OF_EXPLOSION)));
     }
+
+    public static void loadSpellPowerConfig() {
+        defaultMap.put("spell_power:critical_chance",listOfIdentifiers(List.of(Items.REDSTONE,Items.GLOWSTONE_DUST,Items.FIRE_CHARGE,Items.GHAST_TEAR,ModItems.ESSENCE_OF_CRITICAL_SPELL)));
+        defaultMap.put("spell_power:critical_damage",listOfIdentifiers(List.of(Items.GUNPOWDER,Items.LAPIS_LAZULI,Items.TNT,Items.FIRE_CHARGE,ModItems.ESSENCE_OF_CRITICAL_SPELL)));
+        defaultMap.put("spell_power:energize",listOfIdentifiers(List.of(Items.REDSTONE,Items.END_ROD,Items.COPPER_BLOCK,Items.TRIDENT,ModItems.ESSENCE_OF_ENERGY)));
+        defaultMap.put("spell_power:haste",listOfIdentifiers(List.of(Items.SUGAR,Items.GLOW_BERRIES,Items.EMERALD,Items.GLOWSTONE,ModItems.ESSENCE_OF_HASTE)));
+        defaultMap.put("spell_power:magic_protection",listOfIdentifiers(List.of(Items.IRON_INGOT,Items.COPPER_GRATE,Items.CRYING_OBSIDIAN,ModItems.ESSENCE_OF_MAGIC_PROTECTION)));
+        defaultMap.put("spell_power:soulfrost",listOfIdentifiers(List.of(Items.SNOWBALL,Items.POWDER_SNOW_BUCKET,Items.PACKED_ICE,Items.BLUE_ICE,ModItems.ESSENCE_OF_SOULFROST)));
+        defaultMap.put("spell_power:spell_power",listOfIdentifiers(List.of(Items.DIAMOND,Items.REDSTONE_BLOCK,Items.EMERALD_BLOCK,Items.DIAMOND_BLOCK,ModItems.ESSENCE_OF_SPELL_POWER)));
+        defaultMap.put("spell_power:sunfire",listOfIdentifiers(List.of(Items.COAL,Items.SOUL_CAMPFIRE,Items.SOUL_CAMPFIRE,Items.BLAZE_POWDER,ModItems.ESSENCE_OF_SUNFIRE)));
+        defaultMap.put("spell_engine:spell_infinity",listOfIdentifiers(List.of(ModItems.ESSENCE_OF_SPELL_INFINITY)));
+    }
+    public static void loadCombatRollConfig() {
+        defaultMap.put("combat_roll:multi_roll",listOfIdentifiers(List.of(Items.LEATHER_BOOTS,Items.PISTON,ModItems.ESSENCE_OF_MULTI_ROLL)));
+        defaultMap.put("combat_roll:longfooted",listOfIdentifiers(List.of(Items.IRON_BOOTS,Items.LIGHTNING_ROD,Items.END_ROD,ModItems.ESSENCE_OF_LONGFOOT)));
+        defaultMap.put("combat_roll:acrobat",listOfIdentifiers(List.of(Items.SUGAR,Items.REDSTONE,Items.DIAMOND_LEGGINGS,Items.CROSSBOW,ModItems.ESSENCE_OF_AGILITY)));
+    }
 }

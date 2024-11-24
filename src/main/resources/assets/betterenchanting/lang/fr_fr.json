@@ -82,6 +82,17 @@
 
   "item.betterenchanting.essence_of_explosion": "Essence d'explosion",
 
+  "item.betterenchanting.essence_of_multi_roll": "Essence de roulade",
+  "item.betterenchanting.essence_of_longfoot": "Essence de grand pas",
+  "item.betterenchanting.essence_of_critical_spell": "Essence de sort critique",
+  "item.betterenchanting.essence_of_energy": "Essence d'energy",
+  "item.betterenchanting.essence_of_haste": "Essence d'hâte",
+  "item.betterenchanting.essence_of_magic_protection": "Essence de protection magique",
+  "item.betterenchanting.essence_of_soulfrost": "Essence de Soulfrost",
+  "item.betterenchanting.essence_of_spell_power": "Essence de puissance de sort",
+  "item.betterenchanting.essence_of_sunfire": "Essence de Sunfire",
+  "item.betterenchanting.essence_of_spell_infinity": "Essence de sort infini",
+
   "container.betterenchanting.enchant.material.one": "%s %s",
   "container.betterenchanting.enchant.charge": "Charger éclat magique",
 

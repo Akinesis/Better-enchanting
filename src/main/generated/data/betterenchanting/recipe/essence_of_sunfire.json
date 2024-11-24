@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:blaze_rod"
+    },
+    "D": {
+      "item": "minecraft:campfire"
+    },
+    "I": {
+      "item": "betterenchanting:infused_lapis"
+    },
+    "N": {
+      "item": "minecraft:fire_charge"
+    },
+    "S": {
+      "item": "betterenchanting:magic_shard_full"
+    }
+  },
+  "pattern": [
+    " I ",
+    "NSN",
+    "CDC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterenchanting:essence_of_sunfire"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "C": {
+      "item": "minecraft:amethyst_block"
+    },
+    "D": {
+      "item": "minecraft:nether_star"
+    },
+    "I": {
+      "item": "betterenchanting:infused_lapis"
+    },
+    "N": {
+      "item": "minecraft:quartz_block"
+    },
+    "S": {
+      "item": "betterenchanting:magic_shard_full"
+    }
+  },
+  "pattern": [
+    " I ",
+    "NSN",
+    "CDC"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterenchanting:essence_of_spell_infinity"
+  }
+}
