@@ -2,6 +2,7 @@ package cutefox.betterenchanting.screen;
 
 import com.mojang.datafixers.util.Pair;
 import cutefox.betterenchanting.Util.ModEnchantmentHelper;
+import cutefox.betterenchanting.config.GlobalConfig;
 import cutefox.betterenchanting.registry.ModItems;
 import cutefox.betterenchanting.registry.ModScreenHandlerType;
 import net.minecraft.advancement.criterion.Criteria;
@@ -46,9 +47,9 @@ public class CustomEnchantmentScreenHandler extends ScreenHandler {
     public final int[] enchantmentId;
     public final int[] enchantmentLevel;
     private List<EnchantmentLevelEntry> possibleEnchantments;
-    public static final int ENCHANT_ARRAY_SIZE = 40;
-    public static final int SHARD_FILLING_LAPIS_COST = 3;
-    public static final int SHARD_FILLING_EXPERIENCE_COST = 5;
+    public static final int ENCHANT_ARRAY_SIZE = 50;
+    public static final int SHARD_FILLING_LAPIS_COST = GlobalConfig.shardFillingLapisCost;
+    public static final int SHARD_FILLING_EXPERIENCE_COST = GlobalConfig.shardFillingExperienceCost;
 
     public CustomEnchantmentScreenHandler(int syncId, PlayerInventory playerInventory) {
         this(syncId, playerInventory, ScreenHandlerContext.EMPTY);

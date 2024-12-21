@@ -97,5 +97,19 @@
   "container.betterenchanting.enchant.charge": "Charger éclat magique",
 
   "tag.item.betterenchanting.enchantment_ingredients":"Ingredients d'enchantement",
-  "tag.item.betterenchanting.enchantment_essence":"Essence d'enchantement"
+  "tag.item.betterenchanting.enchantment_essence":"Essence d'enchantement",
+
+  "better-enchanting/betterEnchanting.midnightconfig.title":"Configuration gloable pour Better Enchanting",
+  "better-enchanting/betterEnchanting.midnightconfig.disabledEnchants":"Enchantments désactivés",
+  "better-enchanting/betterEnchanting.midnightconfig.costSection":"Options des coûts du mod",
+  "better-enchanting/betterEnchanting.midnightconfig.shardFillingLapisCost":"Coûts en lapis de charge d'un écalt magique",
+  "better-enchanting/betterEnchanting.midnightconfig.shardFillingExperienceCost":"Coûts en expérience de charge d'un écalt magique",
+  "better-enchanting/betterEnchanting.midnightconfig.consecutiveEnchantIncrease":"Coûts incrémental d'enchantment",
+  "better-enchanting/betterEnchanting.midnightconfig.consecutiveEnchantIncrease.tooltip":"Coûts final = CoûtsInitial * (1+(modifier*nombreEnchantements))",
+  "better-enchanting/betterEnchanting.midnightconfig.baseEnchantmentCost":"Coûts d'enchantement initial",
+  "better-enchanting/betterEnchanting.midnightconfig.baseEnchantmentCost.tooltip":"CoûtsInital = (CoûtsInital/poidsEnchantement)+niveauEnchantement",
+  "better-enchanting/betterEnchanting.midnightconfig.tresaureMultiplier":"Multiplicateur d'enchantment trésor",
+  "better-enchanting/betterEnchanting.midnightconfig.overideItemCost":"Coûts en objet fixe",
+  "better-enchanting/betterEnchanting.midnightconfig.overidenItemCost":"Coûts en item (si coûts fixe)",
+  "better-enchanting/betterEnchanting.midnightconfig.overidenItemCost.tooltip":"Si \"Coûts en objet fixe\" est VRAIS, tous les coûts en objet des enchantement serons cette valeure."
 }

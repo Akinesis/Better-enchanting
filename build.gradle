@@ -32,6 +32,11 @@ repositories {
 		}
 	}
 
+	maven {
+		name = "Terraformers"
+		url = "https://maven.terraformersmc.com/"
+	}
+
 }
 
 fabricApi {
@@ -56,6 +61,10 @@ dependencies {
 	//The Bumblezone
 	modCompileOnly "maven.modrinth:eA8SXqWL:${project.bublezone_version_id}"
 	modCompileOnly "com.teamresourceful.resourcefullib:resourcefullib-fabric-1.21:3.0.11"
+
+	//Mid,ight lib for config
+	modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_version}")
+	modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 
 	//Spell engine
 	modCompileOnly("maven.modrinth:spell-engine:${project.spell_engine_version}")

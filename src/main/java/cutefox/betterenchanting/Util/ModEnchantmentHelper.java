@@ -2,6 +2,7 @@ package cutefox.betterenchanting.Util;
 
 import com.google.common.collect.Lists;
 import cutefox.betterenchanting.BetterEnchanting;
+import cutefox.betterenchanting.config.GlobalConfig;
 import cutefox.betterenchanting.datagen.ModEnchantIngredientMap;
 import cutefox.betterenchanting.registry.ModEnchantmentTags;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
@@ -28,13 +29,13 @@ import java.util.stream.Stream;
 public class ModEnchantmentHelper {
 
     public static int getEnchantmentLevelCost(Enchantment enchantment, int enchantLevel, ItemStack stack, World world){
-        float tempCost = (8f/enchantment.getWeight())+enchantLevel;
-        tempCost *= (1+(0.1*stack.getEnchantments().getSize())); //price increase by 10% for each different enchantments.
+        float tempCost = (GlobalConfig.baseEnchantmentCost/enchantment.getWeight())+enchantLevel;
+        tempCost *= (1+(GlobalConfig.consecutiveEnchantIncrease*stack.getEnchantments().getSize())); //price increase by 10% for each different enchantments.
         for(Object2IntMap.Entry<RegistryEntry<Enchantment>> e : stack.getEnchantments().getEnchantmentEntries()){
             tempCost += stack.getEnchantments().getLevel(e.getKey());
         }
         if(enchantIsTreasure(enchantment, world))
-            tempCost *= 2;
+            tempCost *= GlobalConfig.tresaureMultiplier;
 
         int encahntability = stack.getItem().getEnchantability();
 
@@ -72,6 +73,9 @@ public class ModEnchantmentHelper {
     }
 
     public static int getEnchantmentIngredientCost(Enchantment value, int displayedEnchantLevel, Item ingredient) {
+        if(GlobalConfig.overideItemCost)
+            return GlobalConfig.overidenItemCost;
+
         int tempValue = (int)Math.floor(value.getWeight()/2);
         if (value.getMaxLevel() == displayedEnchantLevel)
             tempValue = 1;
@@ -117,6 +121,8 @@ public class ModEnchantmentHelper {
                         validEnchant = enchant.value().isAcceptableItem(itemToEnchant);
                         if(validEnchant == false && itemToEnchant.isIn(ItemTags.AXES) && swordEnchants.contains(enchant.getKey().get()))
                             validEnchant = true;
+                        if(GlobalConfig.disabledEnchants.contains(enchant.getKey().get().getValue()))
+                            return false;
                         return validEnchant;
                 })
                 .forEach(enchant -> {

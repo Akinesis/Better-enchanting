@@ -1,11 +1,12 @@
 package cutefox.betterenchanting;
 
-import cutefox.betterenchanting.Util.BetterEnchantingApi;
 import cutefox.betterenchanting.Util.EnchantingIngredientMapPayload;
 import cutefox.betterenchanting.Util.Utils;
 import cutefox.betterenchanting.conditions.ModConfigConditions;
+import cutefox.betterenchanting.config.GlobalConfig;
 import cutefox.betterenchanting.datagen.ModEnchantIngredientMap;
 import cutefox.betterenchanting.registry.*;
+import eu.midnightdust.lib.config.MidnightConfig;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.lifecycle.v1.ServerLifecycleEvents;
 import net.fabricmc.fabric.api.itemgroup.v1.FabricItemGroup;
@@ -15,15 +16,12 @@ import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.server.world.ServerWorld;
 import net.minecraft.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.List;
 
 
 public class BetterEnchanting implements ModInitializer {
@@ -43,11 +41,11 @@ public class BetterEnchanting implements ModInitializer {
 	@Override
 	public void onInitialize() {
 
-
 		ModConfigConditions.registerConditions();
 
 		checkForCompat();
 
+		MidnightConfig.init("better-enchanting/betterEnchanting", GlobalConfig.class);
 		ModItems.registerModItems();
 		ModScreenHandlerType.registerModScreenHandlers();
 		ModEnchantmentTags.registerModTags();
