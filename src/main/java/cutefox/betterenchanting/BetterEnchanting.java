@@ -14,6 +14,7 @@ import net.fabricmc.fabric.api.networking.v1.PayloadTypeRegistry;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayConnectionEvents;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.fabricmc.loader.api.FabricLoader;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
@@ -90,7 +91,7 @@ public class BetterEnchanting implements ModInitializer {
 			}
 
 			if(e.getResourceManager().getAllNamespaces().contains("toss_up") && !TOSS_UP_PRESENT){
-				LOGGER.info("Mod Toss Up is present and loaded ; Building compat for "+BetterEnchanting.MOD_ID);
+				LOGGER.info("Datapack Toss Up is present and loaded ; Building compat for " + BetterEnchanting.MOD_ID);
 				TOSS_UP_PRESENT = true;
 				ModEnchantIngredientMap.loadTossUpConfig();
 			}
@@ -105,18 +106,18 @@ public class BetterEnchanting implements ModInitializer {
 	}
 
 	private ItemGroup generateItemGroup(){
-		ItemGroup itemGroup = FabricItemGroup.builder()
+
+		// inlined, changed lambda to method reference
+        return FabricItemGroup.builder()
 				.icon(() -> new ItemStack(ModItems.ESSENCE_OF_PROTECTION))
 				.displayName(Text.translatable("itemGroup.betterenchanting.item_group"))
 				.entries((context, entries) -> {
-					entries.addAll(ModItems.MOD_ITEM_LIST.stream().map(i -> i.getDefaultStack()).toList());
+					entries.addAll(ModItems.MOD_ITEM_LIST.stream().map(Item::getDefaultStack).toList());
 
 					if(BetterEnchanting.BUMBLEZONE_PRESENT)
-						entries.addAll(ModItems.MOD_ITEM_LIST_BUMBLEZONE_COMPAT.stream().map(i -> i.getDefaultStack()).toList());
+						entries.addAll(ModItems.MOD_ITEM_LIST_BUMBLEZONE_COMPAT.stream().map(Item::getDefaultStack).toList());
 				})
 				.build();
-
-		return itemGroup;
 	}
 
 	private void checkForCompat(){
