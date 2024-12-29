@@ -7,7 +7,7 @@ import net.minecraft.util.Identifier;
 
 import java.util.List;
 
-public class GlobalConfig extends MidnightConfig{
+public class GlobalConfig extends MidnightConfig {
 
     public static final String GLOBAL = "Global config";
 
@@ -21,5 +21,7 @@ public class GlobalConfig extends MidnightConfig{
     @Entry(category = GLOBAL) public static double consecutiveEnchantIncrease = 0.05;
     @Entry(category = GLOBAL) public static int baseEnchantmentCost = 8;
     @Entry(category = GLOBAL) public static double tresaureMultiplier = 2;
+
+    // removed ModMenuApi - obsolete, causes crashes on dedicated servers
 
 }

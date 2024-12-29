@@ -525,7 +525,7 @@ public class CustomEnchantmentScreen extends HandledScreen<CustomEnchantmentScre
         this.pageTurningSpeed = this.nextPageTurningSpeed;
         boolean bl = false;
 
-        for(int i = 0; i < handler.ENCHANT_ARRAY_SIZE; ++i) {
+        for(int i = 0; i < CustomEnchantmentScreenHandler.ENCHANT_ARRAY_SIZE; ++i) {
             if (this.handler.enchantmentLevel[i] != 0) {
                 bl = true;
                 break;
