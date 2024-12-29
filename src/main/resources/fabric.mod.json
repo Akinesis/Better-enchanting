@@ -25,7 +25,7 @@
 			"cutefox.betterenchanting.datagen.ModDataGenerator"
 		],
 		"modmenu": [
-			"cutefox.betterenchanting.config.GlobalConfig"
+			"cutefox.betterenchanting.config.ModMenuIntegration"
 		]
 	},
 	"mixins": [
