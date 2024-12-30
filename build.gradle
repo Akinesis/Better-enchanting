@@ -66,7 +66,7 @@ dependencies {
 
 	//Midnight lib for config
 	modImplementation include ("maven.modrinth:midnightlib:${project.midnightlib_version}")
-	// modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
+	modImplementation("com.terraformersmc:modmenu:${project.modmenu_version}")
 
 	//Spell engine
 	modCompileOnly("maven.modrinth:spell-engine:${project.spell_engine_version}")
