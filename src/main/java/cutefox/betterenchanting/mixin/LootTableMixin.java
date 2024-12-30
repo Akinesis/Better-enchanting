@@ -3,6 +3,7 @@ package cutefox.betterenchanting.mixin;
 import com.llamalad7.mixinextras.sugar.Local;
 import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import cutefox.betterenchanting.BetterEnchanting;
+import cutefox.betterenchanting.Util.ModEnchantmentHelper;
 import cutefox.betterenchanting.datagen.ModEnchantIngredientMap;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.minecraft.component.type.ItemEnchantmentsComponent;
@@ -39,42 +40,11 @@ public abstract class LootTableMixin {
         if(localRef.get().isEmpty())
             return;
 
-        int i = 0;
-        ItemStack newItem;
         ItemStack localRefItemStack = localRef.get().copy();
 
-        if(localRefItemStack.getItem().equals(Items.ENCHANTED_BOOK)){
-            ItemEnchantmentsComponent bookEnchants = EnchantmentHelper.getEnchantments(localRefItemStack);
-
-
-            for(Object2IntMap.Entry<RegistryEntry<Enchantment>> ench : bookEnchants.getEnchantmentEntries()){
-                bookEnchants.getEnchantmentEntries();
-                int enchantLevel = ench.getIntValue();
-                Enchantment enchantment = ench.getKey().value();
-                List<Item> ingredientsOfEnchant = ModEnchantIngredientMap.getIngredientsOfEnchantment(enchantment);
-                if(ingredientsOfEnchant !=null && !ingredientsOfEnchant.isEmpty()){
-                    if(enchantLevel > ingredientsOfEnchant.size()) //If not all ingredients are configured for the enchant
-                        enchantLevel = ingredientsOfEnchant.size();
-
-                    newItem = new ItemStack(ingredientsOfEnchant.get(enchantLevel-1));
-                    if(enchantLevel < ingredientsOfEnchant.size()){
-                        //If the ingredient is not an essence
-                        Random rand = Random.create();
-                        newItem.setCount(enchantLevel+rand.nextBetween(1,3));
-                    }
-                }else {
-                    newItem = new ItemStack(Items.EXPERIENCE_BOTTLE);
-                }
-                if(i > 0)
-                    this.essences.add(newItem);
-                else
-                    localRef.set(newItem);
-                i++;
-            }
-        }
+        essences.addAll(ModEnchantmentHelper.replaceEnchantedBook(localRef,localRefItemStack));
     }
 
-    //@Inject(method = "supplyInventory", at = @At(value = "RETURN"), locals = LocalCapture.CAPTURE_FAILHARD)
     @Inject(method = "supplyInventory", at = @At(value = "TAIL"),locals = LocalCapture.CAPTURE_FAILHARD)
     public void betterEnchanting$addEssencesAfterLootGeneration(Inventory inventory, LootContextParameterSet parameters, long seed, CallbackInfo ci){
 

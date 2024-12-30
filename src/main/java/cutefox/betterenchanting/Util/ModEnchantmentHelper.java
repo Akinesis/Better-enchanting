@@ -1,12 +1,15 @@
 package cutefox.betterenchanting.Util;
 
 import com.google.common.collect.Lists;
+import com.llamalad7.mixinextras.sugar.Local;
+import com.llamalad7.mixinextras.sugar.ref.LocalRef;
 import cutefox.betterenchanting.BetterEnchanting;
 import cutefox.betterenchanting.config.GlobalConfig;
 import cutefox.betterenchanting.datagen.ModEnchantIngredientMap;
 import cutefox.betterenchanting.registry.ModEnchantmentTags;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.hyper_pigeon.horseshoes.Horseshoes;
+import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentLevelEntry;
@@ -21,7 +24,9 @@ import net.minecraft.registry.entry.RegistryEntry;
 import net.minecraft.registry.entry.RegistryEntryList;
 import net.minecraft.registry.tag.EnchantmentTags;
 import net.minecraft.registry.tag.ItemTags;
+import net.minecraft.util.math.random.Random;
 import net.minecraft.world.World;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 import java.util.stream.Stream;
@@ -182,5 +187,46 @@ public class ModEnchantmentHelper {
                     Horseshoes.GOLD_HORSESHOES_ITEM));
 
         return enchantableModdedItems.contains(itemStacks.getItem()) || itemStacks.getItem().isEnchantable(itemStacks);
+    }
+
+    public static List<ItemStack> replaceEnchantedBook(@Nullable @Local LocalRef<ItemStack> localRef, ItemStack item){
+
+        List<ItemStack> returnList = new ArrayList<>();
+        int i = 0;
+        ItemStack newItem;
+        ItemStack localRefItemStack = item.copy();
+
+        if(localRefItemStack.getItem().equals(Items.ENCHANTED_BOOK)){
+            ItemEnchantmentsComponent bookEnchants = EnchantmentHelper.getEnchantments(localRefItemStack);
+
+
+            for(Object2IntMap.Entry<RegistryEntry<Enchantment>> ench : bookEnchants.getEnchantmentEntries()){
+                bookEnchants.getEnchantmentEntries();
+                int enchantLevel = ench.getIntValue();
+                Enchantment enchantment = ench.getKey().value();
+                List<Item> ingredientsOfEnchant = ModEnchantIngredientMap.getIngredientsOfEnchantment(enchantment);
+                if(ingredientsOfEnchant !=null && !ingredientsOfEnchant.isEmpty()){
+                    if(enchantLevel > ingredientsOfEnchant.size()) //If not all ingredients are configured for the enchant
+                        enchantLevel = ingredientsOfEnchant.size();
+
+                    newItem = new ItemStack(ingredientsOfEnchant.get(enchantLevel-1));
+                    if(enchantLevel < ingredientsOfEnchant.size()){
+                        //If the ingredient is not an essence
+                        net.minecraft.util.math.random.Random rand = Random.create();
+                        newItem.setCount(enchantLevel+rand.nextBetween(1,3));
+                    }
+                }else {
+                    newItem = new ItemStack(Items.EXPERIENCE_BOTTLE);
+                }
+                if(i > 0 || localRef == null)
+                    returnList.add(newItem);
+                else
+                    if (localRef != null)
+                        localRef.set(newItem);
+                i++;
+            }
+        }
+
+        return returnList;
     }
 }
