@@ -7,6 +7,7 @@
 
   "item.betterenchanting.iron_upgrade_smithing_template": "Iron Upgrade Smithing Template",
   "item.betterenchanting.diamond_upgrade_smithing_template": "Diamond Upgrade Smithing Template",
+  "item.betterenchanting.enchantment_catalyst": "Enchantment Catalyst",
 
   "item.betterenchanting.essence_of_protection": "Essence Of Protection",
   "item.betterenchanting.essence_of_fire_protection": "Essence Of Fire Protection",
@@ -101,6 +102,7 @@
 
   "better-enchanting/betterEnchanting.midnightconfig.title":"Better Enchanting Global Config",
   "better-enchanting/betterEnchanting.midnightconfig.disabledEnchants":"Disabled enchantments",
+  "better-enchanting/betterEnchanting.midnightconfig.allowBookInAnvil":"Allow enchanted book in anvil",
   "better-enchanting/betterEnchanting.midnightconfig.costSection":"Values regarding cost for the mod",
   "better-enchanting/betterEnchanting.midnightconfig.shardFillingLapisCost":"Lapis cost of magic shard filling",
   "better-enchanting/betterEnchanting.midnightconfig.shardFillingExperienceCost":"Experience cost of magic shard filling",
@@ -111,5 +113,7 @@
   "better-enchanting/betterEnchanting.midnightconfig.tresaureMultiplier":"Treasure enchant cost multiplier",
   "better-enchanting/betterEnchanting.midnightconfig.overideItemCost":"Should override item cost",
   "better-enchanting/betterEnchanting.midnightconfig.overidenItemCost":"Cost of item (if overiden)",
-  "better-enchanting/betterEnchanting.midnightconfig.overidenItemCost.tooltip":"If \"Should override item cost\" set to TRUE, all enchantment item cost will be this value."
+  "better-enchanting/betterEnchanting.midnightconfig.overidenItemCost.tooltip":"If \"Should override item cost\" set to TRUE, all enchantment item cost will be this value.",
+  "better-enchanting/betterEnchanting.midnightconfig.catalystGivebackChance":"Catalyst giveback chance",
+  "better-enchanting/betterEnchanting.midnightconfig.catalystGivebackChance.tooltip":"Chance upon using a catalyst at the anvil to give back a blank one."
 }

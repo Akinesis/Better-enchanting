@@ -1,5 +1,6 @@
 package cutefox.betterenchanting.datagen;
 
+import com.terraformersmc.modmenu.util.mod.Mod;
 import cutefox.betterenchanting.BetterEnchanting;
 import cutefox.betterenchanting.registry.ModItemTags;
 import cutefox.betterenchanting.registry.ModItems;
@@ -7,6 +8,7 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
 import net.minecraft.item.Items;
 import net.minecraft.registry.RegistryWrapper;
+import net.minecraft.registry.tag.ItemTags;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -141,6 +143,47 @@ public class ModItemTagProvider extends FabricTagProvider.ItemTagProvider {
                 .add(ModItems.ESSENCE_OF_SPELL_INFINITY)
                 .add(ModItems.ESSENCE_OF_SUNFIRE);
 
+        getOrCreateTagBuilder(ItemTags.ARMOR_ENCHANTABLE)
+                .add(ModItems.ENCHANTMENT_CATALYST);
+
+        getOrCreateTagBuilder(ItemTags.EQUIPPABLE_ENCHANTABLE)
+                .add(ModItems.ENCHANTMENT_CATALYST);
+
+        getOrCreateTagBuilder(ItemTags.WEAPON_ENCHANTABLE)
+                .add(ModItems.ENCHANTMENT_CATALYST);
+
+        getOrCreateTagBuilder(ItemTags.FIRE_ASPECT_ENCHANTABLE)
+                .add(ModItems.ENCHANTMENT_CATALYST);
+
+        getOrCreateTagBuilder(ItemTags.MACE_ENCHANTABLE)
+                .add(ModItems.ENCHANTMENT_CATALYST);
+
+        getOrCreateTagBuilder(ItemTags.SHARP_WEAPON_ENCHANTABLE)
+                .add(ModItems.ENCHANTMENT_CATALYST);
+
+        getOrCreateTagBuilder(ItemTags.SWORD_ENCHANTABLE)
+                .add(ModItems.ENCHANTMENT_CATALYST);
+
+        getOrCreateTagBuilder(ItemTags.TRIDENT_ENCHANTABLE)
+                .add(ModItems.ENCHANTMENT_CATALYST);
+
+        getOrCreateTagBuilder(ItemTags.FISHING_ENCHANTABLE)
+                .add(ModItems.ENCHANTMENT_CATALYST);
+
+        getOrCreateTagBuilder(ItemTags.DURABILITY_ENCHANTABLE)
+                .add(ModItems.ENCHANTMENT_CATALYST);
+
+        getOrCreateTagBuilder(ItemTags.CROSSBOW_ENCHANTABLE)
+                .add(ModItems.ENCHANTMENT_CATALYST);
+
+        getOrCreateTagBuilder(ItemTags.BOW_ENCHANTABLE)
+                .add(ModItems.ENCHANTMENT_CATALYST);
+
+        getOrCreateTagBuilder(ItemTags.MINING_ENCHANTABLE)
+                .add(ModItems.ENCHANTMENT_CATALYST);
+
+        getOrCreateTagBuilder(ItemTags.MINING_LOOT_ENCHANTABLE)
+                .add(ModItems.ENCHANTMENT_CATALYST);
 
     }
 }

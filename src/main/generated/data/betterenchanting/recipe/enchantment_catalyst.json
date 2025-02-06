@@ -1,0 +1,30 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "A": {
+      "item": "minecraft:amethyst_shard"
+    },
+    "D": {
+      "item": "minecraft:diamond"
+    },
+    "E": {
+      "item": "minecraft:emerald"
+    },
+    "L": {
+      "item": "betterenchanting:infused_lapis"
+    },
+    "M": {
+      "item": "betterenchanting:magic_shard_full"
+    }
+  },
+  "pattern": [
+    " D ",
+    "LML",
+    "AEA"
+  ],
+  "result": {
+    "count": 1,
+    "id": "betterenchanting:enchantment_catalyst"
+  }
+}

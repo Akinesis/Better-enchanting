@@ -12,6 +12,7 @@ public class GlobalConfig extends MidnightConfig {
     public static final String GLOBAL = "Global config";
 
     @Entry(category = GLOBAL, idMode = 2) public static List<Identifier> disabledEnchants = Lists.newArrayList(Identifier.of("namespace","enchantment"));
+    @Entry(category = GLOBAL) public static boolean  allowBookInAnvil = false;
     @Comment(category = GLOBAL) public static Comment spacer1;
     @Comment(category = GLOBAL) public static Comment costSection;
     @Entry(category = GLOBAL) public static int shardFillingLapisCost = 3;
@@ -21,6 +22,7 @@ public class GlobalConfig extends MidnightConfig {
     @Entry(category = GLOBAL) public static double consecutiveEnchantIncrease = 0.05;
     @Entry(category = GLOBAL) public static int baseEnchantmentCost = 8;
     @Entry(category = GLOBAL) public static double tresaureMultiplier = 2;
+    @Entry(category = GLOBAL) public static int catalystGivebackChance = 10;
 
     // removed ModMenuApi - obsolete, causes crashes on dedicated servers
 

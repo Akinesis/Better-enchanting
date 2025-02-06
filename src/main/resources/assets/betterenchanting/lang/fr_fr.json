@@ -7,6 +7,7 @@
 
   "item.betterenchanting.iron_upgrade_smithing_template": "Amélioration en fer",
   "item.betterenchanting.diamond_upgrade_smithing_template": "Amélioration en diamant",
+  "item.betterenchanting.enchantment_catalyst": "Catalyseur d'enchantement",
 
   "item.betterenchanting.essence_of_protection": "Essence de protection",
   "item.betterenchanting.essence_of_fire_protection": "Essence de protection aux flammes",
@@ -101,6 +102,7 @@
 
   "better-enchanting/betterEnchanting.midnightconfig.title":"Configuration gloable pour Better Enchanting",
   "better-enchanting/betterEnchanting.midnightconfig.disabledEnchants":"Enchantments désactivés",
+  "better-enchanting/betterEnchanting.midnightconfig.allowBookInAnvil":"Autoriser livre enchanté à l'enclume",
   "better-enchanting/betterEnchanting.midnightconfig.costSection":"Options des coûts du mod",
   "better-enchanting/betterEnchanting.midnightconfig.shardFillingLapisCost":"Coûts en lapis de charge d'un écalt magique",
   "better-enchanting/betterEnchanting.midnightconfig.shardFillingExperienceCost":"Coûts en expérience de charge d'un écalt magique",
@@ -111,5 +113,7 @@
   "better-enchanting/betterEnchanting.midnightconfig.tresaureMultiplier":"Multiplicateur d'enchantment trésor",
   "better-enchanting/betterEnchanting.midnightconfig.overideItemCost":"Coûts en objet fixe",
   "better-enchanting/betterEnchanting.midnightconfig.overidenItemCost":"Coûts en item (si coûts fixe)",
-  "better-enchanting/betterEnchanting.midnightconfig.overidenItemCost.tooltip":"Si \"Coûts en objet fixe\" est VRAIS, tous les coûts en objet des enchantement serons cette valeure."
+  "better-enchanting/betterEnchanting.midnightconfig.overidenItemCost.tooltip":"Si \"Coûts en objet fixe\" est VRAIS, tous les coûts en objet des enchantement serons cette valeure.",
+  "better-enchanting/betterEnchanting.midnightconfig.catalystGivebackChance":"Chance de retour du Catalyseur",
+  "better-enchanting/betterEnchanting.midnightconfig.catalystGivebackChance.tooltip":"Chance de rendre un Catalyseur vide en en utilisant un à l'enclume."
 }

@@ -7,8 +7,10 @@ import cutefox.betterenchanting.BetterEnchanting;
 import cutefox.betterenchanting.config.GlobalConfig;
 import cutefox.betterenchanting.datagen.ModEnchantIngredientMap;
 import cutefox.betterenchanting.registry.ModEnchantmentTags;
+import cutefox.betterenchanting.registry.ModItems;
 import it.unimi.dsi.fastutil.objects.Object2IntMap;
 import net.hyper_pigeon.horseshoes.Horseshoes;
+import net.minecraft.component.DataComponentTypes;
 import net.minecraft.component.type.ItemEnchantmentsComponent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -45,6 +47,17 @@ public class ModEnchantmentHelper {
         int encahntability = stack.getItem().getEnchantability();
 
         tempCost = tempCost * (1-(encahntability/100));
+
+        return Math.round(tempCost);
+    }
+
+    public static int getCatalystEnchantmentCost(ItemStack outputItem){
+        float tempCost = 0;
+        for(Object2IntMap.Entry<RegistryEntry<Enchantment>> e : EnchantmentHelper.getEnchantments(outputItem).getEnchantmentEntries()){
+
+            tempCost += e.getKey().value().getAnvilCost();
+            tempCost += Math.min(Math.round(e.getIntValue()/2),1);
+        }
 
         return Math.round(tempCost);
     }
@@ -228,5 +241,33 @@ public class ModEnchantmentHelper {
         }
 
         return returnList;
+    }
+
+    public static ItemStack combineCatalyst(ItemStack firstCatalyst, ItemStack secondCatalyst){
+        ItemStack output = new ItemStack(ModItems.ENCHANTMENT_CATALYST);
+        output.set(DataComponentTypes.MAX_STACK_SIZE, 1);
+
+        EnchantmentHelper.getEnchantments(firstCatalyst).getEnchantmentEntries().stream().forEach(e -> output.addEnchantment(e.getKey(), e.getIntValue()));
+
+        for(Object2IntMap.Entry<RegistryEntry<Enchantment>> e : EnchantmentHelper.getEnchantments(secondCatalyst).getEnchantmentEntries()){
+            if(output.getEnchantments().getEnchantments().contains(e.getKey())) {
+                int newLevel = e.getIntValue();
+                int oldValue = output.getEnchantments().getLevel(e.getKey());
+                if(newLevel > oldValue){
+                    //output.getEnchantments().getEnchantmentEntries().remove(e.getKey());
+                    output.addEnchantment(e.getKey(), e.getIntValue());
+                }else if(oldValue == newLevel){
+                    int maxLevel = e.getKey().value().getMaxLevel();
+                    //output.getEnchantments().getEnchantmentEntries().remove(e.getKey());
+                    output.addEnchantment(e.getKey(), Math.min(oldValue+1, maxLevel));
+                }
+
+            }else{
+                output.addEnchantment(e.getKey(), e.getIntValue());
+            }
+
+        }
+
+        return output;
     }
 }

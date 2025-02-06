@@ -1,6 +1,7 @@
 package cutefox.betterenchanting.datagen;
 
 
+import com.terraformersmc.modmenu.util.mod.Mod;
 import cutefox.betterenchanting.BetterEnchanting;
 import cutefox.betterenchanting.Util.Utils;
 import cutefox.betterenchanting.conditions.BumblezoneCompatCondition;
@@ -48,6 +49,21 @@ public class ModRecipeProvider extends FabricRecipeProvider {
                 .criterion(hasItem(Items.SMITHING_TABLE), conditionsFromItem(Items.SMITHING_TABLE))
                 .criterion(hasItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE), conditionsFromItem(Items.NETHERITE_UPGRADE_SMITHING_TEMPLATE))
                 .offerTo(exporter, Utils.id(getRecipeName(ModItems.IRON_UPGRADE_SMITHING_TEMPLATE)));
+
+        ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.ENCHANTMENT_CATALYST, 1)
+                .pattern(" D ")
+                .pattern("LML")
+                .pattern("AEA")
+                .input('E', Items.EMERALD)
+                .input('D', Items.DIAMOND)
+                .input('M', ModItems.MAGIC_SHARD_FULL)
+                .input('L', ModItems.INFUSED_LAPIS)
+                .input('A', Items.AMETHYST_SHARD)
+                .criterion(hasItem(ModItems.MAGIC_SHARD_FULL), conditionsFromItem(ModItems.MAGIC_SHARD_FULL))
+                .criterion(hasItem(ModItems.MAGIC_SHARD_DULL), conditionsFromItem(ModItems.MAGIC_SHARD_DULL))
+                .criterion(hasItem(ModItems.INFUSED_LAPIS), conditionsFromItem(ModItems.INFUSED_LAPIS))
+                .criterion(hasItem(Items.GRINDSTONE), conditionsFromItem(Items.GRINDSTONE))
+                .offerTo(exporter, Utils.id(getRecipeName(ModItems.ENCHANTMENT_CATALYST)));
 
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.DIAMOND_UPGRADE_SMITHING_TEMPLATE, 1)
                 .pattern("DID")

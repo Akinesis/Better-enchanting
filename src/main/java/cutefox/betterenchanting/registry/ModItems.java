@@ -29,6 +29,7 @@ public class ModItems {
     //region UPGRADE TEMPLATES
     public static final Item IRON_UPGRADE_SMITHING_TEMPLATE = registerItem("iron_upgrade_smithing_template", new Item(new Item.Settings()));
     public static final Item DIAMOND_UPGRADE_SMITHING_TEMPLATE = registerItem("diamond_upgrade_smithing_template", new Item(new Item.Settings()));
+    public static final Item ENCHANTMENT_CATALYST = registerItem("enchantment_catalyst", new Item(new Item.Settings().maxCount(16)));
     //endregion
 
     //Armors

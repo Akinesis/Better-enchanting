@@ -8,7 +8,9 @@
 		"ForgingScreenHandlerMixin",
 		"LootTableMixin",
 		"MixinTradeOffers",
-		"VaultBlockEntityMixin"
+		"VaultBlockEntityMixin",
+		"GrindstoneScreenHandlerMixin",
+		"ScreenHandlerMixin"
 	],
 	"injectors": {
 		"defaultRequire": 1
